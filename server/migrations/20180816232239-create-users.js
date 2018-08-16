@@ -20,6 +20,11 @@ module.exports = {
       allowNull: true,
       type: Sequelize.STRING,
     },
+    FacebookId: {
+      allowNull: true,
+      type: Sequelize.BIGINT,
+      unique: true,
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
