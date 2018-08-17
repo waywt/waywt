@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         len: [1, 720],
       },
     },
-    imageUrl: {
+    avatar: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
