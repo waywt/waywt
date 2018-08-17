@@ -7,6 +7,13 @@ module.exports = (sequelize, DataTypes) => {
         len: [1, 240],
       },
     },
+    imageUrl: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isUrl: true,       
+      },
+    },
   }, {});
 
   Outfit.associate = (models) => {
