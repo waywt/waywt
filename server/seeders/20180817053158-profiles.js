@@ -10,7 +10,7 @@ while (i <= 30) {
     UserId: i,
     header: faker.lorem.words(),
     summary: faker.lorem.sentences(Math.floor(Math.random()*5)),
-    imageUrl: faker.internet.avatar(),
+    avatar: faker.internet.avatar(),
     createdAt: date,
     updatedAt: date,
   };
