@@ -1,37 +1,37 @@
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('Users', {
     id: {
+      type: Sequelize.INTEGER,
       allowNull: false,
       autoIncrement: true,
-      primaryKey: true,
-      type: Sequelize.INTEGER,
+      primaryKey: true, 
     },
     username: {
+      type: Sequelize.STRING,
       allowNull: false,
       unique: true,
-      type: Sequelize.STRING,
     },
     email: {
-      allowNull: false,
-      unique: true,
       type: Sequelize.STRING,
+      allowNull: false,
+      unique: true,  
     },
     password: {
-      allowNull: true,
       type: Sequelize.STRING,
+      allowNull: true,
     },
     FacebookId: {
-      allowNull: true,
       type: Sequelize.BIGINT,
+      allowNull: true,
       unique: true,
     },
     createdAt: {
-      allowNull: false,
       type: Sequelize.DATE,
+      allowNull: false,
     },
     updatedAt: {
-      allowNull: false,
       type: Sequelize.DATE,
+      allowNull: false,
     },
   }),
   down: queryInterface => queryInterface.dropTable('Users'),
