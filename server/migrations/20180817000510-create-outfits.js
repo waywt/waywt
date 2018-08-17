@@ -30,16 +30,6 @@ module.exports = {
       onUpdate: 'CASCADE',
       onDelete: 'SET NULL',
     },
-    BrandId: {
-      type: Sequelize.INTEGER,
-      foreignKey: true,
-      references: {
-        model: 'Brands',
-        key: 'id',
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'SET NULL',
-    },
     createdAt: {
       type: Sequelize.DATE,
       allowNull: false,

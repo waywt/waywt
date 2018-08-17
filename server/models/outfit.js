@@ -19,7 +19,6 @@ module.exports = (sequelize, DataTypes) => {
   Outfit.associate = (models) => {
     Outfit.belongsTo(models.User);
     Outfit.belongsTo(models.Category);
-    Outfit.belongsTo(models.Brand);
     Outfit.hasMany(models.Comment);
     Outfit.hasMany(models.Like);
     Outfit.hasMany(models.Tag);

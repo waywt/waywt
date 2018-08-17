@@ -11,7 +11,6 @@ while (i <= 400) {
     imageUrl: 'https://placekitten.com/420/320',
     UserId: Math.floor(Math.random() * 30) + 1,
     CategoryId: Math.floor(Math.random() * 14) + 1,
-    BrandId: Math.floor(Math.random() * 30) + 1,
     createdAt: date,
     updatedAt: date,
   };
