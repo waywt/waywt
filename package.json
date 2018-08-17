@@ -8,7 +8,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "setup-db": "sequelize db:migrate"
+    "setup-db": "sequelize db:migrate",
+    "watch": "nodemon --ignore 'client/*'"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
