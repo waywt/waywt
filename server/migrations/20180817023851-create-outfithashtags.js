@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => queryInterface.createTable('OutfitHastags', {
+  up: (queryInterface, Sequelize) => queryInterface.createTable('OutfitHashtags', {
     id: {
       type: Sequelize.INTEGER,
       allowNull: false,

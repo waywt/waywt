@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        len: [2, 60],
+        is: /^[a-z0-9._]+$/i,
+        len: [1, 60],
       },
     },
     email: {
@@ -16,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         isEmail: true,
-        len: [3, 100],
       },
     },
     password: {
@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.associate = (models) => {
-    User.hasMany(models.Order);
+    User.hasOne(models.Profile);
   };
 
   return User;
