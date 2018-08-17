@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
-        len: [1, 1000],
+        len: [1, 720],
       },
     },
     imageUrl: {
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         isUrl: true,       
       },
     },
-  });
+  }, {});
 
   Profile.associate = (models) => {
     Profile.belongsTo(models.User);

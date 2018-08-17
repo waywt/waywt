@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         isEmail: true,
+        len: [1, 240],
       },
     },
     password: {
@@ -57,6 +58,13 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = (models) => {
     User.hasOne(models.Profile);
+    User.hasMany(models.Follower);
+    User.hasMany(models.Follower, { as: 'Following', foreignKey: 'FollowerId' });
+    User.hasMany(models.Outfit);
+    User.hasMany(models.Comment);
+    User.hasMany(models.Like);
+    User.hasMany(models.Tag);
+    User.hasMany(models.Tag, { as: 'Tagged', foreignKey: 'TaggedId' });
   };
 
   return User;
