@@ -8,6 +8,10 @@ const routes = require('./routes');
 const app = express();
 const PORT = process.env.PORT || 3100;
 
+// Set view engine
+app.set('view engine', 'ejs');
+app.set('views', './server/views');
+
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

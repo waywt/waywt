@@ -1,9 +1,12 @@
 const jwt = require('jsonwebtoken');
 
-const createToken = (user, exp) => jwt.sign({
-  authenticated: true,
-  id: user.id,
-}, process.env.JWT_SECRET, { expiresIn: exp });
+const createTempToken = () => jwt.sign({
+  valid: true
+}, process.env.JWT_SECRET, { expiresIn: '90s' })
+
+const createToken = (user) => jwt.sign({
+  username: user.username,
+}, process.env.JWT_SECRET, { expiresIn: '5h' });
 
 const decodeToken = (token) => {
   try {
@@ -14,6 +17,7 @@ const decodeToken = (token) => {
 };
 
 module.exports = {
+  createTempToken,
   createToken,
   decodeToken,
 };

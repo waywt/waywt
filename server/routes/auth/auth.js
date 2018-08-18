@@ -1,19 +1,17 @@
-const express = require('express');
-
-const router = express.Router();
+const router = require('express').Router();
 const passport = require('passport');
-const jwt = require('../config/jwt');
-const { User } = require('../models');
+const jwt = require('../../config/jwt');
+const { User } = require('../../models');
 
-require('../config/passport');
+require('../../config/passport');
 
 const createTempToken = (req, res, next) => {
-  req.facebookConnectToken = jwt.createToken({ id: 'fbConnectToken' }, '90s');
+  req.tempToken = jwt.createTempToken();
   next();
 };
 
 const validateTempToken = (req, res, next) => {
-  if (jwt.decodeToken(req.query.state).id === 'fbConnectToken') {
+  if (jwt.decodeToken(req.query.state).valid) {
     next();
   } else {
     res.redirect('/login');
@@ -21,25 +19,24 @@ const validateTempToken = (req, res, next) => {
 };
 
 const facebookAuthenticate = (req, res, next) => {
-  passport.authenticate('auth-customer-facebook', {
-    state: req.facebookConnectToken,
+  passport.authenticate('auth-user-facebook', {
+    state: req.tempToken,
     session: false,
   })(req, res, next);
 };
 
-router.get('/signup', (req, res) => {
-  res.render('signup');
-});
+const googleAuthenticate = (req, res, next) => {
+  passport.authenticate('auth-user-google', {
+    state: req.tempToken,
+    session: false,
+  })(req, res, next);
+};
 
-router.get('/login', (req, res) => {
-  res.render('login');
-});
+router.get('/facebook', createTempToken, facebookAuthenticate);
 
-router.get('/login/facebook', createTempToken, facebookAuthenticate);
-
-router.get('/login/facebook/callback', validateTempToken, passport.authenticate('auth-customer-facebook', { session: false }), (req, res) => {
+router.get('/facebook/callback', validateTempToken, passport.authenticate('auth-user-facebook', { session: false }), (req, res) => {
   (async () => {
-    const fbUser = req.user._json; // eslint-disable-line no-underscore-dangle
+    const fbUser = req.user._json;
     let user;
 
     user = await User.findOne({ where: { FacebookId: fbUser.id } });
@@ -57,42 +54,87 @@ router.get('/login/facebook/callback', validateTempToken, passport.authenticate(
         });
       }
 
-      return res.render('temp', {
-        layout: false,
-        accessToken: jwt.createToken(user, '1w'),
-        name: fbUser.name,
+      return res.render('redirect', {
+        accessToken: jwt.createToken(user),
+        username: user.username,
       });
     }
     const newUser = await User.create({
-      name: fbUser.name,
+      username: fbUser.name.replace(/ /g, '_'),
       email: fbUser.email,
       FacebookId: fbUser.id,
     });
 
-    return res.render('temp', {
-      layout: false,
-      accessToken: jwt.createToken(newUser, '1w'),
-      name: fbUser.name,
+    return res.render('redirect', {
+      accessToken: jwt.createToken(newUser),
+      username: fbUser.name.replace(/ /g, '_'),
+    });
+  })();
+});
+
+router.get('/google', createTempToken, googleAuthenticate);
+
+router.get('/google/callback', validateTempToken, passport.authenticate('auth-user-google', { session: false }), (req, res) => {
+  (async () => {
+    const googleUser = req.user._json;
+    let user;
+
+    user = await User.findOne({ where: { GoogleId: googleUser.id } });
+    user = user || await User.findOne({ where: { email: googleUser.emails[0].value } });
+
+    if (user) {
+      if (!user.GoogleId) {
+        await User.update({
+          GoogleId: googleUser.id,
+        },
+        {
+          where: {
+            email: googleUser.emails[0].value,
+          },
+        });
+      }
+
+      return res.render('redirect', {
+        accessToken: jwt.createToken(user),
+        username: user.username,
+      });
+    }
+    const newUser = await User.create({
+      username: googleUser.displayName.replace(/ /g, '_'),
+      email: googleUser.emails[0].value,
+      GoogleId: googleUser.id,
+    });
+
+    return res.render('redirect', {
+      accessToken: jwt.createToken(newUser),
+      username: googleUser.displayName.replace(/ /g, '_'),
     });
   })();
 });
 
 router.post('/signup', (req, res) => {
   (async () => {
-    const userWithEmail = await User.findOne({ where: { email: req.body.email } });
+    const userWithUsername = await User.findOne({ where: { email: req.body.email } });
+    let userWithEmail;
+    
+    if (userWithUsername) {
+      userWithEmail = '';
+    } else {
+      userWithEmail = await User.findOne({ where: { email: req.body.email } });
+    }
 
     if (userWithEmail) {
       return res.json({ error: 'User with this email already exists.' });
     }
     try {
       const newUser = await User.create({
-        name: req.body.name,
+        username: req.body.username,
         email: req.body.email,
         password: req.body.password,
       });
       return res.json({
         accessToken: jwt.createToken(newUser, '1w'),
-        name: req.body.name,
+        username: req.body.username,
       });
     } catch (e) {
       return res.json({ error: e.errors });

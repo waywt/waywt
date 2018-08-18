@@ -1,7 +1,6 @@
 const path = require('path');
-const express = require('express');
-const router = express.Router();
-const auth = require('./auth');
+const router = require('express').Router();
+const auth = require('./auth/auth');
 const user = require('./api/user');
 
 // Auth Routes
