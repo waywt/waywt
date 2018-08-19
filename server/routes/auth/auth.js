@@ -114,40 +114,34 @@ router.get('/google/callback', validateTempToken, passport.authenticate('auth-us
 
 router.post('/signup', (req, res) => {
   (async () => {
+    const { username, email, password } = req.body;
     let user;
 
-    if (/@/.test(req.body.usernameOrEmail)) {
-      user = await User.findOne({ where: { email: req.body.usernameOrEmail } });
+    user = await User.findOne({ where: { username: username } });
+
+    if (user) {
+      return res.json({ error: { username: 'Username already taken.'} });
     } else {
-      user = await User.findOne({ where: { username: req.body.usernameOrEmail } });
+      user = await User.findOne({ where: { email: email } });
     }
-   
-
-    // const userWithUsername = await User.findOne({ where: { email: req.body.email } });
-    // let userWithEmail;
     
-    // if (userWithUsername) {
-    //   userWithEmail = '';
-    // } else {
-    //   userWithEmail = await User.findOne({ where: { email: req.body.email } });
-    // }
-
-    // if (userWithEmail) {
-    //   return res.json({ error: 'User with this email already exists.' });
-    // }
-    // try {
-    //   const newUser = await User.create({
-    //     username: req.body.username,
-    //     email: req.body.email,
-    //     password: req.body.password,
-    //   });
-    //   return res.json({
-    //     accessToken: jwt.createToken(newUser, '1w'),
-    //     username: req.body.username,
-    //   });
-    // } catch (e) {
-    //   return res.json({ error: e.errors });
-    // }
+    if (user) {
+      return res.json({ error: { email: 'User with this email already exists.'} });
+    } 
+   
+    try {
+      const newUser = await User.create({
+        username: username,
+        email: email,
+        password: password,
+      });
+      return res.json({
+        accessToken: jwt.createToken(newUser),
+        username: username,
+      });
+    } catch (e) {
+      return res.json({ error: e.errors });
+    }
   })();
 });
 
@@ -157,12 +151,12 @@ router.post('/login', (req, res) => {
     let user;
 
     if (/@/.test(usernameOrEmail)) {
-      user = await User.findOne({ where: { email: usernameOrEmail } });
+      user = await User.findOne({ where: { email: usernameOrEmail }});
     } else {
-      user = await User.findOne({ where: { username: usernameOrEmail } });
+      user = await User.findOne({ where: { username: usernameOrEmail }});
     }
    
-    if (!user) return res.json({error: 'Could not find user.'});
+    if (!user) return res.json({error: { usernameOrEmail: 'Could not find user.'}});
 
     if (!user.password && user.FacebookId) {
       res.redirect('/auth/facebook');
@@ -174,7 +168,7 @@ router.post('/login', (req, res) => {
         username: user.username,
       });
     } else {
-      return res.json({ error: 'Invalid Password.' });
+      return res.json({ error: { password: 'Invalid Password.'}});
     }
   })();
 });
