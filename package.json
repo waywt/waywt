@@ -9,7 +9,8 @@
   "private": false,
   "scripts": {
     "setup-db": "sequelize db:migrate",
-    "watch": "nodemon --ignore 'client/*'"
+    "watch-server": "nodemon --ignore 'client/*'",
+    "watch-client": "cd client && yarn start"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
