@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { authSignup } from '../../utils/API';
 
 class Signup extends Component {
@@ -6,6 +7,7 @@ class Signup extends Component {
     username: '',
     email: '',
     password: '',
+    redirect: false,
   };
 
   handleInputChange = event => {
@@ -18,46 +20,56 @@ class Signup extends Component {
     event.preventDefault();
     
     authSignup(this.state).then(result => {
-      console.log(result);
+      if(!result.data.error) {
+        localStorage.setItem('accessToken', result.data.accessToken);
+        localStorage.setItem('username', result.data.username);
+        this.setState({ redirect: true });
+      }
     });
   }
 
   render() {
-    return (
-      <div>
-        <h1>SIGNUP FORM COMPONENT</h1>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Username
-            <input
-              type="text"
-              name="username"
-              value={this.state.username}  
-              onChange={this.handleInputChange}     
-            />
-          </label>
-          <label>
-            Email
-            <input
-              type="email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleInputChange}
-            />  
-          </label>
-          <label>
-            Password
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleInputChange}
-            />
-          </label>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    );
+    const { redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to='/'/>;
+    } else {
+      return (
+        <div>
+          <h1>SIGNUP FORM COMPONENT</h1>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Username
+              <input
+                type="text"
+                name="username"
+                value={this.state.username}  
+                onChange={this.handleInputChange}     
+              />
+            </label>
+            <label>
+              Email
+              <input
+                type="email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+              />  
+            </label>
+            <label>
+              Password
+              <input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleInputChange}
+              />
+            </label>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      );
+    }
   }
 }
 
