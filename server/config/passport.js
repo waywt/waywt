@@ -9,6 +9,14 @@ const opts = {};
 opts.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.JWT_SECRET;
 
+let googleCallbackURL;
+
+if (process.env.NODE_ENV) { // production
+  googleCallbackURL = 'https://waywt-instagarment.herokuapp.com/auth/google.callback';
+} else {
+  googleCallbackURL = `http://localhost:${PORT}/auth/google/callback`;
+}
+
 passport.use('auth-user', new JWTStrategy(opts, (jwtPayload, cb) => cb(null, jwtPayload)));
 
 passport.use('auth-user-facebook', new FacebookStrategy({
