@@ -2,7 +2,7 @@ const url = require('url');
 const router = require('express').Router();
 const passport = require('passport');
 const jwt = require('../../config/jwt');
-const { User } = require('../../models');
+const { User, Profile, Follower } = require('../../models');
 const env = process.env.NODE_ENV || 'development';
 
 require('../../config/passport');
@@ -47,7 +47,6 @@ const redirect = (res, user) => {
     pathname: redirectUrl,
     query: {
        accessToken: jwt.createToken(user),
-       username: user.username,
        env: env,
        redirect: true,
     },
@@ -181,6 +180,21 @@ router.post('/login', (req, res) => {
       return res.json({ error: { password: 'Invalid Password.'}});
     }
   })();
+});
+
+router.get('/user', passport.authenticate('auth-user', {session: false}), (req, res) => {
+  User.findOne({
+    where: {
+      username: req.user.username,
+    },
+    include: [
+      { model: Profile },
+      { model: Follower, include: [{ model: User, as: 'Follower' }] },
+      { model: Follower, as: 'Following', include: [User] },
+    ],
+  }).then(result => {
+    res.json(result);
+  });
 });
 
 module.exports = router;
