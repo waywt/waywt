@@ -48,6 +48,7 @@ const redirect = (res, user) => {
     query: {
        accessToken: jwt.createToken(user),
        username: user.username,
+       env: env,
        redirect: true,
     },
   }));
