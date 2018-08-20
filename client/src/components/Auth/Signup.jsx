@@ -49,9 +49,11 @@ class Signup extends Component {
             <div id="signup-descrip">
             Sign up to share what you're wearing with friends and followers.
             </div>
+            <a href="http://localhost:3100/auth/facebook">
             <div class="w-75 btn facebook-signup">
             <i class="fab fa-facebook-square fa-lg"></i>  Log in with Facebook
             </div> 
+            </a>
             
             <div class="d-flex">
               <div class="linebreak1"></div>

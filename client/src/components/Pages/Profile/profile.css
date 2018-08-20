@@ -1,0 +1,44 @@
+.profile-header {
+    margin-top:150px;
+}
+
+.profile-photo {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+
+.userImage {
+    height: 75%;
+    width: 100%;
+}
+
+.userImage:hover {
+    opacity: .75;
+}
+
+.usernameDisplay {
+    font-size: 32px;
+    font-weight: 200;
+}
+
+.profileNumber {
+    font-weight: bold;
+}
+
+.profDisplay {
+    margin-top: 15px;
+}
+
+.photoGrid {
+    margin-top:20px;
+}
+
+.profileLine {
+    width: 66%;
+    margin-left: 216px;
+}
+
+.profileName {
+    font-weight: 600;
+}
