@@ -32,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       unique: true,
     },
+    GoogleId: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: true,
+    },
   }, {
     indexes: [
       {
@@ -42,6 +47,9 @@ module.exports = (sequelize, DataTypes) => {
       },
       {
         fields: ['FacebookId'],
+      },
+      {
+        fields: ['GoogleId'],
       },
     ],
   });
