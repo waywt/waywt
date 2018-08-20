@@ -10,6 +10,9 @@ const App = () => (
       <Switch>
         <Route exact path='/signup' component={Signup} />
         <Route exact path='/' component={Patrick} />
+        <Route exact path='/auth/cb' render={() => {
+          return <h1>/auth/cb</h1>;
+        }} />
         {/* <Route exact path='/login' component={Login} /> */}
         {/* <Route component={NoMatch} /> */}
       </Switch>
