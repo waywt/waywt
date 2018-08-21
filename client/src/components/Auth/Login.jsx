@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { authSignup } from '../../utils/API';
-import "./signup.css"
+import './auth.css';
 
 class Login extends Component {
     state = {

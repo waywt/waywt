@@ -1,30 +1,65 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { authVerify } from './utils/API';
+import { Signup, Login, Temp } from './components/Auth';
+
 import Patrick from './components/Patrick';
-import Signup from './components/Auth/Signup';
-
-//import Login from './components/Auth/Login';
-import Temp from './components/Auth/Temp';
-
-import Login from './components/Auth/Login';
 
 
-const App = () => (
-  <Router>
-    <div>
-      <Switch>
-        <Route exact path='/signup' component={Signup} />
-        <Route exact path='/' component={Patrick} />
+class App extends Component {
+  state = {
+    authenticated: false,
+    username: ''
+  }
 
-        <Route exact path='/auth/cb' component={Temp} />
+  componentDidMount() {
+    const accessToken = localStorage.getItem('accessToken');
 
-        <Route exact path="/login" component={Login} />
+    if (accessToken) {
+      authVerify(accessToken).then(result => {
+        console.log(result);
+        this.updateUserState(result.data);
+      }).catch(err => { // Unauthorized
+        localStorage.removeItem('accessToken');
+      });
+    }
+  }
+  
+  updateUserState = (userData) => {
+    this.setState({
+      authenticated: true,
+      id: userData.id,
+      username: userData.username,
+      email: userData.email,
+      createdAt: userData.createdAt,
+      profile: userData.Profile,
+      followers: userData.Followers,
+      following: userData.Following
+    });
+  }
 
-        {/* <Route exact path='/login' component={Login} /> */}
-        {/* <Route component={NoMatch} /> */}
-      </Switch>
-    </div>
-  </Router>
-);
+  render() {
+    return (
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path='/signup' render={() => {
+              return (
+                <Signup authenticated={this.state.authenticated}
+                        updateUserState={this.updateUserState}
+                />
+              );
+            }} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path='/auth/cb' component={Temp} />
+            <Route exact path='/' component={Patrick} />
+
+            {/* <Route component={NoMatch} /> */}
+          </Switch>
+        </div>
+      </Router>
+    );
+  } 
+}
 
 export default App;

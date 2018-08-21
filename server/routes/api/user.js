@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
       { model: Profile },
       { model: Follower, include: [{ model: User, as: 'Follower' }] },
       { model: Follower, as: 'Following', include: [User] },
-    ]
+    ],
   }).then(result => {
     res.json(result);
   });

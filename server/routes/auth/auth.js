@@ -188,10 +188,18 @@ router.get('/user', passport.authenticate('auth-user', {session: false}), (req, 
       username: req.user.username,
     },
     include: [
-      { model: Profile },
+      { 
+        model: Profile ,
+        attributes: { 
+          exclude: ['createdAt', 'updatedAt'] 
+        },
+      },
       { model: Follower, include: [{ model: User, as: 'Follower' }] },
       { model: Follower, as: 'Following', include: [User] },
     ],
+    attributes: { 
+      exclude: ['password', 'GoogleId', 'FacebookId', 'updatedAt'] 
+    },
   }).then(result => {
     res.json(result);
   });
