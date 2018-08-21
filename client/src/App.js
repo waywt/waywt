@@ -5,7 +5,6 @@ import { Signup, Login, Temp } from './components/Auth';
 
 import Patrick from './components/Patrick';
 
-
 class App extends Component {
   state = {
     authenticated: false,
