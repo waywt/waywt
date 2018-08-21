@@ -24,17 +24,14 @@ class App extends Component {
       });
     }
   }
+
+  componentDidUpdate() {
+    console.log('i ran');
+  }
   
-  updateUserState = (userData) => {
+  updateUserState = () => {
     this.setState({
       authenticated: true,
-      id: userData.id,
-      username: userData.username,
-      email: userData.email,
-      createdAt: userData.createdAt,
-      profile: userData.Profile,
-      followers: userData.Followers,
-      following: userData.Following
     });
   }
 
@@ -45,12 +42,20 @@ class App extends Component {
           <Switch>
             <Route exact path='/signup' render={() => {
               return (
-                <Signup authenticated={this.state.authenticated}
-                        updateUserState={this.updateUserState}
+                <Signup 
+                  authenticated={this.state.authenticated}
+                  updateUserState={this.updateUserState}
                 />
               );
             }} />
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/login" render={() => {
+              return (
+                <Login 
+                  authenticated={this.state.authenticated}
+                  updateUserState={this.updateUserState}
+                />
+              );
+            }} />
             <Route exact path='/auth/cb' component={Temp} />
             <Route exact path='/' component={Patrick} />
 

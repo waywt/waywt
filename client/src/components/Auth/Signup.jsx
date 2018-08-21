@@ -8,7 +8,6 @@ class Signup extends Component {
     username: '',
     email: '',
     password: '',
-    redirect: false,
     fbUrl: '/auth/facebook',
     googUrl: '/auth/google'
   };
@@ -33,16 +32,14 @@ class Signup extends Component {
     authSignup(this.state).then(result => {
       if(!result.data.error) {
         localStorage.setItem('accessToken', result.data.accessToken);
-        this.setState({redirect: true});
+        this.props.updateUserState();
       }
       // error handling?
     });
   }
 
   render() {
-    const { redirect } = this.state;
-
-    if (this.props.authenticated || redirect) {
+    if (this.props.authenticated) {
       return <Redirect to="/" />;
     } else {
       return (

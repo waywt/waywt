@@ -7,7 +7,6 @@ class Login extends Component {
     state = {
       usernameOrEmail: '',
       password: '',
-      redirect: false,
       fbUrl: '/auth/facebook',
       googUrl: '/auth/google'
     };
@@ -32,16 +31,14 @@ class Login extends Component {
       authLogin(this.state).then(result => {
         if(!result.data.error) {
           localStorage.setItem('accessToken', result.data.accessToken);
-          this.setState({ redirect: true });
+          this.props.updateUserState();
         }
         // error handling?
       });
     }
   
     render() {
-      const { redirect } = this.state;
-  
-      if (redirect) {
+      if (this.props.authenticated) {
         return <Redirect to="/" />;
       } else {
         return (
