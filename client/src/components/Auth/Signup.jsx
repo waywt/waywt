@@ -9,7 +9,18 @@ class Signup extends Component {
     email: '',
     password: '',
     redirect: false,
+    fbUrl: '/auth/facebook',
+    googUrl: '/auth/google'
   };
+
+  componentDidMount() {
+    if (/localhost/.test(window.location.href)) {
+      this.setState({
+        fbUrl: 'http://localhost:3100/auth/facebook',
+        googUrl: 'http://localhost:3100/auth/google'
+      });
+    };
+  }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -24,6 +35,7 @@ class Signup extends Component {
         localStorage.setItem('accessToken', result.data.accessToken);
         this.setState({redirect: true});
       }
+      // error handling?
     });
   }
 
@@ -55,11 +67,11 @@ class Signup extends Component {
                       <div id="signup-descrip">
                         Sign up to share what you're wearing with friends and followers.
                       </div>
-                      <a href="http://localhost:3100/auth/facebook" className="w-75 btn facebook-signup">
+                      <a href={this.state.fbUrl} className="w-75 btn facebook-signup">
                         <i className="fab fa-facebook-square fa-lg mr-2"></i>
                         Log in with Facebook
                       </a>
-                      <a href="http://localhost:3100/auth/google" className="w-75 btn google-signup">
+                      <a href={this.state.googUrl} className="w-75 btn google-signup">
                         <i className="fab fa-google fa-lg mr-2"></i>
                         Log in with Google
                       </a> 
