@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from "../../Header";
-import "./profile.css"
+import "./profile.css";
+
 
 
 
@@ -12,7 +13,24 @@ class Profile extends Component {
       password: '',
       redirect: false,
     };
-  
+
+
+    imageSquare = props => {
+        return (
+            <div className="col-md-3">
+            <div className="imageContainer">
+            <a href="#">
+                <img src="https://i.imgur.com/E51bZN1.jpg" alt="image1" className="userImage"></img>
+                <div class="iconProfile">
+                    <i class="fas fa-heart"></i>
+                    <i class="fas fa-comment iconCommentProfile"></i>
+                </div>
+             </a>   
+             </div>
+        </div>
+        )
+    }
+
     
     render() {
         const { redirect } = this.state;
@@ -68,21 +86,9 @@ class Profile extends Component {
                 <div className="row photoGrid">
                 <div className="col-md-11 offset-md-2">
                     <div className="row">
-                    <div className="col-md-3">
-                    <a href="#">
-                    <img src="https://i.imgur.com/E51bZN1.jpg" alt="image1" className="userImage"></img>
-                    </a>
-                    </div>
-                    <div className="col-md-3">
-                    <a href="#">
-                    <img src="https://i.imgur.com/E51bZN1.jpg" alt="image1" className="userImage"></img>
-                    </a>
-                    </div>
-                    <div className="col-md-3">
-                    <a href="#">
-                    <img src="https://i.imgur.com/E51bZN1.jpg" alt="image1" className="userImage"></img>
-                    </a>
-                    </div>
+                        {this.imageSquare()}
+                        {this.imageSquare()}
+                        {this.imageSquare()}
                     </div>
                 </div>
                 </div>
