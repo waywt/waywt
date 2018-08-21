@@ -28,7 +28,7 @@ body {
 }
 
 #iphonePic {
-  margin-top: 20px;
+  margin-top: 15px;
   height: 600px;
 }
 
@@ -66,6 +66,13 @@ body {
   font-weight: 600;
   background-color: #e74b37;
 }
+
+a.facebook-signup:hover,
+a.google-signup:hover {
+  color: white;
+  text-decoration: none;
+}
+
 
 .linebreak {
   background-color: #e6e6e6;
