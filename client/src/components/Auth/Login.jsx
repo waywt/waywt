@@ -88,7 +88,7 @@ class Login extends Component {
                     </label>
                     <button className="btn w-75" id="login_btn" type="submit">Log in</button>
                     <div>
-                      <a className="password-link" href=""> Forgot password? </a>
+                      <a className="password-link" href="/reset-password"> Forgot password? </a>
                     </div>
                   </form>
                 </div>
