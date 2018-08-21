@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { authVerify } from './utils/API';
 import { Signup, Login, Temp } from './components/Auth';
+import { Profile } from './components/Pages/Profile';
+
 
 import Patrick from './components/Patrick';
 
@@ -57,6 +59,8 @@ class App extends Component {
             }} />
             <Route exact path='/auth/cb' component={Temp} />
             <Route exact path='/' component={Patrick} />
+            <Route exact path='/profile' component={Profile} />
+
 
             {/* <Route component={NoMatch} /> */}
           </Switch>

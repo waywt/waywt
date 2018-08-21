@@ -11,6 +11,12 @@
 .userImage {
     height: 75%;
     width: 100%;
+    position: relative;
+}
+
+.imageContainer {
+    height: 100%;
+    width: 100%;
 }
 
 .userImage:hover {
@@ -41,4 +47,17 @@
 
 .profileName {
     font-weight: 600;
+}
+
+.iconProfile {
+    opacity: 0;
+    color: white;
+    position: absolute;
+    padding: 110px;
+    font-size: 40px;
+    bottom: 100px;
+}
+
+.iconProfile:hover {
+    opacity: 1;
 }
