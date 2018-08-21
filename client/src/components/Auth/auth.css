@@ -11,11 +11,11 @@ body {
 }
 
 .login-page {
-  margin-top: 75px;
   background-color: white;
-  text-align: center;
   border: 0.5px solid #e6e6e6;
-  height: 350px;
+  max-width: 350px;
+  text-align: center;
+  padding: 20px;
 }
 
 .loginBox {
@@ -73,7 +73,6 @@ a.google-signup:hover {
   text-decoration: none;
 }
 
-
 .linebreak {
   background-color: #e6e6e6;
   height: 1px;
@@ -108,7 +107,8 @@ label {
   padding: 0 8px;
 }
 
-#signup_btn {
+#signup_btn,
+#login_btn {
   font-size: 14px;
   font-weight: 600;
   margin-top: 8px;

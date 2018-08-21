@@ -60,7 +60,7 @@ class Signup extends Component {
               <div className="row">
                 <div className="col">
                   <div className="signup-page mx-auto">
-                    <form className="login-form" onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit}>
                       <div >
                         <img className="instagarment-logo" src="instagarment.png" alt="instagarment logo" ></img>
                       </div>

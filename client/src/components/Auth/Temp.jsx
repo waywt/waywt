@@ -11,7 +11,7 @@ class Temp extends Component {
       localStorage.setItem('accessToken', accessToken);
     }
 
-    return <Redirect to='/' />;
+    return <Redirect to="/" />;
   }
 }
 
