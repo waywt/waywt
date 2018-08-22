@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { authVerify } from './utils/API';
 import { Signup, Login, Temp } from './components/Auth';
 import { Profile } from './components/Pages/Profile';
 import Home from "./components/Pages/Home/";
 import Tag from "./components/Tag";
 import Outfit from "./components/Outfit";
+
 
 class App extends Component {
   state = {
@@ -28,8 +29,8 @@ class App extends Component {
     console.log('state authenticated updated');
   }
   
-  updateAuthState = () => {
-    this.setState({authenticated: true});
+  updateAuthState = (boolean) => {
+    this.setState({authenticated: boolean});
   }
 
   render() {
@@ -54,7 +55,18 @@ class App extends Component {
               );
             }} />
             <Route exact path='/auth/cb' component={Temp} />
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' render={() => {
+              if (this.state.authenticated) {
+                return (
+                  <Home
+                    authenticated={this.state.authenticated}
+                    updateAuthState={this.updateAuthState}
+                  />
+                );
+              } else {
+                return <Redirect to="/signup" />;
+              }
+            }} />
             <Route exact path='/profile' component={Profile} />
             <Route exact path='/outfit' component={Outfit} />
 

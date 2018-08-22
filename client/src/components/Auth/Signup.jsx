@@ -32,7 +32,7 @@ class Signup extends Component {
     authSignup(this.state).then(result => {
       if(!result.data.error) {
         localStorage.setItem('accessToken', result.data.accessToken);
-        this.props.updateAuthState();
+        this.props.updateAuthState(true);
       }
       // error handling?
     });

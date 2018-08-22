@@ -2,20 +2,37 @@ import React, { Component } from "react";
 import "./Header.css";
 
 class Header extends Component {
+  state = {
+    username: '',
+    email: '',
+    password: '',
+    redirect: false,
+  };
+
+  logOut = (event) => {
+    event.preventDefault();
+    localStorage.removeItem('accessToken');
+    this.props.updateAuthState(false);
+  }
+
   render() {
     return (
-      <nav class="Nav navbar justify-content-between">
-        <a class="navbar-brand">Instagarment</a>
-        <form class="form-inline">
+      <nav className="Nav navbar justify-content-between">
+        <a className="navbar-brand">Instagarment</a>
+        <form className="form-inline">
           <input
             id="header-input"
-            class="form-control mr-sm-2"
+            className="form-control mr-sm-2"
             type="search"
             placeholder="search..."
             aria-label="Search"
           />
-          <button class="btn my-2 my-sm-0" type="submit">
+          <button className="btn my-2 my-sm-0 searchButton" type="submit">
             Search
+          </button>
+
+          <button className="btn my-2 my-sm-0 signOutButton" type="submit" onClick={this.logOut}>
+            <i className="fas fa-sign-out-alt"></i> Log Out
           </button>
         </form>
       </nav>
