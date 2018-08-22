@@ -1,20 +1,16 @@
-const faker = require('faker');
-
 const date = new Date();
+const categoryNames = ['Sleepwear', 'Casual', 'Business', 'Formal', 'Athletic', 'Outerwear'];
 const categories = [];
-let i = 1;
 
-while (i <= 15) {
+categoryNames.forEach((name, index) => {
   const newCategory = {
-    id: i,
-    name: `${faker.commerce.department()}-${i}`,
+    id: index + 1,
+    name: name,
     createdAt: date,
     updatedAt: date,
   };
-
   categories.push(newCategory);
-  i += 1;
-}
+});
 
 module.exports = {
   up: async (queryInterface) => {

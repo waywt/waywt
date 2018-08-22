@@ -8,14 +8,14 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     x: {
-      type: DataTypes.DECIMAL(3,2),
+      type: DataTypes.DECIMAL(7,4),
       allowNull: false,
       validate: {
         isDecimal: true,
       },
     },
     y: {
-      type: DataTypes.DECIMAL(3,2),
+      type: DataTypes.DECIMAL(7,4),
       allowNull: false,
       validate: {
         isDecimal: true,
