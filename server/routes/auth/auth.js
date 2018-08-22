@@ -1,9 +1,19 @@
+const url = require('url');
 const router = require('express').Router();
 const passport = require('passport');
 const jwt = require('../../config/jwt');
-const { User } = require('../../models');
+const { User, Profile, Follower } = require('../../models');
+const env = process.env.NODE_ENV || 'development';
 
 require('../../config/passport');
+
+let loginUrl = '/login';
+let redirectUrl = '/auth/cb';
+
+if (env === 'development') {
+  loginUrl = 'http://localhost:3000/login',
+  redirectUrl = 'http://localhost:3000/auth/cb'
+}
 
 const createTempToken = (req, res, next) => {
   req.tempToken = jwt.createTempToken();
@@ -14,7 +24,7 @@ const validateTempToken = (req, res, next) => {
   if (jwt.decodeToken(req.query.state).valid) {
     next();
   } else {
-    res.redirect('/login');
+    res.redirect(loginUrl);
   }
 };
 
@@ -31,6 +41,17 @@ const googleAuthenticate = (req, res, next) => {
     session: false,
   })(req, res, next);
 };
+
+const redirect = (res, user) => {
+  return res.redirect(url.format({
+    pathname: redirectUrl,
+    query: {
+       accessToken: jwt.createToken(user),
+       env: env,
+       redirect: true,
+    },
+  }));
+}
 
 router.get('/facebook', createTempToken, facebookAuthenticate);
 
@@ -54,10 +75,7 @@ router.get('/facebook/callback', validateTempToken, passport.authenticate('auth-
         });
       }
 
-      return res.render('redirect', {
-        accessToken: jwt.createToken(user),
-        username: user.username,
-      });
+      return redirect(res, user);
     }
     const newUser = await User.create({
       username: fbUser.name.replace(/ /g, '_'),
@@ -65,10 +83,7 @@ router.get('/facebook/callback', validateTempToken, passport.authenticate('auth-
       FacebookId: fbUser.id,
     });
 
-    return res.render('redirect', {
-      accessToken: jwt.createToken(newUser),
-      username: fbUser.name.replace(/ /g, '_'),
-    });
+    return redirect(res, newUser);
   })();
 });
 
@@ -94,10 +109,7 @@ router.get('/google/callback', validateTempToken, passport.authenticate('auth-us
         });
       }
 
-      return res.render('redirect', {
-        accessToken: jwt.createToken(user),
-        username: user.username,
-      });
+      return redirect(res, user);
     }
     const newUser = await User.create({
       username: googleUser.displayName.replace(/ /g, '_'),
@@ -105,10 +117,7 @@ router.get('/google/callback', validateTempToken, passport.authenticate('auth-us
       GoogleId: googleUser.id,
     });
 
-    return res.render('redirect', {
-      accessToken: jwt.createToken(newUser),
-      username: googleUser.displayName.replace(/ /g, '_'),
-    });
+    return redirect(res, newUser);
   })();
 });
 
@@ -171,6 +180,29 @@ router.post('/login', (req, res) => {
       return res.json({ error: { password: 'Invalid Password.'}});
     }
   })();
+});
+
+router.get('/user', passport.authenticate('auth-user', {session: false}), (req, res) => {
+  User.findOne({
+    where: {
+      username: req.user.username,
+    },
+    include: [
+      { 
+        model: Profile ,
+        attributes: { 
+          exclude: ['createdAt', 'updatedAt'] 
+        },
+      },
+      { model: Follower, include: [{ model: User, as: 'Follower' }] },
+      { model: Follower, as: 'Following', include: [User] },
+    ],
+    attributes: { 
+      exclude: ['password', 'GoogleId', 'FacebookId', 'updatedAt'] 
+    },
+  }).then(result => {
+    res.json(result);
+  });
 });
 
 module.exports = router;
