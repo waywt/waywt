@@ -10,7 +10,6 @@ import Outfit from "./components/Outfit";
 class App extends Component {
   state = {
     authenticated: false,
-    username: ''
   }
 
   componentDidMount() {
@@ -18,8 +17,7 @@ class App extends Component {
 
     if (accessToken) {
       authVerify(accessToken).then(result => {
-        console.log(result);
-        this.updateUserState(result.data);
+        this.setState({authenticated: result.data.authenticated});
       }).catch(err => { // Unauthorized
         localStorage.removeItem('accessToken');
       });
@@ -27,13 +25,11 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log('i ran');
+    console.log('state authenticated updated');
   }
   
-  updateUserState = () => {
-    this.setState({
-      authenticated: true,
-    });
+  updateAuthState = () => {
+    this.setState({authenticated: true});
   }
 
   render() {
@@ -45,7 +41,7 @@ class App extends Component {
               return (
                 <Signup 
                   authenticated={this.state.authenticated}
-                  updateUserState={this.updateUserState}
+                  updateAuthState={this.updateAuthState}
                 />
               );
             }} />
@@ -53,7 +49,7 @@ class App extends Component {
               return (
                 <Login 
                   authenticated={this.state.authenticated}
-                  updateUserState={this.updateUserState}
+                  updateAuthState={this.updateAuthState}
                 />
               );
             }} />

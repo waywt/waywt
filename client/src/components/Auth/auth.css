@@ -112,7 +112,7 @@ label {
   font-weight: 600;
   margin-top: 8px;
   margin-bottom: 15px;
-  background-color: #3897f0;
+  background-color: #3897f0 !important;
   padding: .225rem .75rem;
   color: white;
 }
