@@ -50,7 +50,7 @@ class Outfit extends Component {
             <input
               id="comment-form"
               type="text"
-              class="form-control"
+              className="form-control"
               id="formGroupExampleInput"
               placeholder="Add a comment..."
             />

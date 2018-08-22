@@ -17,7 +17,7 @@ class App extends Component {
     const accessToken = localStorage.getItem('accessToken');
 
     if (accessToken) {
-      authVerify(accessToken).then(result => {
+      authVerify().then(result => {
         this.setState({authenticated: result.data.authenticated});
       }).catch(err => { // Unauthorized
         localStorage.removeItem('accessToken');

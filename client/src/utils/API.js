@@ -8,8 +8,8 @@ export const authLogin = user => {
   return axios.post('/auth/login', user);
 }
 
-export const authVerify = (accessToken) => {
+export const authVerify = () => {
   return axios.get('/auth/user', {
-    'headers': { 'Authorization': `Bearer ${accessToken}` }
+    'headers': { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }
   });
 }
