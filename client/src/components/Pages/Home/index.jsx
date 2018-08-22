@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Header from "../../Header";
-import Post from "../../Post";
+import Outfit from "../../Outfit";
 import Sidebar from "../../Sidebar";
 
 class Patrick extends Component {
@@ -21,7 +21,7 @@ class Patrick extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8">
-              <Post
+              <Outfit
                 username={username}
                 avatar={avatar}
                 description={description}
@@ -38,7 +38,7 @@ class Patrick extends Component {
               />
             </div>
             <div className="col-md-8">
-              <Post
+              <Outfit
                 username={username}
                 avatar={avatar}
                 description={description}
@@ -47,7 +47,7 @@ class Patrick extends Component {
               />
             </div>
             <div className="col-md-8">
-              <Post
+              <Outfit
                 username={username}
                 avatar={avatar}
                 description={description}
@@ -56,7 +56,7 @@ class Patrick extends Component {
               />
             </div>
             <div className="col-md-8">
-              <Post
+              <Outfit
                 username={username}
                 avatar={avatar}
                 description={description}

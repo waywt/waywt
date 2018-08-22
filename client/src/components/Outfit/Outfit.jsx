@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import Header from "../../Header";
-import "./Post.css";
+import "./Outfit.css";
 
-class Post extends Component {
+class Outfit extends Component {
     state = {
       username: '',
       email: '',

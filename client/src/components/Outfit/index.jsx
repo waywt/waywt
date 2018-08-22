@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./Post.css";
+import "./Outfit.css";
 
-class Post extends Component {
+class Outfit extends Component {
   render() {
     const { username, avatar, image, description } = this.props;
 
