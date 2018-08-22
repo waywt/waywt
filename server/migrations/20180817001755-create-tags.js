@@ -11,11 +11,11 @@ module.exports = {
       allowNull: true,    
     },
     x: {
-      type: Sequelize.DECIMAL(3, 2),
+      type: Sequelize.DECIMAL(7,4),
       allowNull: false,
     },
     y: {
-      type: Sequelize.DECIMAL(3, 2),
+      type: Sequelize.DECIMAL(7,4),
       allowNull: false,
     },
     UserId: {
