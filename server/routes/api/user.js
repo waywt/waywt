@@ -1,18 +1,71 @@
 const router = require('express').Router();
-const { User, Profile, Follower, Outfit } = require('../../models');
+const { Op } = require('sequelize');
+const { User, Profile, Follower, Category, Outfit, Comment, Like, Tag, Hashtag } = require('../../models');
+const passport = require('passport');
 
-router.get('/:username', (req, res) => {
+router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, res) => {
   User.findOne({
     where: {
-      username: req.params.username,
+      username: req.user.username,
     },
+    attributes: ['username'],
     include: [
-      { model: Profile },
-      { model: Follower, include: [{ model: User, as: 'Follower' }] },
-      { model: Follower, as: 'Following', include: [User] },
+      { model: Profile, attributes: ['avatar'] },
+      { 
+        model: Follower, as: 'Following',
+        attributes: ['UserId'], 
+      },
     ],
-  }).then(result => {
-    res.json(result);
+  }).then(user => {
+    const FollowingIds = [];
+    user.Following.forEach(following => {
+      FollowingIds.push(following.UserId);
+    });
+    
+    Outfit.findAll({
+      where: {
+        UserId: {
+          [Op.in]: FollowingIds,
+        },
+      },
+      attributes: { exclude: ['updatedAt'] },
+      include: [
+        {
+          model: Category,
+          attributes: ['name'],
+        },
+        { 
+          model: User, 
+          attributes: ['username'],
+          include: [{ model: Profile, attributes: ['avatar']}]
+        },
+        {
+          model: Comment,
+          attributes: ['id', 'text'],
+          include: [{ model: User, attributes: ['username']}],
+          order: [['createdAt', 'DESC']],
+        },
+        {
+          model: Like,
+          attributes: ['id'],
+        },
+        {
+          model: Tag,
+          attributes: ['id', 'text', 'x', 'y'],
+          include: [{ model: User, as: 'Tagged', attributes: ['username']}],
+        },
+        {
+          model: Hashtag,
+          attributes: ['id', 'text'],
+          through: { attributes: [] },   
+        }
+      ],
+      order: [['createdAt', 'DESC']],
+      limit: 10,
+      offset: parseInt(req.query.offset) || 0,
+    }).then(outfits => {
+      res.json([user, outfits]);
+    });
   });
 });
 
