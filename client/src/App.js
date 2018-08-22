@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { authVerify } from './utils/API';
 import { Signup, Login, Temp } from './components/Auth';
-
-import Patrick from './components/Patrick';
+import { Profile } from './components/Pages/Profile';
+import Home from "./components/Pages/Home/";
+import Tag from "./components/Tag";
 
 class App extends Component {
   state = {
@@ -56,7 +57,9 @@ class App extends Component {
               );
             }} />
             <Route exact path='/auth/cb' component={Temp} />
-            <Route exact path='/' component={Patrick} />
+            <Route exact path='/' component={Home} />
+            <Route exact path='/profile' component={Profile} />
+
 
             {/* <Route component={NoMatch} /> */}
           </Switch>
@@ -65,5 +68,4 @@ class App extends Component {
     );
   } 
 }
-
 export default App;

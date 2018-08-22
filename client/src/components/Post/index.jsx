@@ -3,10 +3,8 @@ import "./Post.css";
 
 class Post extends Component {
   render() {
-    const username = this.props.username;
-    const avatar = this.props.avatar;
-    const image = this.props.image;
-    const description = this.props.description;
+    const { username, avatar, image, description } = this.props;
+
     return (
       <article className="Post" ref="Post">
         <header>
@@ -20,13 +18,44 @@ class Post extends Component {
           </div>
         </header>
         <div className="Post-image">
+          <button id="button1" />
           <div className="Post-image-bg">
             <img alt={description} src={image} />
           </div>
         </div>
+        <div className="action-buttons">
+          <button className="btn like-btn" />
+          <button className="btn comment-btn" />
+        </div>
+        <div className="Post-likes">
+          <strong>1,481 likes</strong>
+        </div>
         <div className="Post-description">
           <strong>{username}</strong> {description}
         </div>
+        <div className="comment-container">
+          <div className="Post-comment">
+            <strong>pat_gabes</strong> This ain't even great
+          </div>
+          <div className="Post-comment">
+            <strong>pat_gabes</strong> Sick fit dude
+          </div>
+          <div className="Post-comment">
+            <strong>pat_gabes</strong> Wow, this fit is dope bro
+          </div>
+        </div>
+        <hr />
+        <form>
+          <div className="form-group">
+            <input
+              id="comment-form"
+              type="text"
+              class="form-control"
+              id="formGroupExampleInput"
+              placeholder="Add a comment..."
+            />
+          </div>
+        </form>
       </article>
     );
   }

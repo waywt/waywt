@@ -16,7 +16,7 @@ router.get('/:username', (req, res) => {
   });
 });
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   User.findAll({
     include: [
       { model: Profile },
