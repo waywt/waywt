@@ -1,12 +1,12 @@
-const router = require('express').Router();
-const { User, Profile, Follower } = require('../../models');
+const router = require("express").Router();
+const { User, Profile, Follower } = require("../../models");
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   User.findAll({
     include: [
       { model: Profile },
-      { model: Follower, include: [{ model: User, as: 'Follower' }] },
-      { model: Follower, as: 'Following', include: [User] },
+      { model: Follower, include: [{ model: User, as: "Follower" }] },
+      { model: Follower, as: "Following", include: [User] }
     ]
   }).then(result => {
     res.json(result);
