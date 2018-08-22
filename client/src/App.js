@@ -5,6 +5,7 @@ import { Signup, Login, Temp } from './components/Auth';
 import { Profile } from './components/Pages/Profile';
 import Home from "./components/Pages/Home/";
 import Tag from "./components/Tag";
+import Outfit from "./components/Outfit";
 
 class App extends Component {
   state = {
@@ -59,6 +60,7 @@ class App extends Component {
             <Route exact path='/auth/cb' component={Temp} />
             <Route exact path='/' component={Home} />
             <Route exact path='/profile' component={Profile} />
+            <Route exact path='/outfit' component={Outfit} />
 
 
             {/* <Route component={NoMatch} /> */}
