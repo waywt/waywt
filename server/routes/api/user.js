@@ -66,7 +66,7 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
         limit: 10,
         offset: parseInt(req.query.offset) || 0,
       }).then(outfits => {
-        res.json({user: user, FollowingOutfits: outfits});
+        res.json({user: user, outfits: outfits});
       });
     } else {
       User.findAll({
@@ -81,18 +81,6 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
         res.json({user: user, suggestions: _.shuffle(users).slice(0, 10)});
       });
     }
-  });
-});
-
-router.get("/", (req, res) => {
-  User.findAll({
-    include: [
-      { model: Profile },
-      { model: Follower, include: [{ model: User, as: 'Follower' }] },
-      { model: Follower, as: 'Following', include: [User] },
-    ],
-  }).then(result => {
-    res.json(result);
   });
 });
 

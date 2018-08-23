@@ -13,3 +13,9 @@ export const authVerify = () => {
     'headers': { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }
   });
 }
+
+export const userFeed = () => {
+  return axios.get('/api/users/feed', {
+    'headers': { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }
+  });
+}
