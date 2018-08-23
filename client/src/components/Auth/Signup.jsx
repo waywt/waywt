@@ -79,7 +79,7 @@ class Signup extends Component {
                       </div>
                       <label>
                         <input
-                          className="input"
+                          className="authInput"
                           type="text"
                           name="username"
                           placeholder="Username"
@@ -89,7 +89,7 @@ class Signup extends Component {
                       </label>
                       <label>
                         <input
-                          className="input"
+                          className="authInput"
                           type="email"
                           name="email"
                           placeholder="Email address"
@@ -99,7 +99,7 @@ class Signup extends Component {
                       </label>
                       <label>
                         <input
-                          className="input" 
+                          className="authInput" 
                           type="password"
                           name="password"
                           placeholder="Password"
