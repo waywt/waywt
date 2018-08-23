@@ -89,7 +89,8 @@ a.google-signup:hover {
   margin-bottom: 15px;
 }
 
-label {
+.signup-page label,
+.login-page label {
   margin-bottom: 12px;
 }
 
@@ -127,5 +128,12 @@ label {
   top: 0;
   right: 15px;
   line-height: 40px;
+  color: #ff1616;
+}
+
+.authErrorMsg {
+  padding: 0 5px;
+  margin-bottom: 12px;
+  font-size: .85rem;
   color: #ff1616;
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { authSignup } from '../../utils/API';
+import { validUsername, validEmail, validPassword } from '../../utils/Validate';
 import './auth.css';
 
 class Signup extends Component {
@@ -8,6 +9,10 @@ class Signup extends Component {
     username: '',
     email: '',
     password: '',
+    usernameErr: false,
+    emailErr: false,
+    passwordErr: false,
+    errMsg: '',
     fbUrl: '/auth/facebook',
     googUrl: '/auth/google'
   };
@@ -23,19 +28,40 @@ class Signup extends Component {
 
   handleInputChange = event => {
     const { name, value } = event.target;
-    this.setState({[name]: value});
+    this.setState({[name]: value, [`${name}Err`]: false});
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
-    authSignup(this.state).then(result => {
-      if(!result.data.error) {
-        localStorage.setItem('accessToken', result.data.accessToken);
-        this.props.updateAuthState(true);
-      }
-      // error handling?
+    const validUsernameRes = validUsername(this.state.username);
+    const validEmailRes = validEmail(this.state.email);
+    const validPwRes = validPassword(this.state.password);
+    const errMsg = [validUsernameRes, validEmailRes, validPwRes].filter(errRes => {
+      return errRes !== 'valid';
     });
+    
+    this.setState({
+      usernameErr: validUsernameRes === 'valid' ? false : true,
+      emailErr: validEmailRes === 'valid' ? false : true,
+      passwordErr: validPwRes === 'valid' ? false : true,
+      errMsg: errMsg.length ? errMsg[0] : '',
+    });
+
+    if (!errMsg.length) {
+      authSignup(this.state).then(result => {
+        if(!result.data.error) {
+          localStorage.setItem('accessToken', result.data.accessToken);
+          this.props.updateAuthState(true);
+        } else if (result.data.error.username) {
+          this.setState({usernameErr: true, errMsg: result.data.error.username});
+        } else if (result.data.error.email) {
+          this.setState({emailErr: true, errMsg: result.data.error.email});
+        } else {
+          this.setState({errMsg: 'Unauthorized.'})
+        }
+      });
+    }
   }
 
   render() {
@@ -77,7 +103,7 @@ class Signup extends Component {
                         <div className="or p-2">OR</div>
                         <div className="linebreak"></div>
                       </div>
-                      <label>
+                      <label className="position-relative">
                         <input
                           className="authInput"
                           type="text"
@@ -86,8 +112,11 @@ class Signup extends Component {
                           value={this.state.username}  
                           onChange={this.handleInputChange}     
                         />
+                        <div className="authError" style={this.state.usernameErr ? {opacity: 1} : {opacity: 0}}>
+                          <i className="far fa-times-circle fa-lg"></i>
+                        </div>
                       </label>
-                      <label>
+                      <label className="position-relative">
                         <input
                           className="authInput"
                           type="email"
@@ -96,8 +125,11 @@ class Signup extends Component {
                           value={this.state.email}
                           onChange={this.handleInputChange}
                         />  
+                        <div className="authError" style={this.state.emailErr ? {opacity: 1} : {opacity: 0}}>
+                          <i className="far fa-times-circle fa-lg"></i>
+                        </div>
                       </label>
-                      <label>
+                      <label className="position-relative">
                         <input
                           className="authInput" 
                           type="password"
@@ -106,7 +138,13 @@ class Signup extends Component {
                           value={this.state.password}
                           onChange={this.handleInputChange}
                         />
+                        <div className="authError" style={this.state.passwordErr ? {opacity: 1} : {opacity: 0}}>
+                          <i className="far fa-times-circle fa-lg"></i>
+                        </div>
                       </label>
+                      <div className="authErrorMsg">
+                        {this.state.errMsg}
+                      </div>
                       <button className="btn w-75" id="signup_btn" type="submit">Sign up</button>
                     </form>
                   </div>
