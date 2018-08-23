@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    if(!this.state.user) { // prevents infinite loop
+    if(this.state.authenticated && !this.state.user) { // prevents infinite loop
       userFeed().then(result => {
         if (result.data.suggestions) { // new user / user not following anyone
           this.setState({
@@ -52,6 +52,15 @@ class App extends Component {
     this.setState({authenticated: boolean});
   }
 
+  resetState = () => {
+    this.setState({
+      authenticated: false,
+      user: null,
+      outfits: null,
+      suggestions: null,
+    });
+  }
+
   render() {
     return (
       <Router>
@@ -65,11 +74,11 @@ class App extends Component {
                     user={this.state.user}
                     outfits={this.state.outfits}
                     suggestions={this.state.suggestions}
-                    updateAuthState={this.updateAuthState}
+                    resetState={this.resetState}
                   />
                 );
               } else {
-                return <Redirect to="/signup" />;
+                return <Redirect to='/signup' />;
               }
             }} />
             <Route exact path='/signup' render={() => {
@@ -89,7 +98,7 @@ class App extends Component {
               );
             }} />
             <Route exact path='/auth/cb' component={Temp} />
-            <Route exact path='/profile' component={Profile} />
+            <Route exact path='/:username' component={Profile} />
             <Route exact path='/outfit' component={Outfit} />
 
 

@@ -12,7 +12,7 @@ class Header extends Component {
   logOut = (event) => {
     event.preventDefault();
     localStorage.removeItem('accessToken');
-    this.props.updateAuthState(false);
+    this.props.resetState();
   }
 
   render() {

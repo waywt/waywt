@@ -13,58 +13,42 @@ class Home extends Component {
       "https://static1.squarespace.com/static/560eabc4e4b061c4bb358ae8/t/57802d7e6b8f5b118a25062b/1468018050251/image.jpg?format=1000w" // {db}
     // comments: []
   };
+
   render() {
-    const { username, avatar, description, image } = this.state;
+    const { authenticated, resetState, user, outfits } = this.props;
+
     return (
       <div className="App">
         <Header 
-          authenticated={this.props.authenticated}
-          updateAuthState={this.props.updateAuthState}
+          authenticated={authenticated}
+          resetState={resetState}
         />
         <div className="container">
           <div className="row">
             <div className="col-md-8">
-              <Outfit
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
-              />
+              <div className="row">
+                {outfits && outfits.map(outfit => {
+                  return (
+                    <div className="col-12" key={`outfit-${outfit.id}`}>
+                      <Outfit
+                        username={outfit.User.username}
+                        avatar={outfit.User.Profile.avatar}
+                        description={outfit.description}
+                        image={outfit.imageUrl}
+                        likeCount={outfit.Likes.length}
+                        comments={outfit.Comments}
+                        tags={outfit.Tags}
+                        hashtags={outfit.Hashtags}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
             </div>
             <div className="col-md-4">
               <Sidebar
-                username={username}
-                avatar={avatar}
-                description={description}
-                image="https://i.redd.it/yfo3eglyfrv01.jpg"
-              />
-            </div>
-            <div className="col-md-8">
-              <Outfit
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
-              />
-            </div>
-            <div className="col-md-8">
-              <Outfit
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
-              />
-            </div>
-            <div className="col-md-8">
-              <Outfit
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
+                username={user ? user.username : ''}
+                avatar={user ? user.Profile.avatar : ''}
               />
             </div>
           </div>
