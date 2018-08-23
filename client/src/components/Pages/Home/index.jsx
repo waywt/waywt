@@ -20,16 +20,7 @@ class Patrick extends Component {
         <Header />
         <div className="container">
           <div className="row">
-            <div className="col-md-8">
-              <Post
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
-              />
-            </div>
-            <div className="col-md-4">
+            <div className="col-md-4 offset-md-8">
               <Sidebar
                 username={username}
                 avatar={avatar}
@@ -37,32 +28,43 @@ class Patrick extends Component {
                 image="https://i.redd.it/yfo3eglyfrv01.jpg"
               />
             </div>
-            <div className="col-md-8">
-              <Post
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
-              />
-            </div>
-            <div className="col-md-8">
-              <Post
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
-              />
-            </div>
-            <div className="col-md-8">
-              <Post
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
-              />
+            <div className="posts-container">
+              <div className="col-md-8">
+                <Post
+                  username={username}
+                  avatar={avatar}
+                  description={description}
+                  image={image}
+                  // comments={comments}
+                />
+              </div>
+              <div className="col-md-8">
+                <Post
+                  username={username}
+                  avatar={avatar}
+                  description={description}
+                  image={image}
+                  // comments={comments}
+                />
+              </div>
+              <div className="col-md-8">
+                <Post
+                  username={username}
+                  avatar={avatar}
+                  description={description}
+                  image={image}
+                  // comments={comments}
+                />
+              </div>
+              <div className="col-md-8">
+                <Post
+                  username={username}
+                  avatar={avatar}
+                  description={description}
+                  image={image}
+                  // comments={comments}
+                />
+              </div>
             </div>
           </div>
         </div>
