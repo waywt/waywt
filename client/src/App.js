@@ -29,21 +29,23 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    userFeed().then(result => {
-      if (result.data.suggestions) { // new user / user not following anyone
-        this.setState({
-          user: result.data.user,
-          suggestions: result.data.suggestions,
-        });
-      } else {
-        this.setState({
-          user: result.data.user,
-          outfits: result.data.outfits,
-        });
-      }
-    }).catch(err => {
-      console.log(err);
-    });
+    if(!this.state.user) { // prevents infinite loop
+      userFeed().then(result => {
+        if (result.data.suggestions) { // new user / user not following anyone
+          this.setState({
+            user: result.data.user,
+            suggestions: result.data.suggestions,
+          });
+        } else {
+          this.setState({
+            user: result.data.user,
+            outfits: result.data.outfits,
+          });
+        }
+      }).catch(err => {
+        console.log(err);
+      });
+    }
   }
   
   updateAuthState = (boolean) => {
