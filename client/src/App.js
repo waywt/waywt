@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
 } from "react-router-dom";
 import { authVerify, userFeed } from "./utils/API";
 import { Signup, Login, Temp } from "./components/Auth";
@@ -36,9 +35,9 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    if(this.state.authenticated && !this.state.user) { // prevents infinite loop
+    if(this.state.authenticated && !this.state.user) {
       userFeed().then(result => {
-        if (result.data.suggestions) { // new user / user not following anyone
+        if (result.data.suggestions) {
           this.setState({
             user: result.data.user,
             suggestions: result.data.suggestions,
@@ -73,43 +72,18 @@ class App extends Component {
       <Router>
         <div>
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => {
-                if (this.state.authenticated) {
-                  return (
-                    <Home
-                      authenticated={this.state.authenticated}
-                      user={this.state.user}
-                      outfits={this.state.outfits}
-                      suggestions={this.state.suggestions}
-                      updateAuthState={this.updateAuthState}
-                    />
-                  );
-                } else {
-                  return <Redirect to="/signup" />;
-                }
-              }}
-            />
-            <Route
-              exact
-              path="/signup"
-              render={() => {
-                return (
-                  <Signup
-                    authenticated={this.state.authenticated}
-                    user={this.state.user}
-                    outfits={this.state.outfits}
-                    suggestions={this.state.suggestions}
-                    resetState={this.resetState}
-                  />
-                );
-              } else {
-                return <Redirect to='/signup' />;
-              }
+            <Route exact path="/" render={() => {
+              return (
+                <Home
+                  authenticated={this.state.authenticated}
+                  user={this.state.user}
+                  outfits={this.state.outfits}
+                  suggestions={this.state.suggestions}
+                  resetState={this.resetState}
+                />
+              );
             }} />
-            <Route exact path='/signup' render={() => {
+            <Route exact path="/signup" render={() => {
               return (
                 <Signup 
                   authenticated={this.state.authenticated}
@@ -125,9 +99,10 @@ class App extends Component {
                 />
               );
             }} />
-            <Route exact path='/auth/cb' component={Temp} />
-            <Route exact path='/:username' component={Profile} />
+            <Route exact path="/auth/cb" component={Temp} />
+            
             <Route exact path='/outfit' component={Outfit} />
+            <Route exact path='/:username' component={Profile} />
             <Route
               exact
               path="/postform"
