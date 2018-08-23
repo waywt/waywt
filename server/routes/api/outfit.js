@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Outfit, Tag } = require('../../models');
+const { User, Category, Outfit, Tag } = require('../../models');
 const passport = require('passport');
 
 router.post('/', passport.authenticate('auth-user', {session: false}), (req, res) => {
@@ -15,17 +15,34 @@ router.post('/', passport.authenticate('auth-user', {session: false}), (req, res
       UserId: user.id,
       CategoryId: req.body.categoryId,
     }).then(outfit => {
-      JSON.parse(req.body.outfitTagsArray).forEach(newTag => {
-        Tag.create({
-          text: newTag.text,
-          x: newTag.x,
-          y: newTag.y,
-          UserId: user.id,
-          OutfitId: outfit.id,
-          TaggedId: newTag.TaggedId,
+      (async() => {
+        await JSON.parse(req.body.outfitTagsArray).forEach(newTag => {
+          Tag.create({
+            text: newTag.text,
+            x: newTag.x,
+            y: newTag.y,
+            UserId: user.id,
+            OutfitId: outfit.id,
+            TaggedId: newTag.TaggedId,
+          });
         });
-      });
-      res.json(outfit);
+        Outfit.findOne({
+          where: {
+            id: outfit.id 
+          },
+          attributes: { exclude: ['createdAt', 'updatedAt'] },
+          include: [
+            { model: Category, attributes: ['name'] },
+            {
+              model: Tag, 
+              attributes: { exclude: ['createdAt', 'updatedAt'] }, 
+              include: [{ model: User, as: 'Tagged', attributes: ['username']}],
+            }
+          ],
+        }).then(result => {
+          res.json(result);
+        });
+      })();
     });
   });
 });
