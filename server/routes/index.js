@@ -2,13 +2,14 @@ const path = require("path");
 const router = require("express").Router();
 const auth = require("./auth/auth");
 const user = require("./api/user");
+const outfit = require("./api/outfit");
 
 // Auth Routes
 router.use("/auth", auth);
 
 // API routes
 router.use("/api/users", user);
-// router.use("/api/user", user);
+router.use("/api/outfits", outfit);
 
 // send the react app if no routes above are hit
 router.use((req, res) => {
