@@ -1,30 +1,37 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { authVerify, userFeed } from './utils/API';
-import { Signup, Login, Temp } from './components/Auth';
-import { Profile } from './components/Pages/Profile';
+import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
+import { authVerify, userFeed } from "./utils/API";
+import { Signup, Login, Temp } from "./components/Auth";
+import { Profile } from "./components/Pages/Profile";
 import Home from "./components/Pages/Home/";
-import Tag from "./components/Tag";
+import PostForm from "./components/Pages/PostForm/";
 import Outfit from "./components/Outfit";
-
 
 class App extends Component {
   state = {
     authenticated: false,
     user: null,
     outfits: null,
-    suggestions: null,
-  }
+    suggestions: null
+  };
 
   componentDidMount() {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem("accessToken");
 
     if (accessToken) {
-      authVerify().then(result => {
-        this.setState({authenticated: result.data.authenticated});
-      }).catch(err => { // Unauthorized
-        localStorage.removeItem('accessToken');
-      });
+      authVerify()
+        .then(result => {
+          this.setState({ authenticated: result.data.authenticated });
+        })
+        .catch(err => {
+          // Unauthorized
+          localStorage.removeItem("accessToken");
+        });
     }
   }
 
@@ -47,10 +54,10 @@ class App extends Component {
       });
     }
   }
-  
-  updateAuthState = (boolean) => {
-    this.setState({authenticated: boolean});
-  }
+
+  updateAuthState = boolean => {
+    this.setState({ authenticated: boolean });
+  };
 
   resetState = () => {
     this.setState({
@@ -66,10 +73,31 @@ class App extends Component {
       <Router>
         <div>
           <Switch>
-            <Route exact path='/' render={() => {
-              if (this.state.authenticated) {
+            <Route
+              exact
+              path="/"
+              render={() => {
+                if (this.state.authenticated) {
+                  return (
+                    <Home
+                      authenticated={this.state.authenticated}
+                      user={this.state.user}
+                      outfits={this.state.outfits}
+                      suggestions={this.state.suggestions}
+                      updateAuthState={this.updateAuthState}
+                    />
+                  );
+                } else {
+                  return <Redirect to="/signup" />;
+                }
+              }}
+            />
+            <Route
+              exact
+              path="/signup"
+              render={() => {
                 return (
-                  <Home
+                  <Signup
                     authenticated={this.state.authenticated}
                     user={this.state.user}
                     outfits={this.state.outfits}
@@ -100,13 +128,24 @@ class App extends Component {
             <Route exact path='/auth/cb' component={Temp} />
             <Route exact path='/:username' component={Profile} />
             <Route exact path='/outfit' component={Outfit} />
-
+            <Route
+              exact
+              path="/postform"
+              render={() => {
+                return (
+                  <PostForm
+                    authenticated={this.state.authenticated}
+                    updateAuthState={this.updateAuthState}
+                  />
+                );
+              }}
+            />
 
             {/* <Route component={NoMatch} /> */}
           </Switch>
         </div>
       </Router>
     );
-  } 
+  }
 }
 export default App;
