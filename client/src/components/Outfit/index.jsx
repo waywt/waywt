@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./Post.css";
+import "./Outfit.css";
 
-class Post extends Component {
+class Outfit extends Component {
   render() {
     const { username, avatar, image, description } = this.props;
 
@@ -50,7 +50,7 @@ class Post extends Component {
             <input
               id="comment-form"
               type="text"
-              class="form-control"
+              className="form-control"
               id="formGroupExampleInput"
               placeholder="Add a comment..."
             />
@@ -60,4 +60,4 @@ class Post extends Component {
     );
   }
 }
-export default Post;
+export default Outfit;

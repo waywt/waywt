@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Header from "../../Header";
-import Post from "../../Post";
+import Outfit from "../../Outfit";
 import Sidebar from "../../Sidebar";
 
-class Patrick extends Component {
+class Home extends Component {
   state = {
     username: "chris_evans", // {db}
     avatar: "https://i.imgur.com/G28Yu4r.png", // {db}
@@ -17,11 +17,14 @@ class Patrick extends Component {
     const { username, avatar, description, image } = this.state;
     return (
       <div className="App">
-        <Header />
+        <Header 
+          authenticated={this.props.authenticated}
+          updateAuthState={this.props.updateAuthState}
+        />
         <div className="container">
           <div className="row">
             <div className="col-md-8">
-              <Post
+              <Outfit
                 username={username}
                 avatar={avatar}
                 description={description}
@@ -38,7 +41,7 @@ class Patrick extends Component {
               />
             </div>
             <div className="col-md-8">
-              <Post
+              <Outfit
                 username={username}
                 avatar={avatar}
                 description={description}
@@ -47,7 +50,7 @@ class Patrick extends Component {
               />
             </div>
             <div className="col-md-8">
-              <Post
+              <Outfit
                 username={username}
                 avatar={avatar}
                 description={description}
@@ -56,7 +59,7 @@ class Patrick extends Component {
               />
             </div>
             <div className="col-md-8">
-              <Post
+              <Outfit
                 username={username}
                 avatar={avatar}
                 description={description}
@@ -71,4 +74,4 @@ class Patrick extends Component {
   }
 }
 
-export default Patrick;
+export default Home;

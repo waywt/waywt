@@ -7,6 +7,8 @@ class Login extends Component {
     state = {
       usernameOrEmail: '',
       password: '',
+      usernameOrEmailErr: false,
+      passwordErr: false,
       fbUrl: '/auth/facebook',
       googUrl: '/auth/google'
     };
@@ -22,7 +24,7 @@ class Login extends Component {
 
     handleInputChange = event => {
       const { name, value } = event.target;
-      this.setState({ [name]: value });
+      this.setState({ [name]: value, [`${name}Err`]: false });
     };
   
     handleSubmit = event => {
@@ -31,9 +33,12 @@ class Login extends Component {
       authLogin(this.state).then(result => {
         if(!result.data.error) {
           localStorage.setItem('accessToken', result.data.accessToken);
-          this.props.updateUserState();
+          this.props.updateAuthState(true);
+        } else if (result.data.error.usernameOrEmail) {
+          this.setState({usernameOrEmailErr: true});
+        } else {
+          this.setState({passwordErr: true});
         }
-        // error handling?
       });
     }
   
@@ -63,25 +68,31 @@ class Login extends Component {
                       <div className="or p-2">OR</div>
                       <div className="linebreak"></div>
                     </div>
-                    <label>
+                    <label className="position-relative">
                       <input 
-                        className="input"
+                        className="authInput border border"
                         type="text"
                         name="usernameOrEmail"
                         placeholder="Username or Email"
                         value={this.state.username}  
                         onChange={this.handleInputChange}     
                       />
+                      <div className="authError" style={this.state.usernameOrEmailErr ? {opacity: 1} : {opacity: 0}}>
+                        <i className="far fa-times-circle fa-lg"></i>
+                      </div>
                     </label>
-                    <label>
+                    <label className="position-relative">
                       <input
-                        className="input"
+                        className="authInput"
                         type="password"
                         name="password"
                         placeholder="Password"
                         value={this.state.password}
                         onChange={this.handleInputChange}
                       />
+                      <div className="authError" style={this.state.passwordErr ? {opacity: 1} : {opacity: 0}}>
+                        <i className="far fa-times-circle fa-lg"></i>
+                      </div>
                     </label>
                     <button className="btn w-75" id="login_btn" type="submit">Log in</button>
                     <div>
