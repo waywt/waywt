@@ -17,7 +17,7 @@ class Home extends Component {
     const { username, avatar, description, image } = this.state;
     return (
       <div className="App">
-        <Header 
+        <Header
           authenticated={this.props.authenticated}
           updateAuthState={this.props.updateAuthState}
         />
