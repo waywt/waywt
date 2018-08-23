@@ -1,26 +1,32 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { authVerify } from "./utils/API";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
+import { authVerify, userFeed } from "./utils/API";
 import { Signup, Login, Temp } from "./components/Auth";
 import { Profile } from "./components/Pages/Profile";
 import Home from "./components/Pages/Home/";
 import PostForm from "./components/Pages/PostForm/";
-import Tag from "./components/Tag";
+import Outfit from "./components/Outfit";
 
 class App extends Component {
   state = {
     authenticated: false,
-    username: ""
+    user: null,
+    outfits: null,
+    suggestions: null
   };
 
   componentDidMount() {
     const accessToken = localStorage.getItem("accessToken");
 
     if (accessToken) {
-      authVerify(accessToken)
+      authVerify()
         .then(result => {
-          console.log(result);
-          this.updateUserState(result.data);
+          this.setState({ authenticated: result.data.authenticated });
         })
         .catch(err => {
           // Unauthorized
@@ -30,13 +36,31 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    console.log("i ran");
+    if (!this.state.user) {
+      // prevents infinite loop
+      userFeed()
+        .then(result => {
+          if (result.data.suggestions) {
+            // new user / user not following anyone
+            this.setState({
+              user: result.data.user,
+              suggestions: result.data.suggestions
+            });
+          } else {
+            this.setState({
+              user: result.data.user,
+              outfits: result.data.outfits
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   }
 
-  updateUserState = () => {
-    this.setState({
-      authenticated: true
-    });
+  updateAuthState = boolean => {
+    this.setState({ authenticated: boolean });
   };
 
   render() {
@@ -46,12 +70,31 @@ class App extends Component {
           <Switch>
             <Route
               exact
+              path="/"
+              render={() => {
+                if (this.state.authenticated) {
+                  return (
+                    <Home
+                      authenticated={this.state.authenticated}
+                      user={this.state.user}
+                      outfits={this.state.outfits}
+                      suggestions={this.state.suggestions}
+                      updateAuthState={this.updateAuthState}
+                    />
+                  );
+                } else {
+                  return <Redirect to="/signup" />;
+                }
+              }}
+            />
+            <Route
+              exact
               path="/signup"
               render={() => {
                 return (
                   <Signup
                     authenticated={this.state.authenticated}
-                    updateUserState={this.updateUserState}
+                    updateAuthState={this.updateAuthState}
                   />
                 );
               }}
@@ -63,15 +106,26 @@ class App extends Component {
                 return (
                   <Login
                     authenticated={this.state.authenticated}
-                    updateUserState={this.updateUserState}
+                    updateAuthState={this.updateAuthState}
                   />
                 );
               }}
             />
             <Route exact path="/auth/cb" component={Temp} />
-            <Route exact path="/" component={Home} />
             <Route exact path="/profile" component={Profile} />
-            <Route exact path="/postform" component={PostForm} />
+            <Route exact path="/outfit" component={Outfit} />
+            <Route
+              exact
+              path="/postform"
+              render={() => {
+                return (
+                  <PostForm
+                    authenticated={this.state.authenticated}
+                    updateAuthState={this.updateAuthState}
+                  />
+                );
+              }}
+            />
 
             {/* <Route component={NoMatch} /> */}
           </Switch>

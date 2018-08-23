@@ -1,3 +1,5 @@
+const faker = require('faker');
+
 const date = new Date();
 const followers = [];
 
@@ -30,7 +32,7 @@ while (i <= 30) {
         id: idCounter,
         UserId: i,
         FollowerId: userIds[j],
-        createdAt: date,
+        createdAt: faker.date.recent(),
         updatedAt: date,
       };
     

@@ -19,7 +19,7 @@ class Profile extends Component {
         return (
             <div className="col-md-3">
             <div className="imageContainer">
-            <a href="#">
+            <a href="">
                 <img src="https://i.imgur.com/E51bZN1.jpg" alt="image1" className="userImage"></img>
                 <div class="iconProfile">
                     <i class="fas fa-heart"></i>
@@ -43,7 +43,7 @@ class Profile extends Component {
               <div className="profilePage">
                     <div className="row profile-header offset-md-2">
                     <div className="col-md-3">
-                    <img src="https://i.imgur.com/WUcNZ1D.jpg" alt="profile-photo" className="profile-photo"></img>
+                    <img src="https://i.imgur.com/WUcNZ1D.jpg" alt="profile" className="profile-photo"></img>
                     </div>
                     <div className="col-md-6">
                     <div className="row">

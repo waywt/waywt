@@ -47,7 +47,6 @@ const redirect = (res, user) => {
     pathname: redirectUrl,
     query: {
        accessToken: jwt.createToken(user),
-       env: env,
        redirect: true,
     },
   }));
@@ -144,10 +143,7 @@ router.post('/signup', (req, res) => {
         email: email,
         password: password,
       });
-      return res.json({
-        accessToken: jwt.createToken(newUser),
-        username: username,
-      });
+      return res.json({accessToken: jwt.createToken(newUser)});
     } catch (e) {
       return res.json({ error: e.errors });
     }
@@ -172,10 +168,7 @@ router.post('/login', (req, res) => {
     } else if (!user.password && user.GoogleId) {
       res.redirect('/auth/google');
     } else if (user.validPassword(password)) {
-      return res.json({
-        accessToken: jwt.createToken(user),
-        username: user.username,
-      });
+      return res.json({accessToken: jwt.createToken(user)});
     } else {
       return res.json({ error: { password: 'Invalid Password.'}});
     }
@@ -186,22 +179,9 @@ router.get('/user', passport.authenticate('auth-user', {session: false}), (req, 
   User.findOne({
     where: {
       username: req.user.username,
-    },
-    include: [
-      { 
-        model: Profile ,
-        attributes: { 
-          exclude: ['createdAt', 'updatedAt'] 
-        },
-      },
-      { model: Follower, include: [{ model: User, as: 'Follower' }] },
-      { model: Follower, as: 'Following', include: [User] },
-    ],
-    attributes: { 
-      exclude: ['password', 'GoogleId', 'FacebookId', 'updatedAt'] 
-    },
+    }
   }).then(result => {
-    res.json(result);
+    res.json({authenticated: true});
   });
 });
 

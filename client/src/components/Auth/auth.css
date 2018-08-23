@@ -89,11 +89,12 @@ a.google-signup:hover {
   margin-bottom: 15px;
 }
 
-label {
+.signup-page label,
+.login-page label {
   margin-bottom: 12px;
 }
 
-.input {
+.authInput {
   margin: 0 5px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   outline: 0;
@@ -112,7 +113,7 @@ label {
   font-weight: 600;
   margin-top: 8px;
   margin-bottom: 15px;
-  background-color: #3897f0;
+  background-color: #3897f0 !important;
   padding: .225rem .75rem;
   color: white;
 }
@@ -120,4 +121,19 @@ label {
 .password-link {
   color: darkblue;
   font-size: 15px;
+}
+
+.authError {
+  position: absolute;
+  top: 0;
+  right: 15px;
+  line-height: 40px;
+  color: #ff1616;
+}
+
+.authErrorMsg {
+  padding: 0 5px;
+  margin-bottom: 12px;
+  font-size: .85rem;
+  color: #ff1616;
 }
