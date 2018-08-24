@@ -41,12 +41,8 @@ body {
   height: 100%;
   padding: 0 20px 0 20px;
 }
-.Post-comment {
-  height: 100%;
-  padding: 0 20px 0px 20px;
-}
-.Post-description a,
-.Post-comment a {
+
+.Post-description a {
   color: black;
 }
 .Post-likes {
@@ -95,11 +91,7 @@ hr {
 input:focus {
   outline: 0 !important;
 }
-.form-group input {
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 95%;
-}
+
 .vjs-fade-out {
   display: none;
   visibility: hidden;
@@ -120,10 +112,49 @@ input:focus {
   border-radius: 100px;
 }
 
-.Load-comment {
-  height: 100%;
-  padding: 0 20px 0px 20px;
+.Outfit-hashtags {
+  padding: 5px 20px;
+  word-wrap: break-word;
+  white-space: initial;
 }
-.Load-comment a {
+.Outfit-hashtags a {
+  color: #1c82f0;
+  margin-right: 5px;
+}
+.Outfit-hashtags a:hover {
+  color: #1c82f090;
+  text-decoration: none;
+}
+.Outfit-comment {
+  height: 100%;
+  padding: 0 20px;
+}
+.Outfit-comment a {
+  color: black;
+}
+.Outfit-comment a:hover {
+  color: #00000090;
+  text-decoration: none;
+}
+.Outfit-load-comment {
+  height: 100%;
+  padding: 5px 20px;
+}
+.Outfit-load-comment a {
   color: #999;
+}
+
+.Outfit-comment-input {
+  outline: none;
+}
+.Outfit-comment-input:focus,
+.Outfit-comment-input:active {
+  box-shadow: 0 0 0 0.1rem #c1d4ee50;
+}
+
+.Outfit-comment-form {
+  padding: 0 12px;
+}
+.Outfit-comment-input {
+  padding: .3rem 8px;
 }

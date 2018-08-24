@@ -70,7 +70,7 @@ class Login extends Component {
                     </div>
                     <label className="position-relative">
                       <input 
-                        className="authInput border border"
+                        className="authInput"
                         type="text"
                         name="usernameOrEmail"
                         placeholder="Username or Email"
