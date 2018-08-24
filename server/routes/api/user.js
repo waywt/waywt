@@ -36,7 +36,7 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
         include: [
           {
             model: Category,
-            attributes: ['name'],
+            attributes: ['id', 'name'],
           },
           { 
             model: User, 

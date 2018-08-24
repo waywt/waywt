@@ -18,7 +18,7 @@ class Outfit extends Component {
 
   render() {
     const { 
-      username, profile, id, image, description, likeCount, comments, tags, hashtags 
+      category, username, profile, id, image, description, likeCount, comments, tags, hashtags 
     } = this.props;
 
     return (
@@ -30,9 +30,14 @@ class Outfit extends Component {
             <img alt={description} src={image} />
           </div>
         </div>
-        <div className="action-buttons">
-          <button className="like-btn" />
-          <button className="comment-btn" />
+        <div className="d-flex align-items-center">
+          <div className="action-buttons mr-auto">
+            <button className="like-btn" />
+            <button className="comment-btn" />
+          </div>
+          <div className="Outfit-category ml-auto">
+            <span data-id={category.id} class="Outfit-category-badge">{category.name}</span>
+          </div>
         </div>
         <div className="Outfit-likes mb-2">
           <a href={`/outfits/${id}`}><strong>{likeCount} likes</strong></a>

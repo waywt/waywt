@@ -33,6 +33,7 @@ class Home extends Component {
                           profile={outfit.User.Profile}
                           id={outfit.id}
                           description={outfit.description}
+                          category={outfit.Category}
                           image={outfit.imageUrl}
                           likeCount={outfit.Likes.length}
                           comments={outfit.Comments}

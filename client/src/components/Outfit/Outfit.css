@@ -95,6 +95,39 @@ body {
   height: 100%;
   padding: 0px 20px;
 }
+.Outfit-category {
+  padding-right: 20px;
+}
+.Outfit-category-badge[data-id="1"] {
+  padding: 2px;
+  border: 1px solid red;
+  border-radius: 5px;
+}
+.Outfit-category-badge[data-id="2"] {
+  padding: 2px;
+  border: 1px solid blue;
+  border-radius: 5px;
+}
+.Outfit-category-badge[data-id="3"] {
+  padding: 2px;
+  border: 1px solid green;
+  border-radius: 5px;
+}
+.Outfit-category-badge[data-id="4"] {
+  padding: 2px;
+  border: 1px solid purple;
+  border-radius: 5px;
+}
+.Outfit-category-badge[data-id="5"] {
+  padding: 2px;
+  border: 1px solid brown;
+  border-radius: 5px;
+}
+.Outfit-category-badge[data-id="6"] {
+  padding: 2px;
+  border: 1px solid magenta;
+  border-radius: 5px;
+}
 .Outfit-hashtags {
   padding: 5px 20px 10px;
   word-wrap: break-word;

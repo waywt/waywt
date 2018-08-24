@@ -45,7 +45,7 @@ router.get('/following', passport.authenticate('auth-user', {session: false}), (
         include: [
           {
             model: Category,
-            attributes: ['name'],
+            attributes: ['id', 'name'],
           },
           { 
             model: User, 
@@ -93,7 +93,7 @@ router.get('/following', passport.authenticate('auth-user', {session: false}), (
         include: [
           {
             model: Category,
-            attributes: ['name'],
+            attributes: ['id', 'name'],
           },
           { 
             model: User, 
