@@ -20,3 +20,12 @@
   position: relative;
   background-color: blue;
 }
+
+.picture-container img {
+  max-height: 970px;
+  width: 729px;
+}
+
+.form-container input {
+  /* width: 50%; */
+}
