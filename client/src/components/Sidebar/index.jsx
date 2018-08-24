@@ -7,7 +7,7 @@ class Sidebar extends Component {
     const { id, username, profile } = this.props;
     
     return (
-      <div className="Sidebar">
+      <div className="Sidebar d-none d-md-block">
         <UserSnapshot 
           id={id}
           username={username} 

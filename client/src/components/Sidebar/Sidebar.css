@@ -1,3 +1,8 @@
+.Sidebar {
+  position: fixed;
+  width: 29%;
+}
+
 .Sidebar ul {
   padding-left: 20px;
 }
