@@ -1,0 +1,16 @@
+.User-detailed {
+  /* display: flex; */
+  width: 100%;
+  padding: 20px;
+  /* align-items: center; */
+}
+
+.profile-photo {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+.username-display {
+  font-size: 32px;
+  font-weight: 200;
+}
