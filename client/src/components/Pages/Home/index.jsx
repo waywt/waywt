@@ -1,76 +1,71 @@
-import React, { Component } from "react";
-import Header from "../../Header";
-import Outfit from "../../Outfit";
-import Sidebar from "../../Sidebar";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import './Home.css';
+import Header from '../../Header';
+import Outfit from '../../Outfit';
+import Sidebar from '../../Sidebar';
+import UserSnapshot from '../../UserSnapshot';
 
 class Home extends Component {
-  state = {
-    username: "chris_evans", // {db}
-    avatar: "https://i.imgur.com/G28Yu4r.png", // {db}
-    description:
-      "If you can't handle me at my worst you don't deserve me at my best", // {db}
-    image:
-      "https://static1.squarespace.com/static/560eabc4e4b061c4bb358ae8/t/57802d7e6b8f5b118a25062b/1468018050251/image.jpg?format=1000w" // {db}
-    // comments: []
-  };
   render() {
-    const { username, avatar, description, image } = this.state;
-    return (
-      <div className="App">
-        <Header
-          authenticated={this.props.authenticated}
-          updateAuthState={this.props.updateAuthState}
-        />
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8">
-              <Outfit
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
-              />
-            </div>
-            <div className="col-md-4">
-              <Sidebar
-                username={username}
-                avatar={avatar}
-                description={description}
-                image="https://i.redd.it/yfo3eglyfrv01.jpg"
-              />
-            </div>
-            <div className="col-md-8">
-              <Outfit
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
-              />
-            </div>
-            <div className="col-md-8">
-              <Outfit
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
-              />
-            </div>
-            <div className="col-md-8">
-              <Outfit
-                username={username}
-                avatar={avatar}
-                description={description}
-                image={image}
-                // comments={comments}
-              />
+    const { authenticated, resetState, user, outfits, suggestions } = this.props;
+
+    if (!authenticated) {
+      return <Redirect to="/signup" />;
+    } else {
+      return (
+        <div className="Home">
+          <Header 
+            authenticated={authenticated}
+            resetState={resetState}
+          />
+          <div className="container">
+            <div className="row">
+              <div className="col-md-8">
+                <div className="row">
+                  {outfits && outfits.map(outfit => {
+                    return (
+                      <div className="col-12" key={`outfit-${outfit.id}`}>
+                        <Outfit
+                          username={outfit.User.username}
+                          profile={outfit.User.Profile}
+                          id={outfit.id}
+                          description={outfit.description}
+                          image={outfit.imageUrl}
+                          likeCount={outfit.Likes.length}
+                          comments={outfit.Comments}
+                          tags={outfit.Tags}
+                          hashtags={outfit.Hashtags}
+                        />
+                      </div>
+                    );
+                  })}
+                  {suggestions && suggestions.map(suggestion => {
+                    return (
+                      <div className="col-12 col-lg-8 offset-lg-2" key={`suggestion-${suggestion.id}`}>
+                        <UserSnapshot 
+                          profile={suggestion.Profile}
+                          username={suggestion.username}
+                          id={suggestion.id}
+                          customStyle={{backgroundColor: 'white', border: '1px solid #efefef'}} 
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="col-md-4">
+                <Sidebar
+                  id={user ? user.id : null}
+                  username={user ? user.username : null}
+                  profile={user ? user.Profile : null}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

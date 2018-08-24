@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
 } from "react-router-dom";
 import { authVerify, userFeed } from "./utils/API";
 import { Signup, Login, Temp } from "./components/Auth";
@@ -36,26 +35,22 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    if (!this.state.user) {
-      // prevents infinite loop
-      userFeed()
-        .then(result => {
-          if (result.data.suggestions) {
-            // new user / user not following anyone
-            this.setState({
-              user: result.data.user,
-              suggestions: result.data.suggestions
-            });
-          } else {
-            this.setState({
-              user: result.data.user,
-              outfits: result.data.outfits
-            });
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    if(this.state.authenticated && !this.state.user) {
+      userFeed().then(result => {
+        if (result.data.suggestions) {
+          this.setState({
+            user: result.data.user,
+            suggestions: result.data.suggestions,
+          });
+        } else {
+          this.setState({
+            user: result.data.user,
+            outfits: result.data.outfits,
+          });
+        }
+      }).catch(err => {
+        console.log(err);
+      });
     }
   }
 
@@ -63,57 +58,51 @@ class App extends Component {
     this.setState({ authenticated: boolean });
   };
 
+  resetState = () => {
+    this.setState({
+      authenticated: false,
+      user: null,
+      outfits: null,
+      suggestions: null,
+    });
+  }
+
   render() {
     return (
       <Router>
         <div>
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => {
-                if (this.state.authenticated) {
-                  return (
-                    <Home
-                      authenticated={this.state.authenticated}
-                      user={this.state.user}
-                      outfits={this.state.outfits}
-                      suggestions={this.state.suggestions}
-                      updateAuthState={this.updateAuthState}
-                    />
-                  );
-                } else {
-                  return <Redirect to="/signup" />;
-                }
-              }}
-            />
-            <Route
-              exact
-              path="/signup"
-              render={() => {
-                return (
-                  <Signup
-                    authenticated={this.state.authenticated}
-                    updateAuthState={this.updateAuthState}
-                  />
-                );
-              }}
-            />
-            <Route
-              exact
-              path="/login"
-              render={() => {
-                return (
-                  <Login
-                    authenticated={this.state.authenticated}
-                    updateAuthState={this.updateAuthState}
-                  />
-                );
-              }}
-            />
+            <Route exact path="/" render={() => {
+              return (
+                <Home
+                  authenticated={this.state.authenticated}
+                  user={this.state.user}
+                  outfits={this.state.outfits}
+                  suggestions={this.state.suggestions}
+                  resetState={this.resetState}
+                />
+              );
+            }} />
+            <Route exact path="/signup" render={() => {
+              return (
+                <Signup 
+                  authenticated={this.state.authenticated}
+                  updateAuthState={this.updateAuthState}
+                />
+              );
+            }} />
+            <Route exact path="/login" render={() => {
+              return (
+                <Login 
+                  authenticated={this.state.authenticated}
+                  updateAuthState={this.updateAuthState}
+                />
+              );
+            }} />
             <Route exact path="/auth/cb" component={Temp} />
-            <Route exact path="/profile" component={Profile} />
-            <Route exact path="/outfit" component={Outfit} />
+            
+            <Route exact path='/outfit' component={Outfit} />
+            <Route exact path='/:username' component={Profile} />
             <Route
               exact
               path="/postform"
