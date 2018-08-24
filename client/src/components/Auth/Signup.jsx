@@ -3,6 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { authSignup } from '../../utils/API';
 import { validUsername, validEmail, validPassword } from '../../utils/Validate';
 import './auth.css';
+import InstagarmentLarge from '../../images/InstagarmentLarge.png'
+import iPhoneX from '../../images/iPhoneX.png'
 
 class Signup extends Component {
   state = {
@@ -75,7 +77,7 @@ class Signup extends Component {
               <div className="row">
                 <div className="col"></div>
                 <div className="col">
-                  <img id="iphonePic" src="iPhoneX.png" alt="iphone"></img>
+                  <img id="iphonePic" src={iPhoneX} alt="iphone"></img>
                 </div>
               </div>
             </div>
@@ -85,7 +87,7 @@ class Signup extends Component {
                   <div className="signup-page mx-auto">
                     <form onSubmit={this.handleSubmit}>
                       <div >
-                        <img className="instagarment-logo" src="instagarment.png" alt="instagarment logo" ></img>
+                        <img className="instagarment-logo" src={InstagarmentLarge} alt="instagarment logo" ></img>
                       </div>
                       <div id="signup-descrip">
                         Sign up to share what you're wearing with friends and followers.

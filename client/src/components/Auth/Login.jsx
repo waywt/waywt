@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { authLogin } from '../../utils/API';
 import './auth.css';
+import InstagarmentLarge from '../../images/InstagarmentLarge.png';
 
 class Login extends Component {
     state = {
@@ -53,7 +54,7 @@ class Login extends Component {
                 <div className="login-page mx-auto">
                   <form onSubmit={this.handleSubmit}>
                     <div >
-                      <img className="instagarment-logo" src="instagarment.png" alt="instagarment logo" ></img>
+                      <img className="instagarment-logo" src={InstagarmentLarge} alt="instagarment logo" ></img>
                     </div>
                     <a href={this.state.fbUrl} className="w-75 btn facebook-signup">
                       <i className="fab fa-facebook-square fa-lg mr-2"></i>
@@ -70,7 +71,7 @@ class Login extends Component {
                     </div>
                     <label className="position-relative">
                       <input 
-                        className="authInput border border"
+                        className="authInput"
                         type="text"
                         name="usernameOrEmail"
                         placeholder="Username or Email"

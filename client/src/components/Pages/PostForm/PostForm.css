@@ -1,0 +1,31 @@
+.post-jumbotron {
+  margin-top: 5%;
+}
+
+.text-container input {
+  display: block;
+  margin: 0 auto;
+}
+
+.inputForm {
+  display: block;
+  margin: 0 auto;
+}
+
+.picture-container {
+  height: 970px;
+  width: 729px;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  background-color: blue;
+}
+
+.picture-container img {
+  max-height: 970px;
+  width: 729px;
+}
+
+.form-container input {
+  /* width: 50%; */
+}

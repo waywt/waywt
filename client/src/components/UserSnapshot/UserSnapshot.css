@@ -1,0 +1,34 @@
+.User-snapshot {
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  font-weight: bold;
+}
+.User-avatar {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+.User-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+.User-info a {
+  color: black;
+}
+.User-info a:hover {
+  color: #00000090;
+  text-decoration: none;
+}
+.User-info p {
+  margin-bottom: 0;
+  font-weight: 300;
+  font-size: .9rem;
+}
+.new-Outfit-link {
+  color: #39c9bb;
+}
+.new-Outfit-link:hover {
+  color: #2c9c91;
+}

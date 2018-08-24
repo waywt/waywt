@@ -1,15 +1,17 @@
 const router = require('express').Router();
 const _ = require('lodash');
 const { Op } = require('sequelize');
-const { User, Profile, Follower, Category, Outfit, Comment, Like, Tag, Hashtag } = require('../../models');
+const { 
+  User, Profile, Follower, Category, Outfit, Comment, Like, Tag, Hashtag 
+} = require('../../models');
 const passport = require('passport');
 
 router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, res) => {
   User.findOne({
     where: {
-      username: req.user.username,
+      id: req.user.id,
     },
-    attributes: ['username'],
+    attributes: ['id', 'username'],
     include: [
       { model: Profile, attributes: ['avatar'] },
       { 
@@ -34,7 +36,7 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
         include: [
           {
             model: Category,
-            attributes: ['name'],
+            attributes: ['id', 'name'],
           },
           { 
             model: User, 
@@ -71,12 +73,12 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
     } else {
       User.findAll({
         where: {
-          username: {
-            [Op.not]: req.user.username,
+          id: {
+            [Op.not]: req.user.id,
           }
         },
         attributes: ['id', 'username'],
-        include: [{ model: Profile, attributes: ['avatar']}],
+        include: [{ model: Profile, attributes: ['avatar', 'header']}],
       }).then(users => {
         res.json({user: user, suggestions: _.shuffle(users).slice(0, 10)});
       });
