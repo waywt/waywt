@@ -1,11 +1,35 @@
 import React, { Component } from 'react';
 import './Outfit.css';
 import UserSnapshot from '../UserSnapshot';
+import like_btn_active from '../../images/like_btn_active.png';
+import like_btn from '../../images/like_btn.png';
+import comment_btn from '../../images/comment_btn.png'
+
 
 class Outfit extends Component {
   state = {
-    numComments: 3
+    numComments: 3,
+    imgsrc: like_btn,
+    likeClicked: false,
   }
+
+
+  handleLikeClick = () => {
+    if (this.state.likeClicked===false){
+      this.setState({
+        imgsrc: like_btn_active,
+        likeClicked:true
+       });
+    }
+    else {
+      this.setState({
+        imgsrc: like_btn,
+        likeClicked: false
+      })
+    }
+   };
+
+  
 
   componentDidMount() {
     //
@@ -16,9 +40,36 @@ class Outfit extends Component {
     this.setState({numComments: this.state.numComments + 3});
   }
 
+  getCatIcon = (catName) => {
+    switch (catName) {
+      case 'Casual':
+        return (<i className="fas fa-coffee" ></i> )
+        break;
+      case 'Formal':
+      return (<i className="fab fa-black-tie" ></i> )
+      break;
+      case 'Business':
+      return (<i className="fas fa-briefcase" ></i> )
+      break;
+      case 'Sleepwear':
+      return (<i className="fas fa-bed" ></i> )
+      break;
+      case 'Athletic':
+      return (<i className="fas fa-dumbbell" ></i> )
+      break;
+      case 'Outerwear':
+      return (<i className="fas fa-snowflake" ></i> )
+      break;
+
+      default:
+        return (<i>outerwear</i>);
+
+    }
+  }
+
   render() {
     const { 
-      username, profile, id, image, description, likeCount, comments, tags, hashtags 
+      category, username, profile, id, image, description, likeCount, comments, tags, hashtags 
     } = this.props;
 
     return (
@@ -30,9 +81,14 @@ class Outfit extends Component {
             <img alt={description} src={image} />
           </div>
         </div>
-        <div className="action-buttons">
-          <button className="like-btn" />
-          <button className="comment-btn" />
+        <div className="d-flex align-items-center my-3">
+          <div className="Outfit-action-buttons mr-auto">
+            <img onClick={this.handleLikeClick}src={this.state.imgsrc} className="like-btn" alt="like button"></img>
+            <img src={comment_btn} className="comment-btn" alt="comment button" />
+          </div>
+          <div className="Outfit-category ml-auto">
+            <span data-id={category.id} class="Outfit-category-badge">{this.getCatIcon(category.name)} {category.name}</span>
+          </div>
         </div>
         <div className="Outfit-likes mb-2">
           <a href={`/outfits/${id}`}><strong>{likeCount} likes</strong></a>
@@ -48,7 +104,7 @@ class Outfit extends Component {
         <div className="Outfit-hashtags">
           {hashtags && hashtags.map(hashtag => {
             return (
-              <a href={`/explore/tags/${hashtag.text}`} classname="Outfit-hashtag" key={`hashtag-${hashtag.id}`}>{`#${hashtag.text}`}</a>
+              <a href={`/explore/tags/${hashtag.text}`} className="Outfit-hashtag" key={`hashtag-${hashtag.id}`}>{`#${hashtag.text}`}</a>
             );
           })}
         </div>

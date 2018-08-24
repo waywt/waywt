@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const _ = require('lodash');
 const { Op } = require('sequelize');
-const { User, Profile, Follower, Category, Outfit, Comment, Like, Tag, Hashtag } = require('../../models');
+const { 
+  User, Profile, Follower, Category, Outfit, Comment, Like, Tag, Hashtag 
+} = require('../../models');
 const passport = require('passport');
 
 router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, res) => {
@@ -34,7 +36,7 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
         include: [
           {
             model: Category,
-            attributes: ['name'],
+            attributes: ['id', 'name'],
           },
           { 
             model: User, 
@@ -71,8 +73,8 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
     } else {
       User.findAll({
         where: {
-          username: {
-            [Op.not]: req.user.username,
+          id: {
+            [Op.not]: req.user.id,
           }
         },
         attributes: ['id', 'username'],

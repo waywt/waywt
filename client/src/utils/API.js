@@ -20,6 +20,12 @@ export const userFeed = () => {
   });
 }
 
+export const outfitsFollowing = (qs) => {
+  return axios.get(`/api/outfits/following${qs}`, {
+    'headers': { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }
+  });
+}
+
 export const createOutfit = newOutfitWithTags => {
   return axios.post('/api/outfits', newOutfitWithTags, {
     'headers': { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }

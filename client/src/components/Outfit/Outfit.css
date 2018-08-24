@@ -52,35 +52,15 @@ body {
   display: block;
   width: 100%;
 }
-.action-buttons {
-  height: 100%;
-  padding: 20px 20px 10px 20px;
+.Outfit-action-buttons {
+  padding-left: 20px;
 }
 .like-btn {
   border: none;
   padding: 0;
   width: 32px;
   height: 32px;
-  background-image: url("../../images/like_btn.png");
-  background-repeat: no-repeat;
   margin-right: 20px;
-}
-.like-btn-active {
-  border: none;
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  background-image: url("../../images/like_btn_active.png");
-  background-repeat: no-repeat;
-  margin-right: 20px;
-}
-.comment-btn {
-  border: none;
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  background-image: url("../../images/comment_btn.png");
-  background-repeat: no-repeat;
 }
 .like-btn:focus, 
 .like-btn-active:focus,
@@ -94,6 +74,45 @@ body {
 .Outfit-likes {
   height: 100%;
   padding: 0px 20px;
+}
+.Outfit-category {
+  padding-right: 20px;
+}
+.Outfit-category-badge[data-id="1"] {
+  padding: 5px;
+  background-color: red;
+  color: white;
+  font-weight: 400;
+}
+.Outfit-category-badge[data-id="2"] {
+  padding: 5px;
+  background-color: blue;
+  color: white;
+  font-weight: 400;
+}
+.Outfit-category-badge[data-id="3"] {
+  padding: 5px;
+  background-color: green;
+  color: white;
+  font-weight: 400;
+}
+.Outfit-category-badge[data-id="4"] {
+  padding: 5px;
+  background-color: purple;
+  color: white;
+  font-weight: 400;
+}
+.Outfit-category-badge[data-id="5"] {
+  padding: 5px;
+  background-color: brown;
+  color: white;
+  font-weight: 400;
+}
+.Outfit-category-badge[data-id="6"] {
+  padding: 5px;
+  background-color: magenta;
+  color: white;
+  font-weight: 400;
 }
 .Outfit-hashtags {
   padding: 5px 20px 10px;

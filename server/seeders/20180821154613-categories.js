@@ -1,5 +1,5 @@
 const date = new Date();
-const categoryNames = ['Sleepwear', 'Casual', 'Business', 'Formal', 'Athletic', 'Outerwear'];
+const categoryNames = ['Casual', 'Formal', 'Business', 'Sleepwear', 'Athletic', 'Outerwear'];
 const categories = [];
 
 categoryNames.forEach((name, index) => {

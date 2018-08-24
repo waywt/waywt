@@ -6,10 +6,11 @@ import {
 } from "react-router-dom";
 import { authVerify, userFeed } from "./utils/API";
 import { Signup, Login, Temp } from "./components/Auth";
-import { Profile } from "./components/Pages/Profile";
 import Home from "./components/Pages/Home/";
+import Profile from "./components/Pages/Profile";
 import PostForm from "./components/Pages/PostForm/";
 import Outfit from "./components/Outfit";
+import OutfitPage from "./components/OutfitPage";
 
 class App extends Component {
   state = {
@@ -58,6 +59,10 @@ class App extends Component {
     this.setState({ authenticated: boolean });
   };
 
+  updateOutfitsState = outfits => {
+    this.setState({outfits: outfits});
+  };
+
   resetState = () => {
     this.setState({
       authenticated: false,
@@ -79,6 +84,7 @@ class App extends Component {
                   user={this.state.user}
                   outfits={this.state.outfits}
                   suggestions={this.state.suggestions}
+                  updateOutfitsState={this.updateOutfitsState}
                   resetState={this.resetState}
                 />
               );
@@ -101,8 +107,9 @@ class App extends Component {
             }} />
             <Route exact path="/auth/cb" component={Temp} />
             
+            
+            <Route exact path='/outfitpage' component={OutfitPage} />
             <Route exact path='/outfit' component={Outfit} />
-            <Route exact path='/:username' component={Profile} />
             <Route
               exact
               path="/postform"
@@ -115,6 +122,18 @@ class App extends Component {
                 );
               }}
             />
+            <Route exact path='/:username' render={() => {
+              return (
+                <Profile
+                  authenticated={this.state.authenticated}
+                  user={this.state.user}
+                  outfits={this.state.outfits}
+                  suggestions={this.state.suggestions}
+                  updateOutfitsState={this.updateOutfitsState}
+                  resetState={this.resetState}
+                />
+              );
+            }} />
 
             {/* <Route component={NoMatch} /> */}
           </Switch>
