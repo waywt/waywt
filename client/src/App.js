@@ -11,6 +11,7 @@ import Profile from "./components/Pages/Profile";
 import PostForm from "./components/Pages/PostForm/";
 import Outfit from "./components/Outfit";
 import OutfitPage from "./components/OutfitPage";
+import Error from "./components/Error";
 
 class App extends Component {
   state = {
@@ -110,6 +111,7 @@ class App extends Component {
             
             <Route exact path='/outfitpage' component={OutfitPage} />
             <Route exact path='/outfit' component={Outfit} />
+
             <Route
               exact
               path="/postform"
@@ -135,7 +137,7 @@ class App extends Component {
               );
             }} />
 
-            {/* <Route component={NoMatch} /> */}
+            <Route component={Error} />
           </Switch>
         </div>
       </Router>
