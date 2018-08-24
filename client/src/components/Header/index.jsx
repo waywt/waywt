@@ -18,7 +18,7 @@ class Header extends Component {
   render() {
     return (
       <nav className="Nav navbar justify-content-between">
-        <a className="navbar-brand">Instagarment</a>
+        <a className="navbar-brand" href="/">Instagarment</a>
         <form className="d-none d-md-block form-inline">
           <input
             id="header-input"

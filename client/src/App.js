@@ -10,6 +10,7 @@ import { Profile } from "./components/Pages/Profile";
 import Home from "./components/Pages/Home/";
 import PostForm from "./components/Pages/PostForm/";
 import Outfit from "./components/Outfit";
+import OutfitPage from "./components/OutfitPage";
 
 class App extends Component {
   state = {
@@ -105,6 +106,7 @@ class App extends Component {
               );
             }} />
             <Route exact path="/auth/cb" component={Temp} />
+            <Route exact path='/outfitpage' component={OutfitPage} />
             
             <Route exact path='/outfit' component={Outfit} />
             <Route exact path='/:username' component={Profile} />
@@ -120,6 +122,7 @@ class App extends Component {
                 );
               }}
             />
+            
 
             {/* <Route component={NoMatch} /> */}
           </Switch>

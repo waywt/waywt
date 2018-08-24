@@ -1,11 +1,35 @@
 import React, { Component } from 'react';
 import './Outfit.css';
 import UserSnapshot from '../UserSnapshot';
+import like_btn_active from '../../images/like_btn_active.png';
+import like_btn from '../../images/like_btn.png';
+import comment_btn from '../../images/comment_btn.png'
+
 
 class Outfit extends Component {
   state = {
-    numComments: 3
+    numComments: 3,
+    imgsrc: like_btn,
+    likeClicked: false,
   }
+
+
+  handleLikeClick = () => {
+    if (this.state.likeClicked===false){
+      this.setState({
+        imgsrc: like_btn_active,
+        likeClicked:true
+       });
+    }
+    else {
+      this.setState({
+        imgsrc: like_btn,
+        likeClicked: false
+      })
+    }
+   };
+
+   
 
   componentDidMount() {
     //
@@ -30,10 +54,10 @@ class Outfit extends Component {
             <img alt={description} src={image} />
           </div>
         </div>
-        <div className="d-flex align-items-center">
-          <div className="action-buttons mr-auto">
-            <button className="like-btn" />
-            <button className="comment-btn" />
+        <div className="d-flex align-items-center my-3">
+          <div className="Outfit-action-buttons mr-auto">
+            <img onClick={this.handleLikeClick}src={this.state.imgsrc} className="like-btn" alt="like button"></img>
+            <img src={comment_btn} className="comment-btn" alt="comment button" />
           </div>
           <div className="Outfit-category ml-auto">
             <span data-id={category.id} class="Outfit-category-badge">{category.name}</span>
@@ -53,7 +77,7 @@ class Outfit extends Component {
         <div className="Outfit-hashtags">
           {hashtags && hashtags.map(hashtag => {
             return (
-              <a href={`/explore/tags/${hashtag.text}`} classname="Outfit-hashtag" key={`hashtag-${hashtag.id}`}>{`#${hashtag.text}`}</a>
+              <a href={`/explore/tags/${hashtag.text}`} className="Outfit-hashtag" key={`hashtag-${hashtag.id}`}>{`#${hashtag.text}`}</a>
             );
           })}
         </div>
