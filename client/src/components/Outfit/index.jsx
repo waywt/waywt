@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import './Outfit.css';
+import UserSnapshot from '../UserSnapshot';
 
 class Outfit extends Component {
   state = {
     numComments: 3
+  }
+
+  componentDidMount() {
+    //
   }
 
   loadMoreComments = (event) => {
@@ -17,8 +22,9 @@ class Outfit extends Component {
     } = this.props;
 
     return (
-      <article className="Post" ref="Post">
-        <header>
+      <article className="Outfit">
+        <UserSnapshot avatar={avatar} username={username} />
+        {/* <header>
           <div className="Post-user">
             <div className="Post-user-avatar">
               <img src={avatar} alt={username} />
@@ -27,7 +33,7 @@ class Outfit extends Component {
               <span>{username}</span>
             </div>
           </div>
-        </header>
+        </header> */}
         <div className="Outfit-image">
           {/* <button id="button1" /> */}
           <div className="Outfit-image-bg">

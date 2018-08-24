@@ -1,21 +1,15 @@
-import React, { Component } from "react";
-import "./Sidebar.css";
+import React, { Component } from 'react';
+import './Sidebar.css';
+import UserSnapshot from '../UserSnapshot';
 
 class Sidebar extends Component {
-  state = {};
   render() {
     const { username, avatar } = this.props;
+    
     return (
       <div className="categories-container">
         <div className="list-container">
-          <div className="Post-user">
-            <div id="sidebar-avatar" className="Post-user-avatar">
-              <img src={avatar} alt={username} />
-            </div>
-            <div className="Post-user-username">
-              <span>{username}</span>
-            </div>
-          </div>
+          <UserSnapshot username={username} avatar={avatar}/>
           <hr />
           <ul>
             <li>Casual</li>

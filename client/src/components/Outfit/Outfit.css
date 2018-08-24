@@ -3,34 +3,11 @@ body {
     Ubuntu, Cantarell, ‘Open Sans’, ‘Helvetica Neue’, sans-serif;
 }
 
-.Post {
-  border-radius: 3px;
-  border: 1px solid #e6e6e6;
-  background-color: #fff;
-  margin-top: 15%;
-}
-.Post-user {
-  display: flex;
-  padding: 16px;
-  align-items: center;
-  font-weight: bold;
-}
-.Post-user-avatar {
-  width: 30px;
-  height: 30px;
-  margin-right: 10px;
-}
-.Post-user-avatar img {
-  width: 100%;
-  height: 100%;
-  border-radius: 100%;
-}
 .Post-user-nickname {
   margin-left: 12px;
   font-family: "PT Sans", sans-serif;
   font-weight: bold;
 }
-
 .Post-caption {
   padding: 16px 16px;
 }
@@ -49,14 +26,11 @@ hr {
   margin-right: 20px;
   opacity: 0.8;
 }
-
-
 .vjs-fade-out {
   display: none;
   visibility: hidden;
   opacity: 0;
 }
-
 .Post-image button {
   position: absolute;
   /* display: block; */
@@ -65,12 +39,17 @@ hr {
   top: 40.73534534634634634%;
   left: 59.53453454353453543543534%;
 }
-
 .Post-image .btn {
   padding: 0 35px 35px 0;
   border-radius: 100px;
 }
 
+.Outfit {
+  border-radius: 3px;
+  border: 1px solid #e6e6e6;
+  background-color: #fff;
+  margin-top: 15%;
+}
 .Outfit-image-bg {
   background-color: #efefef;
 }
@@ -91,6 +70,15 @@ hr {
   background-repeat: no-repeat;
   margin-right: 20px;
 }
+.like-btn-active {
+  border: none;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  background-image: url("../../images/like_btn_active.png");
+  background-repeat: no-repeat;
+  margin-right: 20px;
+}
 .comment-btn {
   border: none;
   padding: 0;
@@ -100,15 +88,20 @@ hr {
   background-repeat: no-repeat;
 }
 .like-btn:focus, 
+.like-btn-active:focus,
 .comment-btn:focus {
   outline: 0;
+}
+.like-btn:hover,
+.like-btn-active:hover {
+  cursor: pointer;
 }
 .Outfit-likes {
   height: 100%;
   padding: 0px 20px;
 }
 .Outfit-hashtags {
-  padding: 5px 20px;
+  padding: 5px 20px 10px;
   word-wrap: break-word;
   white-space: initial;
 }

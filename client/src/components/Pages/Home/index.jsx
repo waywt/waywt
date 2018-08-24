@@ -6,7 +6,7 @@ import Sidebar from '../../Sidebar';
 
 class Home extends Component {
   render() {
-    const { authenticated, resetState, user, outfits } = this.props;
+    const { authenticated, resetState, user, outfits, suggestions } = this.props;
 
     if (!authenticated) {
       return <Redirect to="/signup" />;
@@ -38,12 +38,19 @@ class Home extends Component {
                       </div>
                     );
                   })}
+                  {suggestions && suggestions.map(suggestion => {
+                    return (
+                      <div className="col-12" key={`suggestion-${suggestion.id}`}>
+                        {suggestion.username}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
               <div className="col-md-4">
                 <Sidebar
                   username={user ? user.username : ''}
-                  avatar={user ? user.Profile.avatar : ''}
+                  avatar={user && user.Profile ? user.Profile.avatar : '/default_avatar.png'}
                 />
               </div>
             </div>
