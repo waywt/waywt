@@ -30,25 +30,7 @@ body {
   font-family: "PT Sans", sans-serif;
   font-weight: bold;
 }
-.Post-image-bg {
-  background-color: #efefef;
-}
-.Post-image img {
-  display: block;
-  width: 100%;
-}
-.Post-description {
-  height: 100%;
-  padding: 0 20px 0 20px;
-}
 
-.Post-description a {
-  color: black;
-}
-.Post-likes {
-  height: 100%;
-  padding: 0px 20px 0px 20px;
-}
 .Post-caption {
   padding: 16px 16px;
 }
@@ -67,30 +49,7 @@ hr {
   margin-right: 20px;
   opacity: 0.8;
 }
-.action-buttons {
-  height: 100%;
-  padding: 20px 0px 0px 13px;
-}
-.like-btn {
-  width: 40px;
-  height: 50px;
-  background-image: url("../../images/like_btn.png");
-  background-repeat: no-repeat;
-  margin-left: 10px;
-  margin-right: 20px;
-}
-.comment-btn {
-  width: 60px;
-  height: 50px;
-  background-image: url("../../images/comment_btn.png");
-  background-repeat: no-repeat;
-}
-.form-control {
-  border: none;
-}
-input:focus {
-  outline: 0 !important;
-}
+
 
 .vjs-fade-out {
   display: none;
@@ -112,6 +71,42 @@ input:focus {
   border-radius: 100px;
 }
 
+.Outfit-image-bg {
+  background-color: #efefef;
+}
+.Outfit-image img {
+  display: block;
+  width: 100%;
+}
+.action-buttons {
+  height: 100%;
+  padding: 20px 20px 10px 20px;
+}
+.like-btn {
+  border: none;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  background-image: url("../../images/like_btn.png");
+  background-repeat: no-repeat;
+  margin-right: 20px;
+}
+.comment-btn {
+  border: none;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  background-image: url("../../images/comment_btn.png");
+  background-repeat: no-repeat;
+}
+.like-btn:focus, 
+.comment-btn:focus {
+  outline: 0;
+}
+.Outfit-likes {
+  height: 100%;
+  padding: 0px 20px;
+}
 .Outfit-hashtags {
   padding: 5px 20px;
   word-wrap: break-word;
@@ -125,36 +120,43 @@ input:focus {
   color: #1c82f090;
   text-decoration: none;
 }
+.Outfit-description,
 .Outfit-comment {
   height: 100%;
   padding: 0 20px;
 }
+.Outfit-likes a,
+.Outfit-description a,
 .Outfit-comment a {
   color: black;
 }
+.Outfit-description a:hover,
 .Outfit-comment a:hover {
   color: #00000090;
   text-decoration: none;
 }
 .Outfit-load-comment {
   height: 100%;
-  padding: 5px 20px;
+  padding: 4px 20px;
 }
 .Outfit-load-comment a {
   color: #999;
 }
-
 .Outfit-comment-input {
-  outline: none;
+  outline: 0;
+  box-shadow: none;
 }
-.Outfit-comment-input:focus,
-.Outfit-comment-input:active {
-  box-shadow: 0 0 0 0.1rem #c1d4ee50;
-}
-
 .Outfit-comment-form {
   padding: 0 12px;
 }
 .Outfit-comment-input {
+  box-sizing: border-box;
   padding: .3rem 8px;
+}
+.Outfit-comment-form .form-control {
+  border: none;
+}
+.Outfit-comment-form .form-control:focus {
+  border: none;
+  box-shadow: 0 0 0 0.1rem #c1d4ee70;
 }

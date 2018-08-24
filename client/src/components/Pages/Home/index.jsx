@@ -27,6 +27,7 @@ class Home extends Component {
                         <Outfit
                           username={outfit.User.username}
                           avatar={outfit.User.Profile.avatar}
+                          id={outfit.id}
                           description={outfit.description}
                           image={outfit.imageUrl}
                           likeCount={outfit.Likes.length}

@@ -13,7 +13,7 @@ class Outfit extends Component {
 
   render() {
     const { 
-      username, avatar, image, description, likeCount, comments, tags, hashtags 
+      username, avatar, id, image, description, likeCount, comments, tags, hashtags 
     } = this.props;
 
     return (
@@ -28,20 +28,20 @@ class Outfit extends Component {
             </div>
           </div>
         </header>
-        <div className="Post-image">
-          <button id="button1" />
-          <div className="Post-image-bg">
+        <div className="Outfit-image">
+          {/* <button id="button1" /> */}
+          <div className="Outfit-image-bg">
             <img alt={description} src={image} />
           </div>
         </div>
         <div className="action-buttons">
-          <button className="btn like-btn" />
-          <button className="btn comment-btn" />
+          <button className="like-btn" />
+          <button className="comment-btn" />
         </div>
-        <div className="Post-likes mb-2">
-          <strong>{likeCount} likes</strong>
+        <div className="Outfit-likes mb-2">
+          <a href={`/outfits/${id}`}><strong>{likeCount} likes</strong></a>
         </div>
-        <div className="Post-description">
+        <div className="Outfit-description">
           <a href={`/${username}`}><strong>{username}</strong></a> {description}
         </div>
         {/* {tags && tags.map(tag => {
@@ -75,7 +75,7 @@ class Outfit extends Component {
           <div className="form-group">              
             <input
               type="text"
-              className="Outfit-comment-input form-control"
+              className="form-control"
               placeholder="Add a comment..."
             />
           </div>
