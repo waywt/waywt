@@ -8,7 +8,9 @@ import UserSnapshot from '../../UserSnapshot';
 
 class Home extends Component {
   render() {
-    const { authenticated, resetState, user, outfits, suggestions } = this.props;
+    const { 
+      authenticated, resetState, updateOutfitsState, user, outfits, suggestions 
+    } = this.props;
 
     if (!authenticated) {
       return <Redirect to="/signup" />;
@@ -59,6 +61,7 @@ class Home extends Component {
                   id={user ? user.id : null}
                   username={user ? user.username : null}
                   profile={user ? user.Profile : null}
+                  updateOutfitsState={updateOutfitsState}
                 />
               </div>
             </div>

@@ -58,6 +58,10 @@ class App extends Component {
     this.setState({ authenticated: boolean });
   };
 
+  updateOutfitsState = outfits => {
+    this.setState({outfits: outfits});
+  };
+
   resetState = () => {
     this.setState({
       authenticated: false,
@@ -79,6 +83,7 @@ class App extends Component {
                   user={this.state.user}
                   outfits={this.state.outfits}
                   suggestions={this.state.suggestions}
+                  updateOutfitsState={this.updateOutfitsState}
                   resetState={this.resetState}
                 />
               );

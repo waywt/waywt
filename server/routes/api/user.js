@@ -73,7 +73,7 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
     } else {
       User.findAll({
         where: {
-          username: {
+          id: {
             [Op.not]: req.user.id,
           }
         },
