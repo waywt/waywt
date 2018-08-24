@@ -19,7 +19,7 @@ class Header extends Component {
     return (
       <nav className="Nav navbar justify-content-between">
         <a className="navbar-brand">Instagarment</a>
-        <form className="form-inline">
+        <form className="d-none d-md-block form-inline">
           <input
             id="header-input"
             className="form-control mr-sm-2"
@@ -30,11 +30,10 @@ class Header extends Component {
           <button className="btn my-2 my-sm-0 searchButton" type="submit">
             Search
           </button>
-
-          <button className="btn my-2 my-sm-0 signOutButton" type="submit" onClick={this.logOut}>
-            <i className="fas fa-sign-out-alt"></i> Log Out
-          </button>
         </form>
+        <button className="btn my-2 my-sm-0 signOutButton" type="submit" onClick={this.logOut}>
+          <i className="fas fa-sign-out-alt"></i> Log Out
+        </button>
       </nav>
     );
   }

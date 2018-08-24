@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import './UserSnapshot.css';
 
 class UserSnapshot extends Component {
-  
+  handleFollowUser = () => {
+    
+  }
 
   render() {
     const {profile, username, id} = this.props;
