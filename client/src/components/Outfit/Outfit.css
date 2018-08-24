@@ -52,20 +52,18 @@ body {
   display: block;
   width: 100%;
 }
-.action-buttons {
+/* .action-buttons {
   height: 100%;
   padding: 20px 20px 10px 20px;
-}
+} */
 .like-btn {
   border: none;
   padding: 0;
   width: 32px;
   height: 32px;
-  background-image: url("../../images/like_btn.png");
-  background-repeat: no-repeat;
   margin-right: 20px;
 }
-.like-btn-active {
+/* .like-btn-active {
   border: none;
   padding: 0;
   width: 32px;
@@ -73,15 +71,8 @@ body {
   background-image: url("../../images/like_btn_active.png");
   background-repeat: no-repeat;
   margin-right: 20px;
-}
-.comment-btn {
-  border: none;
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  background-image: url("../../images/comment_btn.png");
-  background-repeat: no-repeat;
-}
+} */
+
 .like-btn:focus, 
 .like-btn-active:focus,
 .comment-btn:focus {
