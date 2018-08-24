@@ -21,11 +21,6 @@ body {
   border-radius: 100%;
   padding: 20px 20px 20px 20px;
 }
-hr {
-  margin-left: 20px;
-  margin-right: 20px;
-  opacity: 0.8;
-}
 .vjs-fade-out {
   display: none;
   visibility: hidden;

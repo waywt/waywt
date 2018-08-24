@@ -26,3 +26,9 @@
   font-weight: 300;
   font-size: .9rem;
 }
+.new-Outfit-link {
+  color: #39c9bb;
+}
+.new-Outfit-link:hover {
+  color: #2c9c91;
+}

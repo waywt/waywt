@@ -18,22 +18,12 @@ class Outfit extends Component {
 
   render() {
     const { 
-      username, avatar, id, image, description, likeCount, comments, tags, hashtags 
+      username, profile, id, image, description, likeCount, comments, tags, hashtags 
     } = this.props;
 
     return (
       <article className="Outfit">
-        <UserSnapshot avatar={avatar} username={username} />
-        {/* <header>
-          <div className="Post-user">
-            <div className="Post-user-avatar">
-              <img src={avatar} alt={username} />
-            </div>
-            <div className="Post-user-username">
-              <span>{username}</span>
-            </div>
-          </div>
-        </header> */}
+        <UserSnapshot profile={profile} username={username} />
         <div className="Outfit-image">
           {/* <button id="button1" /> */}
           <div className="Outfit-image-bg">

@@ -7,10 +7,10 @@ class UserSnapshot extends Component {
   }
 
   render() {
-    const {profile, username, id} = this.props;
+    const {profile, username, id, currUser, customStyle} = this.props;
 
     return (
-      <header>
+      <header style={customStyle}>
         <div className="User-snapshot">
           <div className="User-avatar">
             <img 
@@ -24,7 +24,7 @@ class UserSnapshot extends Component {
               <p>{profile.header}</p>
             ) : ''}
           </div>
-          { id ? (
+          { id && !currUser ? (
             <button 
               className="btn btn-primary btn-sm ml-auto"
               data-id={id}
@@ -32,6 +32,11 @@ class UserSnapshot extends Component {
             >
               Follow
             </button>
+          ) : ''}
+          { id && currUser ? (
+            <a href="/outfits/new" className="new-Outfit-link ml-auto">
+              <i className="fas fa-tshirt fa-lg"></i>
+            </a>
           ) : ''}
         </div>
       </header>

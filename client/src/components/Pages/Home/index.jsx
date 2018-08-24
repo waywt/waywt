@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import './Home.css';
 import Header from '../../Header';
 import Outfit from '../../Outfit';
 import Sidebar from '../../Sidebar';
@@ -13,7 +14,7 @@ class Home extends Component {
       return <Redirect to="/signup" />;
     } else {
       return (
-        <div className="App">
+        <div className="Home">
           <Header 
             authenticated={authenticated}
             resetState={resetState}
@@ -27,7 +28,7 @@ class Home extends Component {
                       <div className="col-12" key={`outfit-${outfit.id}`}>
                         <Outfit
                           username={outfit.User.username}
-                          avatar={outfit.User.Profile.avatar}
+                          profile={outfit.User.Profile}
                           id={outfit.id}
                           description={outfit.description}
                           image={outfit.imageUrl}
@@ -45,7 +46,8 @@ class Home extends Component {
                         <UserSnapshot 
                           profile={suggestion.Profile}
                           username={suggestion.username}
-                          id={suggestion.id} 
+                          id={suggestion.id}
+                          customStyle={{backgroundColor: 'white', border: '1px solid #efefef'}} 
                         />
                       </div>
                     );
@@ -54,6 +56,7 @@ class Home extends Component {
               </div>
               <div className="col-md-4">
                 <Sidebar
+                  id={user ? user.id : null}
                   username={user ? user.username : null}
                   profile={user ? user.Profile : null}
                 />

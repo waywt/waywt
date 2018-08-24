@@ -7,9 +7,9 @@ const passport = require('passport');
 router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, res) => {
   User.findOne({
     where: {
-      username: req.user.username,
+      id: req.user.id,
     },
-    attributes: ['username'],
+    attributes: ['id', 'username'],
     include: [
       { model: Profile, attributes: ['avatar'] },
       { 
