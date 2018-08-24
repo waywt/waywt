@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import Header from '../../Header';
 import Outfit from '../../Outfit';
 import Sidebar from '../../Sidebar';
+import UserSnapshot from '../../UserSnapshot';
 
 class Home extends Component {
   render() {
@@ -40,8 +41,12 @@ class Home extends Component {
                   })}
                   {suggestions && suggestions.map(suggestion => {
                     return (
-                      <div className="col-12" key={`suggestion-${suggestion.id}`}>
-                        {suggestion.username}
+                      <div className="col-12 col-lg-8 offset-lg-2" key={`suggestion-${suggestion.id}`}>
+                        <UserSnapshot 
+                          profile={suggestion.Profile}
+                          username={suggestion.username}
+                          id={suggestion.id} 
+                        />
                       </div>
                     );
                   })}
@@ -49,8 +54,8 @@ class Home extends Component {
               </div>
               <div className="col-md-4">
                 <Sidebar
-                  username={user ? user.username : ''}
-                  avatar={user && user.Profile ? user.Profile.avatar : '/default_avatar.png'}
+                  username={user ? user.username : null}
+                  profile={user ? user.Profile : null}
                 />
               </div>
             </div>

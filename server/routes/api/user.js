@@ -76,7 +76,7 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
           }
         },
         attributes: ['id', 'username'],
-        include: [{ model: Profile, attributes: ['avatar']}],
+        include: [{ model: Profile, attributes: ['avatar', 'header']}],
       }).then(users => {
         res.json({user: user, suggestions: _.shuffle(users).slice(0, 10)});
       });

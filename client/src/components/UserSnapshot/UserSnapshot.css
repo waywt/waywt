@@ -14,10 +14,15 @@
   height: 100%;
   border-radius: 100%;
 }
-.User-username a {
+.User-info a {
   color: black;
 }
-.User-username a:hover {
+.User-info a:hover {
   color: #00000090;
   text-decoration: none;
+}
+.User-info p {
+  margin-bottom: 0;
+  font-weight: 300;
+  font-size: .9rem;
 }

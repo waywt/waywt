@@ -4,12 +4,12 @@ import UserSnapshot from '../UserSnapshot';
 
 class Sidebar extends Component {
   render() {
-    const { username, avatar } = this.props;
+    const { username, profile } = this.props;
     
     return (
       <div className="categories-container">
         <div className="list-container">
-          <UserSnapshot username={username} avatar={avatar}/>
+          <UserSnapshot username={username} profile={profile}/>
           <hr />
           <ul>
             <li>Casual</li>
