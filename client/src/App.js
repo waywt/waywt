@@ -6,6 +6,7 @@ import { Profile } from './components/Pages/Profile';
 import Home from "./components/Pages/Home/";
 import Tag from "./components/Tag";
 import Outfit from "./components/Outfit";
+import Error from "./components/Error";
 
 
 class App extends Component {
@@ -91,7 +92,7 @@ class App extends Component {
             <Route exact path='/auth/cb' component={Temp} />
             <Route exact path='/profile' component={Profile} />
             <Route exact path='/outfit' component={Outfit} />
-
+            <Route exact path='/error' component={Error} />
 
             {/* <Route component={NoMatch} /> */}
           </Switch>
