@@ -79,34 +79,40 @@ body {
   padding-right: 20px;
 }
 .Outfit-category-badge[data-id="1"] {
-  padding: 2px;
-  border: 1px solid red;
-  border-radius: 5px;
+  padding: 5px;
+  background-color: red;
+  color: white;
+  font-weight: 400;
 }
 .Outfit-category-badge[data-id="2"] {
-  padding: 2px;
-  border: 1px solid blue;
-  border-radius: 5px;
+  padding: 5px;
+  background-color: blue;
+  color: white;
+  font-weight: 400;
 }
 .Outfit-category-badge[data-id="3"] {
-  padding: 2px;
-  border: 1px solid green;
-  border-radius: 5px;
+  padding: 5px;
+  background-color: green;
+  color: white;
+  font-weight: 400;
 }
 .Outfit-category-badge[data-id="4"] {
-  padding: 2px;
-  border: 1px solid purple;
-  border-radius: 5px;
+  padding: 5px;
+  background-color: purple;
+  color: white;
+  font-weight: 400;
 }
 .Outfit-category-badge[data-id="5"] {
-  padding: 2px;
-  border: 1px solid brown;
-  border-radius: 5px;
+  padding: 5px;
+  background-color: brown;
+  color: white;
+  font-weight: 400;
 }
 .Outfit-category-badge[data-id="6"] {
-  padding: 2px;
-  border: 1px solid magenta;
-  border-radius: 5px;
+  padding: 5px;
+  background-color: magenta;
+  color: white;
+  font-weight: 400;
 }
 .Outfit-hashtags {
   padding: 5px 20px 10px;

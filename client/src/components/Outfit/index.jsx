@@ -29,7 +29,7 @@ class Outfit extends Component {
     }
    };
 
-   
+  
 
   componentDidMount() {
     //
@@ -38,6 +38,33 @@ class Outfit extends Component {
   loadMoreComments = (event) => {
     event.preventDefault();
     this.setState({numComments: this.state.numComments + 3});
+  }
+
+  getCatIcon = (catName) => {
+    switch (catName) {
+      case 'Casual':
+        return (<i className="fas fa-coffee" ></i> )
+        break;
+      case 'Formal':
+      return (<i className="fab fa-black-tie" ></i> )
+      break;
+      case 'Business':
+      return (<i className="fas fa-briefcase" ></i> )
+      break;
+      case 'Sleepwear':
+      return (<i className="fas fa-bed" ></i> )
+      break;
+      case 'Athletic':
+      return (<i className="fas fa-dumbbell" ></i> )
+      break;
+      case 'Outerwear':
+      return (<i className="fas fa-snowflake" ></i> )
+      break;
+
+      default:
+        return (<i>outerwear</i>);
+
+    }
   }
 
   render() {
@@ -60,7 +87,7 @@ class Outfit extends Component {
             <img src={comment_btn} className="comment-btn" alt="comment button" />
           </div>
           <div className="Outfit-category ml-auto">
-            <span data-id={category.id} class="Outfit-category-badge">{category.name}</span>
+            <span data-id={category.id} class="Outfit-category-badge">{this.getCatIcon(category.name)} {category.name}</span>
           </div>
         </div>
         <div className="Outfit-likes mb-2">
