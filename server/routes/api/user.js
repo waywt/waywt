@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const _ = require('lodash');
-const { Op } = require('sequelize');
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
 const { 
   User, Profile, Follower, Category, Outfit, Comment, Like, Tag, Hashtag 
 } = require('../../models');
@@ -84,6 +85,35 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
       });
     }
   });
+});
+
+router.get('/:username', (req, res) => {
+  (async() => {
+    const user = await  User.findOne({
+      where: {
+        username: req.params.username
+      },
+      attributes: ['id', 'username', [sequelize.fn('COUNT', sequelize.col('Outfits.id')), 'outfit_count']],
+      include: [
+        { model: Profile, attributes: ['avatar', 'header', 'summary'] },
+        { model: Outfit, attributes: [] },
+      ],
+    });
+    const follower = await Follower.findAll({
+      where: {
+        UserId: user.id
+      },
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'follower_count']]
+    });
+    const following = await Follower.findAll({
+      where: {
+        FollowerId: user.id
+      },
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'following_count']]
+    });
+    
+    res.json([user, follower, following]);
+  })();
 });
 
 module.exports = router;

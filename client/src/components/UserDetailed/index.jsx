@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './UserDetailed.css';
+import defaultAvatar from '../../images/default_avatar.png';
 
 class UserDetailed extends Component {
   handleFollowUser = () => {
@@ -7,45 +8,47 @@ class UserDetailed extends Component {
   }
 
   render() {
-    const {profile, username, id, currUser} = this.props;
+    const {
+      authenticated, username, id, profile, outfitCount, followerCount, followingCount
+    } = this.props;
 
     return (
       <div className="User-detailed">
-        <div className="row justify-content-center">
-          <div className="d-flex col-auto col-md-3 align-items-center">
-            <img src="https://i.imgur.com/WUcNZ1D.jpg" alt="profile" className="profile-photo mb-2 mb-md-0"></img>
+        <div className="row">
+          <div className="col-12 col-md-auto d-flex justify-content-center align-items-center">
+            <img 
+              src={profile && profile.avatar ? profile.avatar : defaultAvatar} 
+              alt={username} 
+              className="profile-photo"
+            ></img>
           </div>
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md">
             <div className="row">
-              <div className="col-12 text-center text-md-left username-display">
-                username
+              <div className="col-12 profile-username">
+                {username}
               </div>
             </div>
-            <div className="row mt-3">
-              <div className="col-4">
-                <span className="profileNumber">1 </span>
-                <span className="profileCount">posts</span>
+            <div className="row mt-2">
+              <div className="col-auto">
+                <span className="profile-num-value">{outfitCount} </span>
+                outfits
               </div>
-              <div className="col-4">
-                <span className="profileNumber">1 </span>
-                <span className="profileCount">followers
-              </span>
-                </div>
-              <div className="col-4">
-                <span className="profileNumber">1 </span>
-                <span className="profileCount">following</span>
+              <div className="col-auto">
+                <span className="profile-num-value">{followerCount} </span>
+                followers
               </div>
+              <div className="col-auto">
+                <span className="profile-num-value">{followingCount} </span>
+                following
+              </div>
+              <div className="col-auto flex-grow-1"></div>
             </div>
-            <div className="row mt-3">
-              <div className="col-12">
-                <span className="profileName">
-                  Header
-                </span>
+            <div className="row mt-2">
+              <div className="col-12 my-2 profile-header">
+                {profile && profile.header ? profile.header : ''}
               </div>
-              <div className="col-12">
-                <span className="profileBio">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam iste ullam, temporibus excepturi officiis sunt atque hic sequi ratione quas illum eveniet esse!
-                </span>
+              <div className="col-12 profile-summary">
+                {profile && profile.summary ? profile.summary : ''}
               </div>
             </div>
           </div>        

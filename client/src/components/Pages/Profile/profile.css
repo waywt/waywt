@@ -13,9 +13,7 @@
     opacity: .75;
 }
 
-.profileNumber {
-    font-weight: bold;
-}
+
 
 .profDisplay {
     margin-top: 15px;
@@ -28,10 +26,6 @@
 .profileLine {
     width: 66%;
     margin-left: 216px;
-}
-
-.profileName {
-    font-weight: 600;
 }
 
 .iconProfile {

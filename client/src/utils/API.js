@@ -20,6 +20,10 @@ export const userFeed = () => {
   });
 }
 
+export const userInfo = (username) => {
+  return axios.get(`/api/users/${username}`);
+}
+
 export const outfitsFollowing = (qs) => {
   return axios.get(`/api/outfits/following${qs}`, {
     'headers': { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }

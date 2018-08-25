@@ -1,19 +1,3 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import Header from "../../Header";
-import "./profile.css";
-
-
-
-
-class Profile extends Component {
-    state = {
-      username: '',
-      email: '',
-      password: '',
-      redirect: false,
-    };
-
 
     imageSquare = props => {
         return (
