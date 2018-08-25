@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import './UserDetailed.css';
 import defaultAvatar from '../../images/default_avatar.png';
+import FollowButton from '../FollowButton';
 
 class UserDetailed extends Component {
-  handleFollowUser = () => {
-    
+  showBtns = () => {
+    const {currUser, id} = this.props;
+    const FollowingIds = currUser ? currUser.Following.map(e => e.UserId) : [];
+
+    if (currUser && id === currUser.id) {
+      return (<button>Edit Profile</button>);
+    } else if (currUser && FollowingIds.includes(id)) {
+      return (<button>Unfollow</button>);
+    } else if (currUser) {
+      return <FollowButton id={id} />;
+    }
   }
 
   render() {
     const {
-      authenticated, username, id, profile, outfitCount, followerCount, followingCount
+      authenticated, username, profile, outfitCount, followerCount, followingCount
     } = this.props;
 
     return (
@@ -24,8 +34,9 @@ class UserDetailed extends Component {
           </div>
           <div className="col-12 col-md">
             <div className="row">
-              <div className="col-12 profile-username">
-                {username}
+              <div className="col-12 d-flex align-items-center">
+                <span className="profile-username mr-3">{username}</span>
+                {authenticated ? this.showBtns() : null}
               </div>
             </div>
             <div className="row mt-2">

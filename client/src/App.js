@@ -70,68 +70,67 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path="/" render={() => {
+      <Router> 
+        <Switch>
+          <Route exact path="/" render={() => {
+            return (
+              <Home
+                authenticated={this.state.authenticated}
+                user={this.state.user}
+                outfits={this.state.outfits}
+                suggestions={this.state.suggestions}
+                updateOutfitsState={this.updateOutfitsState}
+                resetState={this.resetState}
+              />
+            );
+          }} />
+          <Route exact path="/signup" render={() => {
+            return (
+              <Signup 
+                authenticated={this.state.authenticated}
+                updateAuthState={this.updateAuthState}
+              />
+            );
+          }} />
+          <Route exact path="/login" render={() => {
+            return (
+              <Login 
+                authenticated={this.state.authenticated}
+                updateAuthState={this.updateAuthState}
+              />
+            );
+          }} />
+          <Route exact path="/auth/cb" component={Temp} />
+          
+          
+          {/* <Route exact path='/outfitpage' component={OutfitPage} /> */}
+          {/* <Route exact path='/outfit' component={Outfit} /> */}
+
+          <Route
+            exact
+            path="/postform"
+            render={() => {
               return (
-                <Home
-                  authenticated={this.state.authenticated}
-                  user={this.state.user}
-                  outfits={this.state.outfits}
-                  suggestions={this.state.suggestions}
-                  updateOutfitsState={this.updateOutfitsState}
-                  resetState={this.resetState}
-                />
-              );
-            }} />
-            <Route exact path="/signup" render={() => {
-              return (
-                <Signup 
+                <PostForm
                   authenticated={this.state.authenticated}
                   updateAuthState={this.updateAuthState}
                 />
               );
-            }} />
-            <Route exact path="/login" render={() => {
-              return (
-                <Login 
-                  authenticated={this.state.authenticated}
-                  updateAuthState={this.updateAuthState}
-                />
-              );
-            }} />
-            <Route exact path="/auth/cb" component={Temp} />
-            
-            
-            {/* <Route exact path='/outfitpage' component={OutfitPage} /> */}
-            {/* <Route exact path='/outfit' component={Outfit} /> */}
+            }}
+          />
+          <Route exact path='/:username' render={({match}) => {
+            return (
+              <Profile
+                currUser={this.state.user}
+                authenticated={this.state.authenticated}
+                username={match.params.username}
+                resetState={this.resetState}
+              />
+            );
+          }} />
 
-            <Route
-              exact
-              path="/postform"
-              render={() => {
-                return (
-                  <PostForm
-                    authenticated={this.state.authenticated}
-                    updateAuthState={this.updateAuthState}
-                  />
-                );
-              }}
-            />
-            <Route exact path='/:username' render={({match}) => {
-              return (
-                <Profile
-                  username={match.params.username}
-                  authenticated={this.state.authenticated}
-                  resetState={this.resetState}
-                />
-              );
-            }} />
-
-            <Route component={Error} />
-          </Switch>
-        </div>
+          <Route component={Error} />
+        </Switch>  
       </Router>
     );
   }

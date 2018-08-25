@@ -116,4 +116,48 @@ router.get('/:username', (req, res) => {
   })();
 });
 
+router.post('/:id/follow', passport.authenticate('auth-user', {session: false}), (req, res) => {
+  (async() => {
+    const alreadyFollowing = await Follower.findOne({
+      where: {
+        UserId: req.params.id,
+        FollowerId: req.user.id,
+      },
+    });
+
+    if (alreadyFollowing) {
+      res.json({error: 'Already following this user.'});
+    } else {
+      const newFollowing = await Follower.create({
+        UserId: req.params.id,
+        FollowerId: req.user.id
+      });
+      res.json(newFollowing);
+    }
+  })();
+});
+
+router.post('/:id/unfollow', passport.authenticate('auth-user', {session: false}),(req, res) => {
+  (async() => {
+    const alreadyFollowing = await Follower.findOne({
+      where: {
+        UserId: req.params.id,
+        FollowerId: req.user.id,
+      },
+    });
+
+    if (!alreadyFollowing) {
+      res.json({error: 'Not following this user.'});
+    } else {
+      const deleteResult = await Follower.destroy({
+        where: {
+          UserId: req.params.id,
+          FollowerId: req.user.id,
+        },
+      });
+      res.json(deleteResult);
+    }
+  })();
+});
+
 module.exports = router;

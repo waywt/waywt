@@ -34,7 +34,7 @@ class Profile extends Component {
 
   render() {
     const { 
-      authenticated, resetState 
+      currUser, authenticated, resetState 
     } = this.props;
     const {
       username, id, profile, outfitCount, followerCount, followingCount
@@ -48,6 +48,7 @@ class Profile extends Component {
         />
         <div className="container">
           <UserDetailed
+            currUser={currUser}
             authenticated={authenticated} 
             username={username}
             id={id}

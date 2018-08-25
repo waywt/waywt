@@ -7,7 +7,7 @@ const createTempToken = () => jwt.sign({
 const createToken = (user) => jwt.sign({
   id: user.id,
   username: user.username,
-}, process.env.JWT_SECRET, { expiresIn: '12h' });
+}, process.env.JWT_SECRET, { expiresIn: '1w' });
 
 const decodeToken = (token) => {
   try {
