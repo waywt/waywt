@@ -35,6 +35,12 @@ class ProfileContent extends Component {
               </div>
             );
           })}
+          {outfitsData && outfitsData.length === 0 ? (
+            <div className="col-12 text-center">
+              <h2>You do not have any outfits!</h2>
+              <h6>Create one <a href="/outfits/new">here</a>.</h6>
+            </div>  
+          ) : ''}
         </div>
       );
     } else if (activeTab === 1) {
@@ -45,6 +51,11 @@ class ProfileContent extends Component {
               <TaggedOutfit tagged={tagged} key={`taggedOutfit-${tagged.Outfit.id}`}/>
             );
           })}
+          {taggedData && taggedData.length === 0 ? (
+            <div className="col-12 text-center">
+              <h2>You have not been tagged in any photos.</h2>
+            </div>  
+          ) : ''}
         </div>
       );
     } else if (activeTab === 2) {
@@ -60,6 +71,11 @@ class ProfileContent extends Component {
               </div>
             )
           })}
+          {followersData && followersData.length === 0 ? (
+            <div className="col-12 text-center">
+              <h2>You do not have any followers.</h2>
+            </div>  
+          ) : ''}
         </div>
       );
     } else {
@@ -75,6 +91,12 @@ class ProfileContent extends Component {
               </div>
             )
           })}
+          {followingData && followingData.length === 0 ? (
+            <div className="col-12 text-center">
+              <h2>You are not following anyone.</h2>
+              <h6>Here are some <a href="/">suggestions</a>.</h6>
+            </div>  
+          ) : ''}
         </div>
       );
     }
