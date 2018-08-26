@@ -4,6 +4,8 @@ import { userInfo } from '../../../utils/API';
 import Header from '../../Header';
 import UserDetailed from '../../UserDetailed';
 import ProfileNav from './ProfileNav';
+import ProfileOutfits from './ProfileOutfits';
+import ProfileUsers from './ProfileUsers';
 
 class Profile extends Component {
   state = {
@@ -12,7 +14,8 @@ class Profile extends Component {
     profile: null,    
     outfitCount: null,
     followerCount: null,
-    followingCount: null
+    followingCount: null,
+    activeTab: 0
   }
 
   componentDidMount() {
@@ -32,6 +35,24 @@ class Profile extends Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.activeTab !== this.state.activeTab) {
+      console.log('tab changed');
+    }
+  }
+
+  showTabContent = () => {
+    if (this.state.activeTab === 0) {
+      return <ProfileOutfits />;      
+    } else if (this.state.activeTab === 1) {
+      return <ProfileOutfits />;     
+    } else if (this.state.activeTab === 2) {
+      return <ProfileUsers />;  
+    } else {
+      return <ProfileUsers />;
+    }
+  }
+
   handleFollowUser = () => {
     const id = this.state.id;
     this.props.updateFollowingState(id, 'follow');
@@ -42,6 +63,10 @@ class Profile extends Component {
     const id = this.state.id;
     this.props.updateFollowingState(id);
     this.setState({followerCount: this.state.followerCount - 1});
+  }
+
+  updateActiveTab = tab => {
+    this.setState({activeTab: tab});
   }
 
   render() {
@@ -73,7 +98,8 @@ class Profile extends Component {
             handleUnfollowUser={this.handleUnfollowUser}
           />
           <hr className="Profile-hr" />
-          <ProfileNav />
+          <ProfileNav updateActiveTab={this.updateActiveTab} />
+          {this.showTabContent()}
         </div>
       </div>
     );

@@ -11,6 +11,7 @@ class ProfileNav extends Component {
     if (this.state.tabActive[tab] !== 1) {
       tabActive[tab] = 1;
       this.setState({tabActive: tabActive});
+      this.props.updateActiveTab(tab);
     }
   }
 

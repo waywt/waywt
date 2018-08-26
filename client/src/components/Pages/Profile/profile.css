@@ -2,19 +2,19 @@
   margin-bottom: -1px;
 }
 .Profile-nav {
-  margin: 0 20px 20px;
+  margin: 0 20px;
 }
 .Profile-nav-tab-0 {
   color: #999;
   font-size: .8rem;
   font-weight: 600;
-  padding: 10px 20px;
+  padding: 15px 20px;
 }
 .Profile-nav-tab-1 {
   color: black;
   font-size: .8rem;
   font-weight: 600;
-  padding: 10px 20px;
+  padding: 15px 20px;
   border-top: 1px solid black;
 }
 .Profile-nav-tab-0:hover {
@@ -22,47 +22,8 @@
   color: #999;
   border-top: 1px solid #0000ff90;
 }
-
-
-.userImage {
-    height: 75%;
-    width: 100%;
-    position: relative;
-}
-
-.imageContainer {
-    height: 100%;
-    width: 100%;
-}
-
-.userImage:hover {
-    opacity: .75;
-}
-
-
-
-.profDisplay {
-    margin-top: 15px;
-}
-
-.photoGrid {
-    margin-top:20px;
-}
-
-.profileLine {
-    width: 66%;
-    margin-left: 216px;
-}
-
-.iconProfile {
-    opacity: 0;
-    color: white;
-    position: absolute;
-    padding: 110px;
-    font-size: 40px;
-    bottom: 100px;
-}
-
-.iconProfile:hover {
-    opacity: 1;
+.Profile-section {
+  margin: 0px 20px 100px;
+  border: 1px solid red;
+  height: 600px;
 }
