@@ -3,6 +3,7 @@ import './Profile.css';
 import { userInfo } from '../../../utils/API';
 import Header from '../../Header';
 import UserDetailed from '../../UserDetailed';
+import ProfileNav from './ProfileNav';
 
 class Profile extends Component {
   state = {
@@ -71,7 +72,8 @@ class Profile extends Component {
             handleFollowUser={this.handleFollowUser}
             handleUnfollowUser={this.handleUnfollowUser}
           />
-          <hr />
+          <hr className="Profile-hr" />
+          <ProfileNav />
         </div>
       </div>
     );

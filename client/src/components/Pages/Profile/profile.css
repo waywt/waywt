@@ -1,3 +1,29 @@
+.Profile-hr {
+  margin-bottom: -1px;
+}
+.Profile-nav {
+  margin: 0 20px 20px;
+}
+.Profile-nav-tab-0 {
+  color: #999;
+  font-size: .8rem;
+  font-weight: 600;
+  padding: 10px 20px;
+}
+.Profile-nav-tab-1 {
+  color: black;
+  font-size: .8rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-top: 1px solid black;
+}
+.Profile-nav-tab-0:hover {
+  cursor: pointer;
+  color: #999;
+  border-top: 1px solid #0000ff90;
+}
+
+
 .userImage {
     height: 75%;
     width: 100%;
