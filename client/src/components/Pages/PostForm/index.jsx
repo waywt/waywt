@@ -29,6 +29,19 @@ class PostForm extends Component {
     });
   };
 
+  // Use this function to handle form submit
+  // this.setState name: "" in formArray
+  // Value - name of piece
+  // On submit, join two arrays then in test post event -
+  // const newArray push
+
+  // handleInputChange = event => {
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // };
+
   // Submit button for each Tag?
   // On submit, setState to corresponding [index.text] *match id's(key)*?
 
@@ -37,8 +50,8 @@ class PostForm extends Component {
 
     console.log("RECT", rect);
 
-    var x = ((event.clientX - rect.left) / 729) * 100;
-    var y = ((event.clientY - rect.top) / 970) * 100;
+    var x = ((event.clientX - rect.left - 14) / 729) * 100;
+    var y = ((event.clientY - rect.top - 14) / 970) * 100;
     var coords = "X coords: " + x + ", Y coords: " + y;
     console.log(coords);
 
@@ -64,8 +77,6 @@ class PostForm extends Component {
   getButtonStyles(xCoord, yCoord) {
     let styles = {
       position: "absolute",
-      height: "20px",
-      width: "20px",
       borderRadius: "100%",
       top: "",
       left: ""
@@ -125,7 +136,7 @@ class PostForm extends Component {
                       <input
                         type="text"
                         class="form-control"
-                        id="formGroupExampleInput"
+                        id="tagTextInput"
                         placeholder="Name this piece!"
                       />
                       {/* <button className="btn btn primary" type="submit">
