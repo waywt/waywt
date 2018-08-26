@@ -37,19 +37,19 @@ export const userUnfollow = (id) => {
 }
 
 export const userOutfits = (id, qs) => {
-  return axios.get(`/api/users/${id}/outfits${qs}`);
+  return axios.get(`/api/users/${id}/outfits${qs ? qs : ''}`);
 }
 
 export const userTagged = (id, qs) => {
-  return axios.get(`/api/users/${id}/tagged${qs}`);
+  return axios.get(`/api/users/${id}/tagged${qs ? qs : ''}`);
 }
 
 export const userFollowers = (id, qs) => {
-  return axios.get(`/api/users/${id}/followers${qs}`);
+  return axios.get(`/api/users/${id}/followers${qs ? qs : ''}`);
 }
 
 export const userFollowing = (id, qs) => {
-  return axios.get(`/api/users/${id}/following${qs}`);
+  return axios.get(`/api/users/${id}/following${qs ? qs : ''}`);
 }
 
 export const outfitsFollowing = (qs) => {

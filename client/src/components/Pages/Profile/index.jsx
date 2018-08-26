@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './Profile.css';
-import { userInfo } from '../../../utils/API';
+import { userInfo, userOutfits, userTagged } from '../../../utils/API';
 import Header from '../../Header';
 import UserDetailed from '../../UserDetailed';
 import ProfileNav from './ProfileNav';
-import ProfileOutfits from './ProfileOutfits';
-import ProfileUsers from './ProfileUsers';
+import ProfileContent from './ProfileContent';
+
 
 class Profile extends Component {
   state = {
@@ -15,7 +15,8 @@ class Profile extends Component {
     outfitCount: null,
     followerCount: null,
     followingCount: null,
-    activeTab: 0
+    activeTab: null,
+    outfitsData: null,
   }
 
   componentDidMount() {
@@ -27,7 +28,8 @@ class Profile extends Component {
           username: result.data[0].username,
           outfitCount: result.data[0].outfit_count,
           followerCount: result.data[1][0].follower_count,
-          followingCount: result.data[2][0].following_count
+          followingCount: result.data[2][0].following_count,
+          activeTab: 0
         });
       }
     }).catch(err => {
@@ -36,20 +38,14 @@ class Profile extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if(prevState.activeTab !== this.state.activeTab) {
-      console.log('tab changed');
-    }
-  }
+    const activeTab = this.state.activeTab;
+    const differentTab = prevState.activeTab !== this.state.activeTab;
+    const nullOutfitsData = this.state.outfitsData === null;
 
-  showTabContent = () => {
-    if (this.state.activeTab === 0) {
-      return <ProfileOutfits />;      
-    } else if (this.state.activeTab === 1) {
-      return <ProfileOutfits />;     
-    } else if (this.state.activeTab === 2) {
-      return <ProfileUsers />;  
-    } else {
-      return <ProfileUsers />;
+    if(activeTab === 0 && differentTab && nullOutfitsData) { 
+      userOutfits(this.state.id).then(result => {
+        this.setState({outfitsData: result.data});
+      });
     }
   }
 
@@ -74,7 +70,7 @@ class Profile extends Component {
       currUser, authenticated, resetState, following 
     } = this.props;
     const {
-      username, id, profile, outfitCount, followerCount, followingCount
+      username, id, profile, outfitCount, followerCount, followingCount, activeTab, outfitsData,
     } = this.state;
 
     return (
@@ -99,7 +95,10 @@ class Profile extends Component {
           />
           <hr className="Profile-hr" />
           <ProfileNav updateActiveTab={this.updateActiveTab} />
-          {this.showTabContent()}
+          <ProfileContent 
+            activeTab={activeTab}
+            outfitsData={outfitsData}
+          />
         </div>
       </div>
     );

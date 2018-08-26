@@ -134,7 +134,7 @@ router.get('/:id/outfits', (req, res) => {
       }
     ],
     order: [['createdAt', 'DESC']],
-    limit: 9,
+    limit: 12,
     offset: parseInt(req.query.offset) || 0,
   }).then(outfits => {
     res.json(outfits);
@@ -160,7 +160,7 @@ router.get('/:id/tagged', (req, res) => {
       }
     ],
     order: [['id', 'DESC']],
-    limit: 9,
+    limit: 12,
     offset: parseInt(req.query.offset) || 0,
   }).then(result => {
     res.json(result);
