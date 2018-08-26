@@ -178,7 +178,7 @@ router.post('/login', (req, res) => {
 router.get('/user', passport.authenticate('auth-user', {session: false}), (req, res) => {
   User.findOne({
     where: {
-      username: req.user.username,
+      username: req.user.id,
     }
   }).then(result => {
     res.json({authenticated: true});

@@ -1,0 +1,31 @@
+.User-detailed {
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.profile-photo {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  margin: 10px 50px;
+}
+.profile-username {
+  font-size: 32px;
+  font-weight: 200;
+}
+.profile-num-value {
+  font-weight: 600;
+}
+.profile-header {
+  font-weight: 600;
+}
+.profile-summary {
+  font-size: .9rem;
+}
+
+@media (max-width: 576px) {
+  .profile-photo {
+    height: 100px;
+    width: 100px;
+  }
+}

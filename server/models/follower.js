@@ -3,7 +3,7 @@ module.exports = (sequelize) => {
 
   Follower.associate = (models) => {
     Follower.belongsTo(models.User);
-    Follower.belongsTo(models.User, { as: 'Follower' });
+    Follower.belongsTo(models.User, { as: 'UserFollower', foreignKey: 'FollowerId' });
   };
 
   return Follower;

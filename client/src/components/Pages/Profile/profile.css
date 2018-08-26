@@ -1,63 +1,100 @@
-.profile-header {
-    margin-top:150px;
+.Profile-hr {
+  margin-bottom: -1px;
 }
-
-.profile-photo {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
+.Profile-nav {
+  margin: 0 20px;
 }
-
-.userImage {
-    height: 75%;
-    width: 100%;
-    position: relative;
+.Profile-nav-tab-0 {
+  color: #999;
+  font-size: .8rem;
+  font-weight: 600;
+  padding: 15px 20px;
 }
-
-.imageContainer {
-    height: 100%;
-    width: 100%;
+.Profile-nav-tab-1 {
+  color: black;
+  font-size: .8rem;
+  font-weight: 600;
+  padding: 15px 20px;
+  border-top: 1px solid black;
 }
-
-.userImage:hover {
-    opacity: .75;
+.Profile-nav-tab-0:hover {
+  cursor: pointer;
+  color: #999;
+  border-top: 1px solid #0000ff90;
 }
-
-.usernameDisplay {
-    font-size: 32px;
-    font-weight: 200;
+.Profile-section {
+  margin: 0px 20px 100px;
 }
-
-.profileNumber {
-    font-weight: bold;
+.Profile-outfit {
+  background-color: aliceblue;
+  width: 100%;
+  padding-top: 100%;
+  position: relative;
+  overflow: hidden;
 }
-
-.profDisplay {
-    margin-top: 15px;
+.Profile-outfit-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  height: 100%;
 }
-
-.photoGrid {
-    margin-top:20px;
+a.Profile-outfit-overlay,
+.Profile-outfit-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #00000060;
+  color: white;
+  font-weight: 600;
+  opacity: 0;
+  -webkit-transition: opacity .8s;
+  transition: opacity .8s;
 }
-
-.profileLine {
-    width: 66%;
-    margin-left: 216px;
+a.Profile-outfit-overlay span,
+.Profile-outfit-overlay span {
+  padding: 0 8px;
 }
-
-.profileName {
-    font-weight: 600;
+a.Profile-outfit-overlay:hover {
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 1;
+  -webkit-transition: opacity .8s;
+  transition: opacity .8s;
 }
-
-.iconProfile {
-    opacity: 0;
-    color: white;
-    position: absolute;
-    padding: 110px;
-    font-size: 40px;
-    bottom: 100px;
+.Profile-outfit-overlay:hover {
+  text-decoration: none;
+  opacity: 1;
+  -webkit-transition: opacity .8s;
+  transition: opacity .8s;
 }
-
-.iconProfile:hover {
-    opacity: 1;
+.Profile-outfit-tag {
+  position: absolute;
+  /* top: calc(50% - 10px);
+  left: calc(50% - 10px); */
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #ffffff95;
+}
+.Profile-outfit-tag:hover {
+  cursor: pointer;
+  background-color: white;
+}
+.po-tag-details {
+  font-size: .9rem;
+}
+.po-tag-text {
+  text-align: center;
+  margin: 0;
+}
+.po-tag-creator {
+  text-align: center;
+  font-weight: 300;
+  font-size: .8rem;
 }

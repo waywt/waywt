@@ -3,6 +3,14 @@
   src: url(../../fonts/siry.otf);
 }
 
+.navbar-brand {
+  color: black;
+}
+
+.navbar-brand:hover {
+  color: black;
+}
+
 body {
   background-color: #f3f3f3;
   font-family: -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Roboto, Oxygen,
@@ -18,7 +26,7 @@ body {
   z-index: 2;
   -webkit-transition: height 0.2s ease-in-out;
   transition: height 0.2s ease-in-out;
-  height: 77px;
+  height: 66px;
   padding-left: 10%;
   padding-right: 10%;
 }
@@ -29,7 +37,7 @@ body {
 }
 
 #header-input {
-  width: 300px !important;
+  width: 250px !important;
   padding-left: 10px;
   padding-right: 10px;
   background-color: #fff !important;
