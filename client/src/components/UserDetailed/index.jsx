@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import './UserDetailed.css';
 import defaultAvatar from '../../images/default_avatar.png';
-import { FollowButton, UnfollowButton } from '../Buttons';
+import { FollowButton, UnfollowButton, EditProfileButton } from '../Buttons';
 
 class UserDetailed extends Component {
   showBtns = () => {
     const {currUser, currUserFollowing, id} = this.props;
 
     if (currUser && id === currUser.id) {
-      return (<button>Edit Profile</button>);
+      return (
+        <EditProfileButton
+          id={id}
+        />
+      );
     } else if (currUser && currUserFollowing.includes(id)) {
       return (
         <UnfollowButton

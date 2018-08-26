@@ -14,9 +14,11 @@ class UnfollowButton extends Component {
   }
 
   render() {
+    const customClasses = this.props.customClasses ? this.props.customClasses : '';
+    
     return (
       <button 
-        className={`btn btn-primary btn-sm ${this.props.customClasses}`}
+        className={`btn btn-primary btn-sm ${customClasses}`}
         data-id={this.props.id}
         onClick={this.handleUnfollowUser}
       >
