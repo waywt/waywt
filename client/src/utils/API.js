@@ -36,6 +36,22 @@ export const userUnfollow = (id) => {
   });
 }
 
+export const userOutfits = (id, qs) => {
+  return axios.get(`/api/users/${id}/outfits${qs}`);
+}
+
+export const userTagged = (id, qs) => {
+  return axios.get(`/api/users/${id}/tagged${qs}`);
+}
+
+export const userFollowers = (id, qs) => {
+  return axios.get(`/api/users/${id}/followers${qs}`);
+}
+
+export const userFollowing = (id, qs) => {
+  return axios.get(`/api/users/${id}/following${qs}`);
+}
+
 export const outfitsFollowing = (qs) => {
   return axios.get(`/api/outfits/following${qs}`, {
     'headers': { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }
