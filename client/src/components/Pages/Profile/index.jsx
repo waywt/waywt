@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Profile.css';
-import { userInfo, userOutfits, userTagged } from '../../../utils/API';
+import { 
+  userInfo, userOutfits, userTagged, userFollowers, userFollowing 
+} from '../../../utils/API';
 import Header from '../../Header';
 import UserDetailed from '../../UserDetailed';
 import ProfileNav from './ProfileNav';
@@ -18,6 +20,8 @@ class Profile extends Component {
     activeTab: null,
     outfitsData: null,
     taggedData: null,
+    followersData: null,
+    followingData: null,
   }
 
   componentDidMount() {
@@ -43,6 +47,8 @@ class Profile extends Component {
     const differentTab = prevState.activeTab !== this.state.activeTab;
     const nullOutfitsData = this.state.outfitsData === null;
     const nullTaggedData = this.state.taggedData === null;
+    const nullFollowersData = this.state.followersData === null;
+    const nullFollowingData = this.state.followingData === null;
 
     if (activeTab === 0 && differentTab && nullOutfitsData) { 
       userOutfits(this.state.id).then(result => {
@@ -51,6 +57,14 @@ class Profile extends Component {
     } else if (activeTab === 1 && differentTab && nullTaggedData) {
       userTagged(this.state.id).then(result => {
         this.setState({taggedData: result.data});
+      });
+    } else if (activeTab === 2 && differentTab && nullFollowersData) {
+      userFollowers(this.state.id).then(result => {
+        this.setState({followersData: result.data});
+      });
+    } else if (activeTab === 3 && differentTab && nullFollowingData) {
+      userFollowing(this.state.id).then(result => {
+        this.setState({followingData: result.data});
       });
     }
   }
@@ -76,7 +90,7 @@ class Profile extends Component {
       currUser, authenticated, resetState, following 
     } = this.props;
     const {
-      username, id, profile, outfitCount, followerCount, followingCount, activeTab, outfitsData, taggedData
+      username, id, profile, outfitCount, followerCount, followingCount, activeTab, outfitsData, taggedData, followersData, followingData
     } = this.state;
 
     return (
@@ -105,6 +119,8 @@ class Profile extends Component {
             activeTab={activeTab}
             outfitsData={outfitsData}
             taggedData={taggedData}
+            followersData={followersData}
+            followingData={followingData}
           />
         </div>
       </div>

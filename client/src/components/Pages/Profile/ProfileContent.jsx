@@ -5,7 +5,9 @@ import UserSnapshot from '../../UserSnapshot';
 
 class ProfileContent extends Component {
   showContent = () => {
-    const { activeTab, outfitsData, taggedData } = this.props;
+    const { 
+      activeTab, outfitsData, taggedData, followersData, followingData 
+    } = this.props;
 
     if (activeTab === 0) {
       return (
@@ -46,9 +48,35 @@ class ProfileContent extends Component {
         </div>
       );
     } else if (activeTab === 2) {
-      return <h1>Followers</h1>;
+      return (
+        <div className="d-flex justify-content-center row">
+          {followersData && followersData.map(follower => {
+            return (
+              <div className="col-12 col-sm-6" key={follower.UserFollower.id}>
+                <UserSnapshot
+                  profile={follower.UserFollower.Profile} 
+                  username={follower.UserFollower.username}
+                />
+              </div>
+            )
+          })}
+        </div>
+      );
     } else {
-      return <h1>Following</h1>;
+      return (
+        <div className="d-flex justify-content-center row">
+          {followingData && followingData.map(following => {
+            return (
+              <div className="col-12 col-sm-6" key={following.User.id}>
+                <UserSnapshot
+                  profile={following.User.Profile} 
+                  username={following.User.username}
+                />
+              </div>
+            )
+          })}
+        </div>
+      );
     }
   }
 
