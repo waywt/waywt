@@ -43,27 +43,18 @@ class Outfit extends Component {
   getCatIcon = (catName) => {
     switch (catName) {
       case 'Casual':
-        return (<i className="fas fa-coffee" ></i> )
-        break;
+        return (<i className="fas fa-coffee" ></i>);
       case 'Formal':
-      return (<i className="fab fa-black-tie" ></i> )
-      break;
+        return (<i className="fab fa-black-tie" ></i>);
       case 'Business':
-      return (<i className="fas fa-briefcase" ></i> )
-      break;
+        return (<i className="fas fa-briefcase" ></i>);
       case 'Sleepwear':
-      return (<i className="fas fa-bed" ></i> )
-      break;
+        return (<i className="fas fa-bed" ></i>);
       case 'Athletic':
-      return (<i className="fas fa-dumbbell" ></i> )
-      break;
+        return (<i className="fas fa-dumbbell" ></i>);
       case 'Outerwear':
-      return (<i className="fas fa-snowflake" ></i> )
-      break;
-
       default:
-        return (<i>outerwear</i>);
-
+        return (<i className="fas fa-snowflake" ></i>);
     }
   }
 

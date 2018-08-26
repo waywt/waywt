@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const _ = require('lodash');
-const { Op } = require('sequelize');
+const sequelize = require('sequelize');
+const Op = sequelize.Op;
 const { 
   User, Profile, Follower, Category, Outfit, Comment, Like, Tag, Hashtag 
 } = require('../../models');
@@ -20,11 +21,8 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
       },
     ],
   }).then(user => {
-    const FollowingIds = [];
-    user.Following.forEach(following => {
-      FollowingIds.push(following.UserId);
-    });
-    
+    const FollowingIds = user.Following.map(f => f.UserId);
+
     if (FollowingIds.length) {
       Outfit.findAll({
         where: {
@@ -68,7 +66,7 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
         limit: 10,
         offset: parseInt(req.query.offset) || 0,
       }).then(outfits => {
-        res.json({user: user, outfits: outfits});
+        res.json({user: user, following: FollowingIds, outfits: outfits});
       });
     } else {
       User.findAll({
@@ -80,10 +78,179 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
         attributes: ['id', 'username'],
         include: [{ model: Profile, attributes: ['avatar', 'header']}],
       }).then(users => {
-        res.json({user: user, suggestions: _.shuffle(users).slice(0, 10)});
+        res.json({user: user, following: FollowingIds, suggestions: _.shuffle(users).slice(0, 10)});
       });
     }
   });
+});
+
+router.get('/:username', (req, res) => {
+  (async() => {
+    const user = await  User.findOne({
+      where: {
+        username: req.params.username
+      },
+      attributes: ['id', 'username', [sequelize.fn('COUNT', sequelize.col('Outfits.id')), 'outfit_count']],
+      include: [
+        { model: Profile, attributes: ['avatar', 'header', 'summary'] },
+        { model: Outfit, attributes: [] },
+      ],
+    });
+    const follower = await Follower.findAll({
+      where: {
+        UserId: user.id
+      },
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'follower_count']]
+    });
+    const following = await Follower.findAll({
+      where: {
+        FollowerId: user.id
+      },
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'following_count']]
+    });
+    
+    res.json([user, follower, following]);
+  })();
+});
+
+router.get('/:id/outfits', (req, res) => {
+  Outfit.findAll({
+    where: {
+      UserId: req.params.id,
+    },
+    attributes: { exclude: ['description', 'updatedAt'] },
+    include: [
+      {
+        model: Category,
+        attributes: ['id', 'name'],
+      },
+      {
+        model: Like,
+        attributes: ['id'],
+      },
+      { 
+        model: Comment,
+        attributes: ['id'],
+      }
+    ],
+    order: [['createdAt', 'DESC']],
+    limit: 12,
+    offset: parseInt(req.query.offset) || 0,
+  }).then(outfits => {
+    res.json(outfits);
+  });
+});
+
+router.get('/:id/tagged', (req, res) => {
+  Tag.findAll({
+    where: {
+      TaggedId: req.params.id,
+    },
+    attributes: { exclude: ['TaggedId', 'OutfitId', 'UserId', 'createdAt', 'updatedAt'] },
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'username'],
+        include: [{model: Profile, attributes: ['avatar']}] 
+      },
+      {
+        model: Outfit,
+        attributes: ['id', 'imageUrl'],
+        include: [{model: Category, attributes: ['name']}]
+      }
+    ],
+    order: [['id', 'DESC']],
+    limit: 12,
+    offset: parseInt(req.query.offset) || 0,
+  }).then(result => {
+    res.json(result);
+  });
+});
+
+router.get('/:id/followers', (req, res) => {
+  Follower.findAll({
+    where: {
+      UserId: req.params.id
+    },
+    attributes: [],
+    include: [
+      { 
+        model: User, as: 'UserFollower',
+        attributes: ['id', 'username'],
+        include: [{model: Profile, attributes: ['avatar', 'header']}] 
+      }
+    ],
+    order: [['createdAt', 'DESC']],
+    limit: 20,
+    offset: parseInt(req.query.offset) || 0,
+  }).then(users => {
+    res.json(users);
+  });
+});
+
+router.get('/:id/following', (req, res) => {
+  Follower.findAll({
+    where: {
+      FollowerId: req.params.id
+    },
+    attributes: [],
+    include: [
+      { 
+        model: User,
+        attributes: ['id', 'username'],
+        include: [{model: Profile, attributes: ['avatar', 'header']}] 
+      }
+    ],
+    order: [['createdAt', 'DESC']],
+    limit: 20,
+    offset: parseInt(req.query.offset) || 0,
+  }).then(users => {
+    res.json(users);
+  });
+});
+
+router.post('/:id/follow', passport.authenticate('auth-user', {session: false}), (req, res) => {
+  (async() => {
+    const alreadyFollowing = await Follower.findOne({
+      where: {
+        UserId: req.params.id,
+        FollowerId: req.user.id,
+      },
+    });
+
+    if (alreadyFollowing) {
+      res.json({error: 'Already following this user.'});
+    } else {
+      const newFollowing = await Follower.create({
+        UserId: req.params.id,
+        FollowerId: req.user.id
+      });
+      res.json(newFollowing);
+    }
+  })();
+});
+
+router.post('/:id/unfollow', passport.authenticate('auth-user', {session: false}),(req, res) => {
+  (async() => {
+    const alreadyFollowing = await Follower.findOne({
+      where: {
+        UserId: req.params.id,
+        FollowerId: req.user.id,
+      },
+    });
+
+    if (!alreadyFollowing) {
+      res.json({error: 'Not following this user.'});
+    } else {
+      const deleteResult = await Follower.destroy({
+        where: {
+          UserId: req.params.id,
+          FollowerId: req.user.id,
+        },
+      });
+      res.json(deleteResult);
+    }
+  })();
 });
 
 module.exports = router;

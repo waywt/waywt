@@ -1,22 +1,18 @@
 import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { authVerify, userFeed } from "./utils/API";
 import { Signup, Login, Temp } from "./components/Auth";
 import Home from "./components/Pages/Home/";
 import Profile from "./components/Pages/Profile";
 import PostForm from "./components/Pages/PostForm/";
-import Outfit from "./components/Outfit";
-import OutfitPage from "./components/OutfitPage";
+// import OutfitPage from "./components/OutfitPage";
 import Error from "./components/Error";
 
 class App extends Component {
   state = {
     authenticated: false,
     user: null,
+    following: [],
     outfits: null,
     suggestions: null
   };
@@ -30,7 +26,6 @@ class App extends Component {
           this.setState({ authenticated: result.data.authenticated });
         })
         .catch(err => {
-          // Unauthorized
           localStorage.removeItem("accessToken");
         });
     }
@@ -47,6 +42,7 @@ class App extends Component {
         } else {
           this.setState({
             user: result.data.user,
+            following: result.data.following,
             outfits: result.data.outfits,
           });
         }
@@ -64,10 +60,21 @@ class App extends Component {
     this.setState({outfits: outfits});
   };
 
+  updateFollowingState = (id, follow) => {
+    let following = this.state.following;
+    if (follow) {
+      following.push(id);
+    } else {
+      following = following.filter(f => f !== id);
+    }
+    this.setState({following: following});
+  }
+
   resetState = () => {
     this.setState({
       authenticated: false,
       user: null,
+      following: null,
       outfits: null,
       suggestions: null,
     });
@@ -75,71 +82,70 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path="/" render={() => {
+      <Router> 
+        <Switch>
+          <Route exact path="/" render={() => {
+            return (
+              <Home
+                authenticated={this.state.authenticated}
+                user={this.state.user}
+                following={this.state.following}
+                outfits={this.state.outfits}
+                suggestions={this.state.suggestions}
+                updateOutfitsState={this.updateOutfitsState}
+                resetState={this.resetState}
+              />
+            );
+          }} />
+          <Route exact path="/signup" render={() => {
+            return (
+              <Signup 
+                authenticated={this.state.authenticated}
+                updateAuthState={this.updateAuthState}
+              />
+            );
+          }} />
+          <Route exact path="/login" render={() => {
+            return (
+              <Login 
+                authenticated={this.state.authenticated}
+                updateAuthState={this.updateAuthState}
+              />
+            );
+          }} />
+          <Route exact path="/auth/cb" component={Temp} />
+          
+          
+          {/* <Route exact path='/outfitpage' component={OutfitPage} /> */}
+          {/* <Route exact path='/outfit' component={Outfit} /> */}
+
+          <Route
+            exact
+            path="/postform"
+            render={() => {
               return (
-                <Home
-                  authenticated={this.state.authenticated}
-                  user={this.state.user}
-                  outfits={this.state.outfits}
-                  suggestions={this.state.suggestions}
-                  updateOutfitsState={this.updateOutfitsState}
-                  resetState={this.resetState}
-                />
-              );
-            }} />
-            <Route exact path="/signup" render={() => {
-              return (
-                <Signup 
+                <PostForm
                   authenticated={this.state.authenticated}
                   updateAuthState={this.updateAuthState}
                 />
               );
-            }} />
-            <Route exact path="/login" render={() => {
-              return (
-                <Login 
-                  authenticated={this.state.authenticated}
-                  updateAuthState={this.updateAuthState}
-                />
-              );
-            }} />
-            <Route exact path="/auth/cb" component={Temp} />
-            
-            
-            <Route exact path='/outfitpage' component={OutfitPage} />
-            <Route exact path='/outfit' component={Outfit} />
+            }}
+          />
+          <Route exact path='/:username' render={({match}) => {
+            return (
+              <Profile
+                authenticated={this.state.authenticated}
+                resetState={this.resetState}
+                currUser={this.state.user}
+                following={this.state.following}
+                updateFollowingState={this.updateFollowingState}
+                username={match.params.username}                
+              />
+            );
+          }} />
 
-            <Route
-              exact
-              path="/postform"
-              render={() => {
-                return (
-                  <PostForm
-                    authenticated={this.state.authenticated}
-                    updateAuthState={this.updateAuthState}
-                  />
-                );
-              }}
-            />
-            <Route exact path='/:username' render={() => {
-              return (
-                <Profile
-                  authenticated={this.state.authenticated}
-                  user={this.state.user}
-                  outfits={this.state.outfits}
-                  suggestions={this.state.suggestions}
-                  updateOutfitsState={this.updateOutfitsState}
-                  resetState={this.resetState}
-                />
-              );
-            }} />
-
-            <Route component={Error} />
-          </Switch>
-        </div>
+          <Route component={Error} />
+        </Switch>  
       </Router>
     );
   }
