@@ -24,6 +24,18 @@ export const userInfo = (username) => {
   return axios.get(`/api/users/${username}`);
 }
 
+export const userFollow = (id) => {
+  return axios.post(`/api/users/${id}/follow`, {}, {
+    'headers': { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }
+  });
+}
+
+export const userUnfollow = (id) => {
+  return axios.post(`/api/users/${id}/unfollow`, {}, {
+    'headers': { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }
+  });
+}
+
 export const outfitsFollowing = (qs) => {
   return axios.get(`/api/outfits/following${qs}`, {
     'headers': { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }

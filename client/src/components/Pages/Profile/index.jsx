@@ -10,9 +10,9 @@ class Profile extends Component {
     username: null,
     id: null,
     profile: null,    
-    outfit_count: null,
-    follower_count: null,
-    following_count: null
+    outfitCount: null,
+    followerCount: null,
+    followingCount: null
   }
 
   componentDidMount() {
@@ -32,9 +32,15 @@ class Profile extends Component {
     });
   }
 
+  handleFollowUser = () => {
+    const id = this.state.id;
+    this.props.updateFollowingState(id, 'follow');
+    this.setState({followerCount: this.state.followerCount + 1});
+  }
+
   render() {
     const { 
-      currUser, authenticated, resetState 
+      currUser, authenticated, resetState, following 
     } = this.props;
     const {
       username, id, profile, outfitCount, followerCount, followingCount
@@ -48,14 +54,16 @@ class Profile extends Component {
         />
         <div className="container">
           <UserDetailed
-            currUser={currUser}
             authenticated={authenticated} 
+            currUser={currUser}
+            currUserFollowing={following}
             username={username}
             id={id}
             profile={profile}
             outfitCount={outfitCount}
             followerCount={followerCount}
             followingCount={followingCount}
+            handleFollowUser={this.handleFollowUser}
           />
           <hr />
         </div>

@@ -5,15 +5,19 @@ import FollowButton from '../FollowButton';
 
 class UserDetailed extends Component {
   showBtns = () => {
-    const {currUser, id} = this.props;
-    const FollowingIds = currUser ? currUser.Following.map(e => e.UserId) : [];
+    const {currUser, currUserFollowing, id} = this.props;
 
     if (currUser && id === currUser.id) {
       return (<button>Edit Profile</button>);
-    } else if (currUser && FollowingIds.includes(id)) {
+    } else if (currUser && currUserFollowing.includes(id)) {
       return (<button>Unfollow</button>);
     } else if (currUser) {
-      return <FollowButton id={id} />;
+      return (
+        <FollowButton 
+          id={id}
+          handleFollowUser={this.props.handleFollowUser}
+        />
+      );
     }
   }
 

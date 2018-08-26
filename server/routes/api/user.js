@@ -21,11 +21,8 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
       },
     ],
   }).then(user => {
-    const FollowingIds = [];
-    user.Following.forEach(following => {
-      FollowingIds.push(following.UserId);
-    });
-    
+    const FollowingIds = user.Following.map(f => f.UserId);
+
     if (FollowingIds.length) {
       Outfit.findAll({
         where: {
@@ -69,7 +66,7 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
         limit: 10,
         offset: parseInt(req.query.offset) || 0,
       }).then(outfits => {
-        res.json({user: user, outfits: outfits});
+        res.json({user: user, following: FollowingIds, outfits: outfits});
       });
     } else {
       User.findAll({
@@ -81,7 +78,7 @@ router.get('/feed', passport.authenticate('auth-user', {session: false}), (req, 
         attributes: ['id', 'username'],
         include: [{ model: Profile, attributes: ['avatar', 'header']}],
       }).then(users => {
-        res.json({user: user, suggestions: _.shuffle(users).slice(0, 10)});
+        res.json({user: user, following: FollowingIds, suggestions: _.shuffle(users).slice(0, 10)});
       });
     }
   });

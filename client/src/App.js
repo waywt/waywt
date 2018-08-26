@@ -12,6 +12,7 @@ class App extends Component {
   state = {
     authenticated: false,
     user: null,
+    following: [],
     outfits: null,
     suggestions: null
   };
@@ -25,7 +26,6 @@ class App extends Component {
           this.setState({ authenticated: result.data.authenticated });
         })
         .catch(err => {
-          // Unauthorized
           localStorage.removeItem("accessToken");
         });
     }
@@ -42,6 +42,7 @@ class App extends Component {
         } else {
           this.setState({
             user: result.data.user,
+            following: result.data.following,
             outfits: result.data.outfits,
           });
         }
@@ -59,10 +60,21 @@ class App extends Component {
     this.setState({outfits: outfits});
   };
 
+  updateFollowingState = (id, follow) => {
+    let following = this.state.following;
+    if (follow) {
+      following.push(id);
+    } else {
+      following = following.filter(f => f !== id);
+    }
+    this.setState({following: following});
+  }
+
   resetState = () => {
     this.setState({
       authenticated: false,
       user: null,
+      following: null,
       outfits: null,
       suggestions: null,
     });
@@ -77,6 +89,7 @@ class App extends Component {
               <Home
                 authenticated={this.state.authenticated}
                 user={this.state.user}
+                following={this.state.following}
                 outfits={this.state.outfits}
                 suggestions={this.state.suggestions}
                 updateOutfitsState={this.updateOutfitsState}
@@ -121,10 +134,12 @@ class App extends Component {
           <Route exact path='/:username' render={({match}) => {
             return (
               <Profile
-                currUser={this.state.user}
                 authenticated={this.state.authenticated}
-                username={match.params.username}
                 resetState={this.resetState}
+                currUser={this.state.user}
+                following={this.state.following}
+                updateFollowingState={this.updateFollowingState}
+                username={match.params.username}                
               />
             );
           }} />
