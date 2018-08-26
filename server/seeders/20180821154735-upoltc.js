@@ -1,6 +1,8 @@
 const faker = require('faker');
 const bcrypt = require('bcryptjs');
+const fs = require('fs');
 
+const images = JSON.parse(fs.readFileSync('./server/utils/imageLinks.json'));
 const date = new Date();
 const hashedPw = bcrypt.hashSync('password', 8);
 const users = [];
@@ -59,7 +61,7 @@ while (i <= 30) {
     const newOutfit = {
       id: outfitIdCounter,
       description: faker.lorem.sentences(Math.floor(Math.random() * 3) + 1),
-      imageUrl: 'https://loremflickr.com/320/240/fashion',
+      imageUrl: images[outfitIdCounter],
       UserId: i,
       CategoryId: Math.floor(Math.random() * 6) + 1,
       createdAt: faker.date.between(pastDate, date),
