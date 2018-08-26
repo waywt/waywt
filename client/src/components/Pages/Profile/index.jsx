@@ -67,6 +67,12 @@ class Profile extends Component {
         this.setState({followingData: result.data});
       });
     }
+
+    if (prevState.followerCount && prevState.followerCount !== this.state.followerCount) {
+      userFollowers(this.state.id).then(result => {
+        this.setState({followersData: result.data});
+      });
+    }
   }
 
   handleFollowUser = () => {

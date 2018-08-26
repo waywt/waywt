@@ -49,7 +49,7 @@ class ProfileContent extends Component {
       );
     } else if (activeTab === 2) {
       return (
-        <div className="d-flex justify-content-center row">
+        <div className="row no-gutters">
           {followersData && followersData.map(follower => {
             return (
               <div className="col-12 col-sm-6" key={follower.UserFollower.id}>
@@ -64,7 +64,7 @@ class ProfileContent extends Component {
       );
     } else {
       return (
-        <div className="d-flex justify-content-center row">
+        <div className="row">
           {followingData && followingData.map(following => {
             return (
               <div className="col-12 col-sm-6" key={following.User.id}>
