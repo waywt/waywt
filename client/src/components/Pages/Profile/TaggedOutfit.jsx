@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Profile.css';
+import './profile.css';
 
 class TaggedOutfit extends Component {
   state = {

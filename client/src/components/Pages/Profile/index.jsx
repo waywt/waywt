@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Profile.css';
+import './profile.css';
 import { 
   userInfo, userOutfits, userTagged, userFollowers, userFollowing 
 } from '../../../utils/API';
