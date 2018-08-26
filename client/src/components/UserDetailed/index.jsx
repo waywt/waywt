@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './UserDetailed.css';
 import defaultAvatar from '../../images/default_avatar.png';
-import FollowButton from '../FollowButton';
-import UnfollowButton from '../UnfollowButton';
+import { FollowButton, UnfollowButton } from '../Buttons';
 
 class UserDetailed extends Component {
   showBtns = () => {
