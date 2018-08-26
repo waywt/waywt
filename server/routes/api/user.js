@@ -113,6 +113,102 @@ router.get('/:username', (req, res) => {
   })();
 });
 
+router.get('/:id/outfits', (req, res) => {
+  Outfit.findAll({
+    where: {
+      UserId: req.params.id,
+    },
+    attributes: { exclude: ['description', 'updatedAt'] },
+    include: [
+      {
+        model: Category,
+        attributes: ['id', 'name'],
+      },
+      {
+        model: Like,
+        attributes: ['id'],
+      },
+      { 
+        model: Comment,
+        attributes: ['id'],
+      }
+    ],
+    order: [['createdAt', 'DESC']],
+    limit: 9,
+    offset: parseInt(req.query.offset) || 0,
+  }).then(outfits => {
+    res.json(outfits);
+  });
+});
+
+router.get('/:id/tagged', (req, res) => {
+  Tag.findAll({
+    where: {
+      TaggedId: req.params.id,
+    },
+    attributes: { exclude: ['TaggedId', 'OutfitId', 'UserId', 'createdAt', 'updatedAt'] },
+    include: [
+      {
+        model: User,
+        attributes: ['id', 'username'],
+        include: [{model: Profile, attributes: ['avatar']}] 
+      },
+      {
+        model: Outfit,
+        attributes: ['id', 'imageUrl'],
+        include: [{model: Category, attributes: ['name']}]
+      }
+    ],
+    order: [['id', 'DESC']],
+    limit: 9,
+    offset: parseInt(req.query.offset) || 0,
+  }).then(result => {
+    res.json(result);
+  });
+});
+
+router.get('/:id/followers', (req, res) => {
+  Follower.findAll({
+    where: {
+      UserId: req.params.id
+    },
+    attributes: [],
+    include: [
+      { 
+        model: User, as: 'UserFollower',
+        attributes: ['id', 'username'],
+        include: [{model: Profile, attributes: ['avatar', 'header']}] 
+      }
+    ],
+    order: [['createdAt', 'DESC']],
+    limit: 20,
+    offset: parseInt(req.query.offset) || 0,
+  }).then(users => {
+    res.json(users);
+  });
+});
+
+router.get('/:id/following', (req, res) => {
+  Follower.findAll({
+    where: {
+      FollowerId: req.params.id
+    },
+    attributes: [],
+    include: [
+      { 
+        model: User,
+        attributes: ['id', 'username'],
+        include: [{model: Profile, attributes: ['avatar', 'header']}] 
+      }
+    ],
+    order: [['createdAt', 'DESC']],
+    limit: 20,
+    offset: parseInt(req.query.offset) || 0,
+  }).then(users => {
+    res.json(users);
+  });
+});
+
 router.post('/:id/follow', passport.authenticate('auth-user', {session: false}), (req, res) => {
   (async() => {
     const alreadyFollowing = await Follower.findOne({
