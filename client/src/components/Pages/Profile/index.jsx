@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import {} from 
 import './Profile.css';
 import { userInfo } from '../../../utils/API';
 import Header from '../../Header';
@@ -38,6 +37,12 @@ class Profile extends Component {
     this.setState({followerCount: this.state.followerCount + 1});
   }
 
+  handleUnfollowUser = () => {
+    const id = this.state.id;
+    this.props.updateFollowingState(id);
+    this.setState({followerCount: this.state.followerCount - 1});
+  }
+
   render() {
     const { 
       currUser, authenticated, resetState, following 
@@ -64,6 +69,7 @@ class Profile extends Component {
             followerCount={followerCount}
             followingCount={followingCount}
             handleFollowUser={this.handleFollowUser}
+            handleUnfollowUser={this.handleUnfollowUser}
           />
           <hr />
         </div>

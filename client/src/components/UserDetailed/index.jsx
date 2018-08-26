@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './UserDetailed.css';
 import defaultAvatar from '../../images/default_avatar.png';
 import FollowButton from '../FollowButton';
+import UnfollowButton from '../UnfollowButton';
 
 class UserDetailed extends Component {
   showBtns = () => {
@@ -10,7 +11,12 @@ class UserDetailed extends Component {
     if (currUser && id === currUser.id) {
       return (<button>Edit Profile</button>);
     } else if (currUser && currUserFollowing.includes(id)) {
-      return (<button>Unfollow</button>);
+      return (
+        <UnfollowButton
+          id={id}
+          handleUnfollowUser={this.props.handleUnfollowUser}
+        />
+      );
     } else if (currUser) {
       return (
         <FollowButton 
