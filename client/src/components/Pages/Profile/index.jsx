@@ -17,6 +17,7 @@ class Profile extends Component {
     followingCount: null,
     activeTab: null,
     outfitsData: null,
+    taggedData: null,
   }
 
   componentDidMount() {
@@ -41,10 +42,15 @@ class Profile extends Component {
     const activeTab = this.state.activeTab;
     const differentTab = prevState.activeTab !== this.state.activeTab;
     const nullOutfitsData = this.state.outfitsData === null;
+    const nullTaggedData = this.state.taggedData === null;
 
-    if(activeTab === 0 && differentTab && nullOutfitsData) { 
+    if (activeTab === 0 && differentTab && nullOutfitsData) { 
       userOutfits(this.state.id).then(result => {
         this.setState({outfitsData: result.data});
+      });
+    } else if (activeTab === 1 && differentTab && nullTaggedData) {
+      userTagged(this.state.id).then(result => {
+        this.setState({taggedData: result.data});
       });
     }
   }
@@ -70,7 +76,7 @@ class Profile extends Component {
       currUser, authenticated, resetState, following 
     } = this.props;
     const {
-      username, id, profile, outfitCount, followerCount, followingCount, activeTab, outfitsData,
+      username, id, profile, outfitCount, followerCount, followingCount, activeTab, outfitsData, taggedData
     } = this.state;
 
     return (
@@ -98,6 +104,7 @@ class Profile extends Component {
           <ProfileContent 
             activeTab={activeTab}
             outfitsData={outfitsData}
+            taggedData={taggedData}
           />
         </div>
       </div>

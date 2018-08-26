@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './Profile.css';
+import TaggedOutfit from './TaggedOutfit';
+import UserSnapshot from '../../UserSnapshot';
 
 class ProfileContent extends Component {
   showContent = () => {
-    const { activeTab, outfitsData } = this.props;
+    const { activeTab, outfitsData, taggedData } = this.props;
 
     if (activeTab === 0) {
       return (
@@ -12,15 +14,15 @@ class ProfileContent extends Component {
             return (
               <div className="col-6 col-md-4 mb-4" key={`profileOutfits-${outfit.id}`}>
                 <div className="Profile-outfit">
-                  <img className="img-fluid w-100" src={outfit.imageUrl} alt={outfit.id} />
+                  <img className="img-fluid w-100 Profile-outfit-img" src={outfit.imageUrl} alt={outfit.id} />
                   <a href={`/outfits/${outfit.id}`} className="Profile-outfit-overlay">
                     <div className="row no-gutters w-100">
-                      <div className="col-12 col-sm text-center text-sm-right likes-info">
+                      <div className="col-12 col-sm text-center text-sm-right">
                         <span>
                           <i className="fas fa-heart"></i> {outfit.Likes.length}
                         </span>
                       </div>
-                      <div className="col-12 col-sm text-center text-sm-left comments-info">
+                      <div className="col-12 col-sm text-center text-sm-left">
                         <span>
                           <i className="fas fa-comment"></i> {outfit.Comments.length}
                         </span>
@@ -34,7 +36,15 @@ class ProfileContent extends Component {
         </div>
       );
     } else if (activeTab === 1) {
-      return <h1>Tagged</h1>;
+      return (
+        <div className="row">
+          {taggedData && taggedData.map(tagged => {
+            return (
+              <TaggedOutfit tagged={tagged} key={`taggedOutfit-${tagged.Outfit.id}`}/>
+            );
+          })}
+        </div>
+      );
     } else if (activeTab === 2) {
       return <h1>Followers</h1>;
     } else {

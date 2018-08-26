@@ -58,7 +58,9 @@ const imageLinks = [];
     galleries.forEach((gallery, i) => {
       if (gallery.images) {
         gallery.images.forEach(image => {
-          if (image.height > 360 && image.height < 1000) imageLinks.push(image.link);   
+          if (image.height > 360 && image.height < 1000 && image.link.slice(-4) !== '.mp4') {
+            imageLinks.push(image.link);
+          }   
         });
       }
     });

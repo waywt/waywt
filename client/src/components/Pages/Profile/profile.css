@@ -32,14 +32,15 @@
   position: relative;
   overflow: hidden;
 }
-.Profile-outfit img {
+.Profile-outfit-img {
   position: absolute;
   top: 0;
   left: 0;
   object-fit: cover;
   height: 100%;
 }
-a.Profile-outfit-overlay {
+a.Profile-outfit-overlay,
+.Profile-outfit-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -55,7 +56,8 @@ a.Profile-outfit-overlay {
   -webkit-transition: opacity .8s;
   transition: opacity .8s;
 }
-a.Profile-outfit-overlay span {
+a.Profile-outfit-overlay span,
+.Profile-outfit-overlay span {
   padding: 0 8px;
 }
 a.Profile-outfit-overlay:hover {
@@ -64,4 +66,35 @@ a.Profile-outfit-overlay:hover {
   opacity: 1;
   -webkit-transition: opacity .8s;
   transition: opacity .8s;
+}
+.Profile-outfit-overlay:hover {
+  text-decoration: none;
+  opacity: 1;
+  -webkit-transition: opacity .8s;
+  transition: opacity .8s;
+}
+.Profile-outfit-tag {
+  position: absolute;
+  /* top: calc(50% - 10px);
+  left: calc(50% - 10px); */
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #ffffff95;
+}
+.Profile-outfit-tag:hover {
+  cursor: pointer;
+  background-color: white;
+}
+.po-tag-details {
+  font-size: .9rem;
+}
+.po-tag-text {
+  text-align: center;
+  margin: 0;
+}
+.po-tag-creator {
+  text-align: center;
+  font-weight: 300;
+  font-size: .8rem;
 }
