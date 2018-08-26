@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import Header from "../../Header";
 import "./PostForm.css";
-import ImgUpload from "./ImgUpload";
 import { createOutfit } from "../../../utils/API";
 
 class PostForm extends Component {
   state = {
-    imageURL: "https://loremflickr.com/320/240/fashion",
+    imageURL:
+      "https://static1.squarespace.com/static/560eabc4e4b061c4bb358ae8/t/57802d7e6b8f5b118a25062b/1468018050251/image.jpg?format=1000w", // IMGUR API response link
     description: "Lorem ipsum dolor sit amet",
     categoryId: 1,
     buttonArray: [],
-    tagArray: []
+    tagArray: [],
+    formArray: []
   };
 
   test = event => {
@@ -28,42 +29,54 @@ class PostForm extends Component {
     });
   };
 
-  createButton = style => {
-    return (
-      <button id="button1" style={style} />
-      // <div class="dropdown">
-      //   <button class="" id="button1" style={style} />
-      //   <div class="dropdown-content">
-      //     <a href="#">Name of Shirt</a>
-      //   </div>
-      // </div>
-    );
-  };
+  // Use this function to handle form submit
+  // this.setState name: "" in formArray
+  // Value - name of piece
+  // On submit, join two arrays then in test post event -
+  // const newArray push
+
+  // handleInputChange = event => {
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  // };
+
+  // Submit button for each Tag?
+  // On submit, setState to corresponding [index.text] *match id's(key)*?
 
   showCoords = event => {
     var rect = event.target.getBoundingClientRect();
 
     console.log("RECT", rect);
 
-    var x = ((event.clientX - rect.left) / 729) * 100;
-    var y = ((event.clientY - rect.top) / 970) * 100;
+    var x = ((event.clientX - rect.left - 14) / 729) * 100;
+    var y = ((event.clientY - rect.top - 14) / 970) * 100;
     var coords = "X coords: " + x + ", Y coords: " + y;
     console.log(coords);
 
     const newButtonStyle = this.getButtonStyles(x, y);
-    const xycoords = (x, y);
 
-    this.setState({
-      tagArray: [...this.state.tagArray, { x: x, y: y }],
-      buttonArray: [...this.state.buttonArray, newButtonStyle]
-    });
+    this.setState(
+      {
+        tagArray: [...this.state.tagArray, { x: x, y: y, text: "" }],
+        buttonArray: [...this.state.buttonArray, newButtonStyle],
+        formArray: [...this.state.formArray, { text: "" }]
+      },
+      () => {
+        // This function needs to be moved to on submit
+        const joinedArray = this.state.tagArray;
+        this.state.formArray.forEach((el, index) => {
+          joinedArray[index]["text"] = el.text;
+        });
+        this.setState({ tagArray: joinedArray });
+      }
+    );
   };
 
   getButtonStyles(xCoord, yCoord) {
     let styles = {
       position: "absolute",
-      height: "20px",
-      width: "20px",
       borderRadius: "100%",
       top: "",
       left: ""
@@ -75,15 +88,6 @@ class PostForm extends Component {
   }
 
   render() {
-    const {
-      imgURL,
-      description,
-      xCoord,
-      yCoord,
-      xPercentage,
-      yPercentage,
-      buttonArray
-    } = this.state;
     return (
       <div className="postform-container">
         <header>
@@ -109,30 +113,41 @@ class PostForm extends Component {
             </button>
           </div>
         </div>
-        <div class="post-jumbotron jumbotron jumbotron-fluid">
-          <div class="text-container container text-center">
-            <h1 class="display-3">Upload an Outfit!</h1>
-            <p class="lead">
-              You can then click on your photo to add tags to tell everyone what
-              you're wearing.
-            </p>
-            <input
-              type="file"
-              class="inputForm form-control-file"
-              id="exampleFormControlFile1"
-            />
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8">
+              <div onClick={this.showCoords} className="picture-container">
+                {this.state.buttonArray.map((styles, index) => {
+                  return (
+                    <button id="button1" style={styles} key={`button_${index}`}>
+                      {index + 1}
+                    </button>
+                  );
+                })}
+                <img src={this.state.imageURL} alt="" />
+              </div>
+            </div>
+            <div className="form-container col-md-4">
+              {this.state.formArray.map((key, index) => {
+                return (
+                  <form key={index}>
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Tag {index + 1}</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="tagTextInput"
+                        placeholder="Name this piece!"
+                      />
+                      {/* <button className="btn btn primary" type="submit">
+                        Submit
+                      </button> */}
+                    </div>
+                  </form>
+                );
+              })}
+            </div>
           </div>
-        </div>
-        <div onClick={this.showCoords} className="picture-container">
-          {this.state.buttonArray.map((style, index) => {
-            return (
-              <button
-                id="button1"
-                style={style}
-                key={`button_${index}${style.top}`}
-              />
-            );
-          })}
         </div>
       </div>
     );
@@ -140,4 +155,3 @@ class PostForm extends Component {
 }
 
 export default PostForm;
-<div />;

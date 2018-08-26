@@ -20,3 +20,26 @@
   position: relative;
   background-color: blue;
 }
+
+.picture-container img {
+  max-height: 970px;
+  width: 729px;
+}
+
+#button1 {
+  padding: 0 !important;
+  height: 30px;
+  width: 30px;
+  background-color: #ef5431;
+  color: #fff;
+  border: none;
+  opacity: 0.45;
+}
+
+#button1:hover {
+  opacity: 1;
+}
+
+#tagTextInput input {
+  background-color: #e3e6e8 !important;
+}
