@@ -45,6 +45,49 @@ const getOutfitDetails = (req, res) => {
   })();
 }
 
+const getOutfitsByCatName = (req, res) => {
+  (async() => {
+    let catId;
+
+    if (req.params.category_name === 'Casual') {
+      catId = 1;
+    } else if (req.params.category_name === 'Formal') {
+      catId = 2;
+    } else if (req.params.category_name === 'Business') {
+      catId = 3;
+    } else if (req.params.category_name === 'Sleepwear') {
+      catId = 4;
+    } else if (req.params.category_name === 'Athletic') {
+      catId = 5;
+    } else  {
+      catId = 6;
+    }
+
+    const outfits = await Outfit.findAll({
+      where: {
+        CategoryId: catId,
+      },
+      attributes: { exclude: ['description', 'updatedAt'] },
+      include: [
+        {
+          model: Like,
+          attributes: ['id'],
+        },
+        { 
+          model: Comment,
+          attributes: ['id'],
+        }
+      ],
+      order: [['createdAt', 'DESC']],
+      limit: 24,
+      offset: parseInt(req.query.offset) || 0,
+    });
+
+    res.json(outfits);
+  })()
+}
+
 module.exports = {
   getOutfitDetails,
+  getOutfitsByCatName
 };
