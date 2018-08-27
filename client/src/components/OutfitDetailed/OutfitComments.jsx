@@ -20,13 +20,13 @@ class OutfitComments extends Component {
       <div>
         {comments && comments.slice(0,numComments-1).map(comment =>{
           return (
-            <div className="Outfit-comment" key={`comment-${comment.id}`}>
+            <div className="od od-comment" key={comment.id}>
               <a href={`/${comment.User.username}`}><strong>{comment.User.username}</strong></a> {comment.text}
             </div>
           );
         })}
         {comments && comments.length > this.state.numComments ? (
-          <div className="Outfit-load-comment mt-2">
+          <div className="od od-load-comment">
             <a href="" onClick={this.loadMoreComments}>Load more comments</a>
           </div>
         ) : ''}

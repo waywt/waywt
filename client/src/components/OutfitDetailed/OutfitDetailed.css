@@ -72,7 +72,7 @@
 
 .od-desc {
   font-size: .9rem;
-  margin: 0 20px;
+  margin: 16px 20px 0;
 }
 
 .od-hts {
@@ -88,4 +88,16 @@
 .od-hts a:hover {
   color: #1c82f090;
   text-decoration: none;
+}
+
+.od-comment {
+  font-size: .9rem;
+  padding: 0 20px;
+}
+.od-load-comment {
+  font-size: .9rem;
+  padding: 10px 20px;
+}
+.od-load-comment a {
+  color: #999;
 }

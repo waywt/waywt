@@ -63,16 +63,19 @@ class OutfitPage extends Component {
                   username={outfitData ? outfitData.User.username : null}
                 />
                 <hr className="op-hr"/>
-                <OutfitDescription
-                  username={outfitData ? outfitData.User.username : null}
-                  description={outfitData ? outfitData.description : null}
-                />
-                <OutfitHashtags 
-                  hashtags={outfitData ? outfitData.Hashtags : null}
-                />
-                <OutfitComments
-                  comments={outfitData ? outfitData.Comments : null}
-                />
+                <div className="op-info-container">
+                  <OutfitDescription
+                    username={outfitData ? outfitData.User.username : null}
+                    description={outfitData ? outfitData.description : null}
+                  />
+                  <OutfitHashtags 
+                    hashtags={outfitData ? outfitData.Hashtags : null}
+                  />
+                  <OutfitComments
+                    comments={outfitData ? outfitData.Comments : null}
+                  />
+                </div>
+                <hr className="op-hr"/>
               </div>
             </div>
           </div>
