@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './OutfitPage.css';
+import { getOutfitDetails } from '../../../utils/outfitAPI';
 import Header from '../../Header';
 import Error from '../../Error';
 
@@ -12,8 +13,14 @@ class Profile extends Component {
     if(isNaN(this.props.outfitId)) {
       this.setState({outfitDNE: true});
     } else {
-      // make API call
-      // make unauth API call
+      getOutfitDetails(this.props.outfitId).then(result => {
+        if (result.data) {
+          //
+          console.log(result.data);
+        } else {
+          this.setState({outfitDNE: true});
+        }
+      });
     }
   }
 
