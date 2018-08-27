@@ -120,7 +120,7 @@ class App extends Component {
 
           <Route
             exact
-            path="/postform"
+            path="/outfits/new"
             render={() => {
               return (
                 <PostForm
