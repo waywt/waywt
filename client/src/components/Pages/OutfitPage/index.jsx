@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './OutfitPage.css';
 import { getOutfitDetails } from '../../../utils/outfitAPI';
 import { 
-  OutfitImage, OutfitDescription, OutfitHashtags, OutfitComments, OutfitBasics 
+  OutfitImage, OutfitDescription, OutfitHashtags, OutfitComments, OutfitBasics, OutfitCommentForm 
 } from '../../OutfitDetailed';
 import UserSnapshot from '../../UserSnapshot';
 import Header from '../../Header';
@@ -78,7 +78,11 @@ class OutfitPage extends Component {
                 <hr className="op-hr"/>
                 <OutfitBasics 
                   category={outfitData ? outfitData.Category : null}
+                  outfitId={outfitId}
+                  likeCount={outfitData ? outfitData.Likes.length : null}
                 />
+                <hr className="op-hr"/>
+                <OutfitCommentForm />
               </div>
             </div>
           </div>

@@ -137,3 +137,48 @@ a.od-cat:hover {
 .od-cat[data-id="6"] {
   background-color: #e51284;
 }
+
+.like-btn {
+  border: none;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  margin-right: 20px;
+}
+.comment-btn {
+  border: none;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+.like-btn:focus, 
+.comment-btn:focus {
+  outline: 0;
+}
+.like-btn:hover {
+  cursor: pointer;
+}
+
+.od-like-ct {
+  margin-top: 16px;
+}
+
+.Outfit-comment-input {
+  outline: 0;
+  box-shadow: none;
+}
+.Outfit-comment-form {
+  margin: 16px 0;
+  padding: 0 12px;
+}
+.Outfit-comment-input {
+  box-sizing: border-box;
+  padding: .3rem 8px;
+}
+.Outfit-comment-form .form-control {
+  border: none;
+}
+.Outfit-comment-form .form-control:focus {
+  border: none;
+  box-shadow: 0 0 0 0.1rem #c1d4ee70;
+}

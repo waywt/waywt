@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import './OutfitDetailed.css';
 import OutfitCategory from './OutfitCategory';
-// import OutfitLikes from './OutfitLikes';
+import OutfitActionBtns from './OutfitActionBtns';
 
 class OutfitBasics extends Component {
   render() {
-    const { category } = this.props;
+    const { category, outfitId, likeCount } = this.props;
 
     return (
       <div className="od-basics-container">
         <div className="row">
           <div className="col">
-            <button>Likes</button><br/><p>numlikes</p>
+            <OutfitActionBtns outfitId={outfitId} likeCount={likeCount} />
           </div>
           <div className="col text-right">
             <OutfitCategory category={category} />
