@@ -76,13 +76,14 @@ class OutfitPage extends Component {
                   />
                 </div>
                 <hr className="op-hr"/>
-                <OutfitBasics 
+                <OutfitBasics
+                  authenticated={authenticated} 
                   category={outfitData ? outfitData.Category : null}
                   outfitId={outfitId}
                   likeCount={outfitData ? outfitData.Likes.length : null}
                 />
                 <hr className="op-hr"/>
-                <OutfitCommentForm />
+                { authenticated ? <OutfitCommentForm /> : ''}
               </div>
             </div>
           </div>

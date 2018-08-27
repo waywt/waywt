@@ -10,18 +10,21 @@ class OutfitActionBtns extends Component {
   }
 
   toggleLike = () => {
-    this.setState({likeActive: !this.state.likeActive});
+    if (this.props.authenticated) {
+      this.setState({likeActive: !this.state.likeActive});
+    }
    };
 
   render () {
-    const { OutfitId, likeCount, showLink } = this.props;
+    const { authenticated, OutfitId, likeCount, showLink } = this.props;
 
     return (
       <div className="row">
         <div className="col-12">
           <img
             src={this.state.likeActive ? like_btn_active : like_btn} 
-            onClick={this.toggleLike} 
+            onClick={this.toggleLike}
+            data-clickable={authenticated ? 1 : 0} 
             className="like-btn" 
             alt="like button"
           ></img>

@@ -155,7 +155,7 @@ a.od-cat:hover {
 .comment-btn:focus {
   outline: 0;
 }
-.like-btn:hover {
+.like-btn[data-clickable="1"]:hover {
   cursor: pointer;
 }
 
@@ -177,6 +177,7 @@ a.od-cat:hover {
 }
 .Outfit-comment-form .form-control {
   border: none;
+  font-size: .9rem;
 }
 .Outfit-comment-form .form-control:focus {
   border: none;
