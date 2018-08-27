@@ -7,6 +7,10 @@
   margin: 0 auto;
 }
 
+.post-jumbotron {
+  background-color: #f3f3f3;
+}
+
 .inputForm {
   display: block;
   margin: 0 auto;
@@ -18,7 +22,6 @@
   margin: 0 auto;
   display: block;
   position: relative;
-  background-color: blue;
 }
 
 .picture-container img {
