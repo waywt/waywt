@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import './OutfitPage.css';
 import { getOutfitDetails } from '../../../utils/outfitAPI';
-import { OutfitImage } from '../../OutfitDetailed';
+import { 
+  OutfitImage, OutfitDescription, OutfitHashtags 
+} from '../../OutfitDetailed';
+import UserSnapshot from '../../UserSnapshot';
 import Header from '../../Header';
 import Error from '../../Error';
 
@@ -46,12 +49,25 @@ class OutfitPage extends Component {
           <Error />
         ) : (
           <div className="container">
-            <div className="row">
-              <div className="col-12 col-md-8">
+            <div className="row no-gutters">
+              <div className="col-12 col-md-7 border border-danger">
                 <OutfitImage 
                   id={outfitData ? outfitData.id : null}
                   imgLink={outfitData ? outfitData.imageUrl : null}
                   tags={outfitData ? outfitData.Tags : null}
+                />
+              </div>
+              <div className="col-12 col-md-5 border border-danger">
+                <UserSnapshot
+                  profile={outfitData ? outfitData.User.Profile : null} 
+                  username={outfitData ? outfitData.User.username : null}
+                />
+                <OutfitDescription
+                  username={outfitData ? outfitData.User.username : null}
+                  description={outfitData ? outfitData.description : null}
+                />
+                <OutfitHashtags 
+                  hashtags={outfitData ? outfitData.Hashtags : null}
                 />
               </div>
             </div>

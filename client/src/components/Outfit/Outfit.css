@@ -114,30 +114,16 @@ body {
   color: white;
   font-weight: 400;
 }
-.Outfit-hashtags {
-  padding: 5px 20px 10px;
-  word-wrap: break-word;
-  white-space: initial;
-}
-.Outfit-hashtags a {
-  color: #1c82f0;
-  margin-right: 5px;
-}
-.Outfit-hashtags a:hover {
-  color: #1c82f090;
-  text-decoration: none;
-}
-.Outfit-description,
+
+
 .Outfit-comment {
   height: 100%;
   padding: 0 20px;
 }
 .Outfit-likes a,
-.Outfit-description a,
 .Outfit-comment a {
   color: black;
 }
-.Outfit-description a:hover,
 .Outfit-comment a:hover {
   color: #00000090;
   text-decoration: none;
