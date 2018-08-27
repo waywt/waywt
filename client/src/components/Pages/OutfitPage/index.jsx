@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import './OutfitPage.css';
 import Header from '../../Header';
+import Error from '../../Error';
 
 class Profile extends Component {
   state = {
-   
+    outfitDNE: false
   }
 
   componentDidMount() {
-    
+    if(isNaN(this.props.outfitId)) {
+      this.setState({outfitDNE: true});
+    } else {
+      // make API call
+      // make unauth API call
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -16,12 +22,8 @@ class Profile extends Component {
   }
 
   render() {
-    const { 
-      currUser, authenticated, resetState, following 
-    } = this.props;
-    const {
-      username, id, profile, outfitCount, followerCount, followingCount, activeTab, outfitsData, taggedData, followersData, followingData, userDNE
-    } = this.state;
+    const { authenticated, currUser, resetState, outfitId} = this.props;
+    const { outfitDNE } = this.state;
 
     return (
       <div>
@@ -30,6 +32,13 @@ class Profile extends Component {
           user={currUser}
           resetState={resetState}
         />
+        {outfitDNE ? (
+          <Error />
+        ) : (
+          <div>
+            {outfitId}
+          </div>
+        )}
       </div>
     );
   }

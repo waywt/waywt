@@ -130,12 +130,13 @@ class App extends Component {
               );
             }}
           />
-          <Route exact path='/outfits/:id' render={() => {
+          <Route exact path='/outfits/:id' render={({match}) => {
             return (
               <OutfitPage
                 authenticated={this.state.authenticated}
                 resetState={this.resetState}
                 currUser={this.state.user}
+                outfitId={match.params.id}
               />
             );
           }} />; 
