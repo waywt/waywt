@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Profile.css';
+import './profile.css';
 
 class TaggedOutfit extends Component {
   state = {
@@ -34,7 +34,7 @@ class TaggedOutfit extends Component {
               style={{top: `calc(${tagged.y}% - 10px)`, left: `calc(${tagged.x}% - 10px)`}}
               onMouseOver={this.handleOnMouseOver}
               onMouseLeave={this.handleOnMouseLeave}
-            ></a>
+            > </a>
           </div>
         </div>              
       </div> 

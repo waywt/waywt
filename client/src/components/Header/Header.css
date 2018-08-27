@@ -54,8 +54,10 @@ body {
   border: 1px solid #c6c6c6 !important;
 }
 
-.signOutButton {
-  background-color: #fff !important;
-  border: 1px solid #c6c6c6 !important;
-  margin-left: 20px;
+a.nb-profile-btn {
+  color: black;
+}
+a.nb-profile-btn:hover,
+.nb-logout-btn:hover {
+  color: #00000080;
 }

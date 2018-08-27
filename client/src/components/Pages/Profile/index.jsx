@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Profile.css';
+import './profile.css';
 import { 
   userInfo, userOutfits, userTagged, userFollowers, userFollowing 
 } from '../../../utils/API';
@@ -7,7 +7,7 @@ import Header from '../../Header';
 import UserDetailed from '../../UserDetailed';
 import ProfileNav from './ProfileNav';
 import ProfileContent from './ProfileContent';
-
+import Error from '../../Error';
 
 class Profile extends Component {
   state = {
@@ -22,11 +22,12 @@ class Profile extends Component {
     taggedData: null,
     followersData: null,
     followingData: null,
+    userDNE: false,
   }
 
   componentDidMount() {
     userInfo(this.props.username).then(result => {
-      if (result.data) {
+      if (result.data[0].id) {
         this.setState({
           profile: result.data[0].Profile,
           id: result.data[0].id,
@@ -36,6 +37,8 @@ class Profile extends Component {
           followingCount: result.data[2][0].following_count,
           activeTab: 0
         });
+      } else {
+        this.setState({userDNE: true});
       }
     }).catch(err => {
       console.log(err);
@@ -96,39 +99,44 @@ class Profile extends Component {
       currUser, authenticated, resetState, following 
     } = this.props;
     const {
-      username, id, profile, outfitCount, followerCount, followingCount, activeTab, outfitsData, taggedData, followersData, followingData
+      username, id, profile, outfitCount, followerCount, followingCount, activeTab, outfitsData, taggedData, followersData, followingData, userDNE
     } = this.state;
 
     return (
       <div className="Profile">
         <Header 
           authenticated={authenticated}
+          user={currUser}
           resetState={resetState}
         />
-        <div className="container">
-          <UserDetailed
-            authenticated={authenticated} 
-            currUser={currUser}
-            currUserFollowing={following}
-            username={username}
-            id={id}
-            profile={profile}
-            outfitCount={outfitCount}
-            followerCount={followerCount}
-            followingCount={followingCount}
-            handleFollowUser={this.handleFollowUser}
-            handleUnfollowUser={this.handleUnfollowUser}
-          />
-          <hr className="Profile-hr" />
-          <ProfileNav updateActiveTab={this.updateActiveTab} />
-          <ProfileContent 
-            activeTab={activeTab}
-            outfitsData={outfitsData}
-            taggedData={taggedData}
-            followersData={followersData}
-            followingData={followingData}
-          />
-        </div>
+        {userDNE ? (
+          <Error />
+        ) : (
+          <div className="container">
+            <UserDetailed
+              authenticated={authenticated} 
+              currUser={currUser}
+              currUserFollowing={following}
+              username={username}
+              id={id}
+              profile={profile}
+              outfitCount={outfitCount}
+              followerCount={followerCount}
+              followingCount={followingCount}
+              handleFollowUser={this.handleFollowUser}
+              handleUnfollowUser={this.handleUnfollowUser}
+            />
+            <hr className="Profile-hr" />
+            <ProfileNav updateActiveTab={this.updateActiveTab} />
+            <ProfileContent 
+              activeTab={activeTab}
+              outfitsData={outfitsData}
+              taggedData={taggedData}
+              followersData={followersData}
+              followingData={followingData}
+            />
+          </div>
+        )}
       </div>
     );
   }

@@ -1,11 +1,9 @@
-import React, { Component } from "react";
-import "./Header.css";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import './Header.css';
 
 class Header extends Component {
   state = {
-    username: '',
-    email: '',
-    password: '',
     redirect: false,
   };
 
@@ -13,10 +11,13 @@ class Header extends Component {
     event.preventDefault();
     localStorage.removeItem('accessToken');
     this.props.resetState();
+    this.setState({redirect: true});
   }
 
   render() {
-    return (
+    return this.state.redirect ? (
+      <Redirect to="/signup" />
+    ) : (
       <nav className="Nav navbar justify-content-between">
         <a className="navbar-brand" href="/">Instagarment</a>
         <form className="d-none d-md-block form-inline">
@@ -31,9 +32,23 @@ class Header extends Component {
             Search
           </button>
         </form>
-        <button className="btn my-2 my-sm-0 signOutButton" type="submit" onClick={this.logOut}>
-          <i className="fas fa-sign-out-alt"></i> Log Out
-        </button>
+        {this.props.authenticated ? (
+          <div>
+            <a
+              href={`/${this.props.user ? this.props.user.username : ''}`}
+              className="btn nb-profile-btn"
+            >
+              <i className="fas fa-user"></i>
+            </a>
+            <button 
+              className="btn nb-logout-btn"
+              type="submit" 
+              onClick={this.logOut}
+            >
+              <i className="fas fa-sign-out-alt"></i>
+            </button>
+          </div>
+        ) : ''}
       </nav>
     );
   }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Outfit.css';
 import UserSnapshot from '../UserSnapshot';
+import { OutfitDescription, OutfitHashtags } from '../OutfitDetailed';
 import like_btn_active from '../../images/like_btn_active.png';
 import like_btn from '../../images/like_btn.png';
 import comment_btn from '../../images/comment_btn.png'
@@ -78,27 +79,17 @@ class Outfit extends Component {
             <img src={comment_btn} className="comment-btn" alt="comment button" />
           </div>
           <div className="Outfit-category ml-auto">
-            <span data-id={category.id} class="Outfit-category-badge">{this.getCatIcon(category.name)} {category.name}</span>
+            <span data-id={category.id} className="Outfit-category-badge">{this.getCatIcon(category.name)} {category.name}</span>
           </div>
         </div>
         <div className="Outfit-likes mb-2">
           <a href={`/outfits/${id}`}><strong>{likeCount} likes</strong></a>
         </div>
-        <div className="Outfit-description">
-          <a href={`/${username}`}><strong>{username}</strong></a> {description}
-        </div>
-        {/* {tags && tags.map(tag => {
-          return (
-            <h1>{tag.x} {tag.y} {tag.text} {tag.Tagged ? tag.Tagged.username : ''}</h1>
-          );
-        })} */}
-        <div className="Outfit-hashtags">
-          {hashtags && hashtags.map(hashtag => {
-            return (
-              <a href={`/explore/tags/${hashtag.text}`} className="Outfit-hashtag" key={`hashtag-${hashtag.id}`}>{`#${hashtag.text}`}</a>
-            );
-          })}
-        </div>
+        <OutfitDescription 
+          username={username}
+          description={description}
+        />
+        <OutfitHashtags hashtags={hashtags ? hashtags : null} />
         <div>
           {comments && comments.slice(0,this.state.numComments-1).map(comment =>{
             return (

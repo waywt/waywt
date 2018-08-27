@@ -1,0 +1,103 @@
+.od a {
+  color: black;
+}
+.od a:hover {
+  color: #00000090;
+  text-decoration: none;
+}
+
+.od-img-container {
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
+}
+.od-img {
+  width: 100%;
+  height: 100%;
+}
+.od-img-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  -webkit-transition: opacity .8s;
+  transition: opacity .8s;
+}
+.active-0:hover {
+  opacity: 1;
+  -webkit-transition: opacity .8s;
+  transition: opacity .8s;
+}
+.active-1 {
+  opacity: 1;
+}
+.active-0 {
+  opacity: 0;
+}
+
+.od-tag {
+  position: absolute;
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.od-tag:hover {
+  cursor: pointer;
+}
+.od-tag-details {
+  text-align: center;
+  padding: 8px;
+  background-color: #00000070;
+}
+.od-td-txt {
+  font-size: .9rem;
+  font-weight: 600;
+  margin: 0;
+}
+.od-td-usr {
+  font-size: .8rem;
+  font-weight: 300;
+  margin: 5px 0 0;
+}
+.od-td-usr a {
+  color: white;
+}
+
+.od-desc {
+  font-size: .9rem;
+  margin: 16px 20px 0;
+}
+
+.od-hts {
+  font-size: .9rem;
+  padding: 5px 20px 10px;
+  word-wrap: break-word;
+  white-space: initial;
+}
+.od-hts a {
+  color: #1c82f0;
+  margin-right: 5px;
+}
+.od-hts a:hover {
+  color: #1c82f090;
+  text-decoration: none;
+}
+
+.od-comment {
+  font-size: .9rem;
+  padding: 0 20px;
+}
+.od-load-comment {
+  font-size: .9rem;
+  padding: 10px 20px;
+}
+.od-load-comment a {
+  color: #999;
+}
