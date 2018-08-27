@@ -27,6 +27,7 @@
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
     "passport-jwt": "^4.0.0",
+    "react-file-input": "^0.2.5",
     "sequelize": "^4.38.0",
     "sequelize-cli": "^4.0.0"
   }

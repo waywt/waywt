@@ -2,16 +2,19 @@ import React, { Component } from "react";
 import Header from "../../Header";
 import "./PostForm.css";
 import { createOutfit } from "../../../utils/API";
+import { uploadImage } from "../../../utils/imgur";
 
 class PostForm extends Component {
   state = {
-    imageURL:
-      "https://static1.squarespace.com/static/560eabc4e4b061c4bb358ae8/t/57802d7e6b8f5b118a25062b/1468018050251/image.jpg?format=1000w", // IMGUR API response link
+    imageURL: "", // IMGUR API response link
     description: "Lorem ipsum dolor sit amet",
     categoryId: 1,
     buttonArray: [],
     tagArray: [],
-    formArray: []
+    formArray: [],
+    text: [],
+    nameArray: [],
+    postArray: []
   };
 
   test = event => {
@@ -35,12 +38,46 @@ class PostForm extends Component {
   // On submit, join two arrays then in test post event -
   // const newArray push
 
-  // handleInputChange = event => {
-  //   const { name, value } = event.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  // };
+  handleInputChange = (event, imagePath) => {
+    event.preventDefault();
+    const value = event.target.files[0];
+    imagePath = value;
+    console.log(value);
+    uploadImage(imagePath).then(result => {
+      console.log(result.data.data.link);
+      this.setState({
+        imageURL: result.data.data.link
+      });
+    });
+  };
+
+  handleFormInputChange = event => {
+    event.preventDefault();
+    const value = event.target.value;
+    console.log(value);
+    console.log(event.target);
+    this.setState({
+      text: value
+    });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const value = this.state.text;
+    this.setState(
+      {
+        nameArray: [...this.state.nameArray, { text: value }]
+      },
+      () => {
+        const joinedArray = this.state.tagArray;
+        this.state.nameArray.forEach((el, index) => {
+          joinedArray[index]["text"] = el.text;
+          console.log(el);
+        });
+        this.setState({ tagArray: joinedArray });
+      }
+    );
+  };
 
   // Submit button for each Tag?
   // On submit, setState to corresponding [index.text] *match id's(key)*?
@@ -57,21 +94,11 @@ class PostForm extends Component {
 
     const newButtonStyle = this.getButtonStyles(x, y);
 
-    this.setState(
-      {
-        tagArray: [...this.state.tagArray, { x: x, y: y, text: "" }],
-        buttonArray: [...this.state.buttonArray, newButtonStyle],
-        formArray: [...this.state.formArray, { text: "" }]
-      },
-      () => {
-        // This function needs to be moved to on submit
-        const joinedArray = this.state.tagArray;
-        this.state.formArray.forEach((el, index) => {
-          joinedArray[index]["text"] = el.text;
-        });
-        this.setState({ tagArray: joinedArray });
-      }
-    );
+    this.setState({
+      tagArray: [...this.state.tagArray, { x: x, y: y, text: "" }],
+      buttonArray: [...this.state.buttonArray, newButtonStyle],
+      formArray: [...this.state.formArray, { text: "" }]
+    });
   };
 
   getButtonStyles(xCoord, yCoord) {
@@ -107,6 +134,7 @@ class PostForm extends Component {
               type="file"
               class="inputForm form-control-file"
               id="exampleFormControlFile1"
+              onChange={this.handleInputChange}
             />
             <button type="submit" onClick={this.test}>
               Submit
@@ -137,12 +165,11 @@ class PostForm extends Component {
                         type="text"
                         class="form-control"
                         id="tagTextInput"
+                        onChange={this.handleFormInputChange}
                         placeholder="Name this piece!"
                       />
-                      {/* <button className="btn btn primary" type="submit">
-                        Submit
-                      </button> */}
                     </div>
+                    <button onClick={this.handleSubmit}>Submit</button>
                   </form>
                 );
               })}
