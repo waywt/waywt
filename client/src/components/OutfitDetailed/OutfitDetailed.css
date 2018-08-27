@@ -71,19 +71,21 @@
 }
 
 .od-desc {
+  font-size: .9rem;
   margin: 0 20px;
 }
 
-.Outfit-hashtags {
+.od-hts {
+  font-size: .9rem;
   padding: 5px 20px 10px;
   word-wrap: break-word;
   white-space: initial;
 }
-.Outfit-hashtags a {
+.od-hts a {
   color: #1c82f0;
   margin-right: 5px;
 }
-.Outfit-hashtags a:hover {
+.od-hts a:hover {
   color: #1c82f090;
   text-decoration: none;
 }

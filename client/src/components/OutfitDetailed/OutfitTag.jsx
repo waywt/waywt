@@ -19,7 +19,7 @@ class OutfitTag extends Component {
         style={{
           top: `calc(${tag.y}% - 10px)`, 
           left: `calc(${tag.x}% - 10px)`,
-          backgroundColor: `${tagDetails && tagDetails.id === tag.id ? '#dff8ec' : 'white'}`
+          backgroundColor: `${tagDetails && tagDetails.id === tag.id ? '#5bf5ca' : 'white'}`
         }}
         onClick={this.toggleTagDetails}
       ></div>
