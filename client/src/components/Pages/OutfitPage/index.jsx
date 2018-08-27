@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './OutfitPage.css';
 import { getOutfitDetails } from '../../../utils/outfitAPI';
+import { OutfitImage } from '../../OutfitDetailed';
 import Header from '../../Header';
 import Error from '../../Error';
 
-class Profile extends Component {
+class OutfitPage extends Component {
   state = {
+    outfitData: null,
     outfitDNE: false
   }
 
@@ -15,7 +17,8 @@ class Profile extends Component {
     } else {
       getOutfitDetails(this.props.outfitId).then(result => {
         if (result.data) {
-          //
+          this.setState({outfitData: result.data});
+          //*
           console.log(result.data);
         } else {
           this.setState({outfitDNE: true});
@@ -24,13 +27,13 @@ class Profile extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  // componentDidUpdate(prevProps, prevState) {
     
-  }
+  // }
 
   render() {
     const { authenticated, currUser, resetState, outfitId} = this.props;
-    const { outfitDNE } = this.state;
+    const { outfitDNE, outfitData } = this.state;
 
     return (
       <div>
@@ -42,8 +45,16 @@ class Profile extends Component {
         {outfitDNE ? (
           <Error />
         ) : (
-          <div>
-            {outfitId}
+          <div className="container">
+            <div className="row">
+              <div className="col-12 col-md-8">
+                <OutfitImage 
+                  id={outfitData ? outfitData.id : null}
+                  imgLink={outfitData ? outfitData.imageUrl : null}
+                  tags={outfitData ? outfitData.Tags : null}
+                />
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -51,4 +62,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default OutfitPage;

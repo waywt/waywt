@@ -34,7 +34,7 @@ class TaggedOutfit extends Component {
               style={{top: `calc(${tagged.y}% - 10px)`, left: `calc(${tagged.x}% - 10px)`}}
               onMouseOver={this.handleOnMouseOver}
               onMouseLeave={this.handleOnMouseLeave}
-            ></a>
+            > </a>
           </div>
         </div>              
       </div> 

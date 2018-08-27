@@ -1,0 +1,62 @@
+.od-img-container {
+  position: relative;
+  overflow: hidden;
+  object-fit: cover;
+}
+.od-img {
+  width: 100%;
+  height: 100%;
+}
+.od-img-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  -webkit-transition: opacity .8s;
+  transition: opacity .8s;
+}
+.active-0:hover {
+  opacity: 1;
+  -webkit-transition: opacity .8s;
+  transition: opacity .8s;
+}
+.active-1 {
+  opacity: 1;
+}
+.active-0 {
+  opacity: 0;
+}
+.od-tag {
+  position: absolute;
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.od-tag:hover {
+  cursor: pointer;
+}
+.od-tag-details {
+  text-align: center;
+  padding: 8px;
+  background-color: #00000070;
+}
+.od-td-txt {
+  font-size: .9rem;
+  font-weight: 600;
+  margin: 0;
+}
+.od-td-usr {
+  font-size: .8rem;
+  font-weight: 300;
+  margin: 5px 0 0;
+}
+.od-td-usr a {
+  color: white;
+}
