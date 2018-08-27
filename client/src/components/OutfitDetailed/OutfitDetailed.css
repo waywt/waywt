@@ -90,14 +90,106 @@
   text-decoration: none;
 }
 
+.od-comments-container {
+  margin-bottom: 16px;
+}
 .od-comment {
   font-size: .9rem;
   padding: 0 20px;
 }
 .od-load-comment {
   font-size: .9rem;
-  padding: 10px 20px;
+  padding: 10px 20px 0;
 }
 .od-load-comment a {
   color: #999;
+}
+
+.od-basics-container {
+  padding: 16px 20px;
+}
+a.od-cat {
+  color: white;
+}
+a.od-cat:hover {
+  text-decoration: none;
+} 
+.od-cat {
+  padding: 5px 8px;
+  color: white;
+  font-weight: 400;
+}
+.od-cat[data-id="1"] {
+  background-color: #f6546a;
+}
+.od-cat[data-id="2"] {
+  background-color: #003366;
+}
+.od-cat[data-id="3"] {
+  background-color: #329932;
+}
+.od-cat[data-id="4"] {
+  background-color: purple;
+}
+.od-cat[data-id="5"] {
+  background-color: brown;
+}
+.od-cat[data-id="6"] {
+  background-color: #e51284;
+}
+
+.like-btn {
+  border: none;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  margin-right: 20px;
+}
+.comment-btn {
+  border: none;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+.like-btn:focus, 
+.comment-btn:focus {
+  outline: 0;
+}
+.like-btn[data-clickable="1"]:hover {
+  cursor: pointer;
+}
+
+.od-like-ct {
+  margin-top: 16px;
+}
+
+.Outfit-comment-form {
+  position: relative;
+  margin: 16px 0;
+  padding: 0 12px;
+}
+.Outfit-comment-input {
+  box-sizing: border-box;
+  padding: .3rem 8px;
+}
+.Outfit-comment-form .form-control {
+  border: none;
+  font-size: .9rem;
+}
+.Outfit-comment-form .form-control:focus {
+  border: none;
+  box-shadow: 0 0 0 0.1rem #c1d4ee70;
+}
+.Outfit-comment-submit {
+  position: absolute;
+  z-index: 2;
+  top: 7px;
+  right: 20px;
+  margin: 0;
+  padding: 0;
+  color: #088da5;
+}
+.Outfit-comment-submit:focus {
+  border: none;
+  box-shadow: none;
 }

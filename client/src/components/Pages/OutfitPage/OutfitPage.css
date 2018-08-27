@@ -1,5 +1,7 @@
 .op-container {
   border: 1px solid #e6e6e6;
+  margin-bottom: 100px;
+  background-color: white;
 }
 .op-img-container {
   background-color: black;

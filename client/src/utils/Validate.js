@@ -30,3 +30,10 @@ export const validPassword = password => {
   }
 }
 
+export const validComment = text => {
+  if (text.length > 1 && text.length < 480) {
+    return true;
+  } else {
+    return false;
+  }
+}

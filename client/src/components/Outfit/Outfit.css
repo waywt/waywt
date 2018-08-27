@@ -55,22 +55,7 @@ body {
 .Outfit-action-buttons {
   padding-left: 20px;
 }
-.like-btn {
-  border: none;
-  padding: 0;
-  width: 32px;
-  height: 32px;
-  margin-right: 20px;
-}
-.like-btn:focus, 
-.like-btn-active:focus,
-.comment-btn:focus {
-  outline: 0;
-}
-.like-btn:hover,
-.like-btn-active:hover {
-  cursor: pointer;
-}
+
 .Outfit-likes {
   height: 100%;
   padding: 0px 20px;
@@ -116,40 +101,6 @@ body {
 }
 
 
-.Outfit-comment {
-  height: 100%;
-  padding: 0 20px;
-}
-.Outfit-likes a,
-.Outfit-comment a {
+.Outfit-likes a {
   color: black;
-}
-.Outfit-comment a:hover {
-  color: #00000090;
-  text-decoration: none;
-}
-.Outfit-load-comment {
-  height: 100%;
-  padding: 4px 20px;
-}
-.Outfit-load-comment a {
-  color: #999;
-}
-.Outfit-comment-input {
-  outline: 0;
-  box-shadow: none;
-}
-.Outfit-comment-form {
-  padding: 0 12px;
-}
-.Outfit-comment-input {
-  box-sizing: border-box;
-  padding: .3rem 8px;
-}
-.Outfit-comment-form .form-control {
-  border: none;
-}
-.Outfit-comment-form .form-control:focus {
-  border: none;
-  box-shadow: 0 0 0 0.1rem #c1d4ee70;
 }

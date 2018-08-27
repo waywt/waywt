@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './OutfitPage.css';
 import { getOutfitDetails } from '../../../utils/outfitAPI';
 import { 
-  OutfitImage, OutfitDescription, OutfitHashtags, OutfitComments 
+  OutfitImage, OutfitDescription, OutfitHashtags, OutfitComments, OutfitBasics, OutfitCommentForm 
 } from '../../OutfitDetailed';
 import UserSnapshot from '../../UserSnapshot';
 import Header from '../../Header';
@@ -20,7 +20,10 @@ class OutfitPage extends Component {
     } else {
       getOutfitDetails(this.props.outfitId).then(result => {
         if (result.data) {
-          this.setState({outfitData: result.data});
+          this.setState({
+            outfitData: result.data,
+            comments: result.data.Comments.reverse()
+          });
           //*
           console.log(result.data);
         } else {
@@ -30,13 +33,15 @@ class OutfitPage extends Component {
     }
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-    
-  // }
+  addComment = newComment => {
+    const commentsArray = this.state.comments;
+    commentsArray.unshift(newComment);
+    this.setState({comments: commentsArray});
+  }
 
   render() {
     const { authenticated, currUser, resetState, outfitId} = this.props;
-    const { outfitDNE, outfitData } = this.state;
+    const { outfitDNE, outfitData, comments } = this.state;
 
     return (
       <div>
@@ -50,7 +55,7 @@ class OutfitPage extends Component {
         ) : (
           <div className="container">
             <div className="row no-gutters op-container">
-              <div className="col-12 col-md-7 d-flex align-items-center op-img-container">
+              <div className="col-12 col-md-7 d-flex align-items-center justify-content-center op-img-container">
                 <OutfitImage 
                   id={outfitData ? outfitData.id : null}
                   imgLink={outfitData ? outfitData.imageUrl : null}
@@ -72,10 +77,24 @@ class OutfitPage extends Component {
                     hashtags={outfitData ? outfitData.Hashtags : null}
                   />
                   <OutfitComments
-                    comments={outfitData ? outfitData.Comments : null}
+                    comments={outfitData ? comments : null}
                   />
                 </div>
                 <hr className="op-hr"/>
+                <OutfitBasics
+                  authenticated={authenticated} 
+                  category={outfitData ? outfitData.Category : null}
+                  outfitId={outfitId}
+                  likeCount={outfitData ? outfitData.Likes.length : null}
+                />
+                <hr className="op-hr"/>
+                { authenticated ? (
+                  <OutfitCommentForm 
+                    outfitId={outfitId} 
+                    currUser={currUser}
+                    addComment={this.addComment}
+                  /> 
+                ) : ''}
               </div>
             </div>
           </div>

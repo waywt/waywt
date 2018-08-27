@@ -1,4 +1,3 @@
-const sequelize = require('sequelize');
 const {
   Outfit, Category, User, Profile, Comment, Like, Tag, Hashtag
 } = require('../models');
@@ -24,7 +23,6 @@ const getOutfitDetails = (req, res) => {
           model: Comment,
           attributes: ['id', 'text'],
           include: [{ model: User, attributes: ['id', 'username']}],
-          order: [['createdAt', 'DESC']],
         },
         {
           model: Like,
