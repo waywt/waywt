@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Outfit.css';
 import UserSnapshot from '../UserSnapshot';
 import { 
-  OutfitDescription, OutfitHashtags, OutfitComments 
+  OutfitDescription, OutfitHashtags, OutfitComments, OutfitBasics 
 } from '../OutfitDetailed';
 import like_btn_active from '../../images/like_btn_active.png';
 import like_btn from '../../images/like_btn.png';
@@ -32,38 +32,9 @@ class Outfit extends Component {
     }
    };
 
-  
-
-  componentDidMount() {
-    //
-  }
-
-  loadMoreComments = (event) => {
-    event.preventDefault();
-    this.setState({numComments: this.state.numComments + 3});
-  }
-
-  getCatIcon = (catName) => {
-    switch (catName) {
-      case 'Casual':
-        return (<i className="fas fa-coffee" ></i>);
-      case 'Formal':
-        return (<i className="fab fa-black-tie" ></i>);
-      case 'Business':
-        return (<i className="fas fa-briefcase" ></i>);
-      case 'Sleepwear':
-        return (<i className="fas fa-bed" ></i>);
-      case 'Athletic':
-        return (<i className="fas fa-dumbbell" ></i>);
-      case 'Outerwear':
-      default:
-        return (<i className="fas fa-snowflake" ></i>);
-    }
-  }
-
   render() {
     const { 
-      category, username, profile, id, image, description, likeCount, comments, tags, hashtags 
+      authenticated, category, username, profile, id, image, description, likeCount, comments, tags, hashtags 
     } = this.props;
 
     return (
@@ -75,18 +46,13 @@ class Outfit extends Component {
             <img alt={description} src={image} />
           </div>
         </div>
-        <div className="d-flex align-items-center my-3">
-          <div className="Outfit-action-buttons mr-auto">
-            <img onClick={this.handleLikeClick}src={this.state.imgsrc} className="like-btn" alt="like button"></img>
-            <img src={comment_btn} className="comment-btn" alt="comment button" />
-          </div>
-          <div className="Outfit-category ml-auto">
-            <span data-id={category.id} className="Outfit-category-badge">{this.getCatIcon(category.name)} {category.name}</span>
-          </div>
-        </div>
-        <div className="Outfit-likes mb-2">
-          <a href={`/outfits/${id}`}><strong>{likeCount} likes</strong></a>
-        </div>
+        <OutfitBasics
+          authenticated={authenticated} 
+          category={category}
+          outfitId={id}
+          likeCount={likeCount}
+          showLink={true}
+        />
         <hr className="op-hr"/>
         <div className="op-info-container">
           <OutfitDescription 

@@ -5,7 +5,7 @@ import OutfitActionBtns from './OutfitActionBtns';
 
 class OutfitBasics extends Component {
   render() {
-    const { authenticated, category, outfitId, likeCount } = this.props;
+    const { authenticated, category, outfitId, likeCount, showLink } = this.props;
 
     return (
       <div className="od-basics-container">
@@ -14,7 +14,8 @@ class OutfitBasics extends Component {
             <OutfitActionBtns
               authenticated={authenticated} 
               outfitId={outfitId} 
-              likeCount={likeCount} 
+              likeCount={likeCount}
+              showLink={showLink} 
             />
           </div>
           <div className="col text-right">

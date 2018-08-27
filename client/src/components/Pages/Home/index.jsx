@@ -30,6 +30,7 @@ class Home extends Component {
                     return (
                       <div className="col-12" key={`outfit-${outfit.id}`}>
                         <Outfit
+                          authenticated={authenticated}
                           username={outfit.User.username}
                           profile={outfit.User.Profile}
                           id={outfit.id}
