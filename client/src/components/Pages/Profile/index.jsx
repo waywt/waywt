@@ -106,6 +106,7 @@ class Profile extends Component {
       <div className="Profile">
         <Header 
           authenticated={authenticated}
+          user={currUser}
           resetState={resetState}
         />
         {userDNE ? (

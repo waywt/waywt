@@ -19,6 +19,7 @@ class Home extends Component {
         <div className="Home">
           <Header 
             authenticated={authenticated}
+            user={user}
             resetState={resetState}
           />
           <div className="container">

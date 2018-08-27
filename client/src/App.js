@@ -90,11 +90,11 @@ class App extends Component {
               <Home
                 authenticated={this.state.authenticated}
                 user={this.state.user}
+                resetState={this.resetState}
                 following={this.state.following}
                 outfits={this.state.outfits}
                 suggestions={this.state.suggestions}
                 updateOutfitsState={this.updateOutfitsState}
-                resetState={this.resetState}
               />
             );
           }} />
@@ -150,6 +150,7 @@ class App extends Component {
               <div>
                 <Header 
                   authenticated={this.state.authenticated}
+                  user={this.state.user}
                   resetState={this.resetState}
                 />
                 <Error />

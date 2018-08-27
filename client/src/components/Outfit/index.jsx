@@ -78,7 +78,7 @@ class Outfit extends Component {
             <img src={comment_btn} className="comment-btn" alt="comment button" />
           </div>
           <div className="Outfit-category ml-auto">
-            <span data-id={category.id} class="Outfit-category-badge">{this.getCatIcon(category.name)} {category.name}</span>
+            <span data-id={category.id} className="Outfit-category-badge">{this.getCatIcon(category.name)} {category.name}</span>
           </div>
         </div>
         <div className="Outfit-likes mb-2">

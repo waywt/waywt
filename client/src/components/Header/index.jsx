@@ -32,9 +32,23 @@ class Header extends Component {
             Search
           </button>
         </form>
-        <button className="btn my-2 my-sm-0 signOutButton" type="submit" onClick={this.logOut}>
-          <i className="fas fa-sign-out-alt"></i> Log Out
-        </button>
+        {this.props.authenticated ? (
+          <div>
+            <a
+              href={`/${this.props.user ? this.props.user.username : ''}`}
+              className="btn nb-profile-btn"
+            >
+              <i className="fas fa-user"></i>
+            </a>
+            <button 
+              className="btn nb-logout-btn"
+              type="submit" 
+              onClick={this.logOut}
+            >
+              <i className="fas fa-sign-out-alt"></i>
+            </button>
+          </div>
+        ) : ''}
       </nav>
     );
   }
