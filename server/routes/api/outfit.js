@@ -5,6 +5,8 @@ const {
 } = require('../../models');
 const passport = require('passport');
 
+const OutfitController = require('../../controllers/OutfitController');
+
 /* GET api/outfits/following?cat={CategoryId}&offset={offset}
 returns outfits of user's Following (limit 10)
 if qs contains cat (CategoryId), return only outfits from that category
@@ -174,6 +176,10 @@ router.post('/', passport.authenticate('auth-user', {session: false}), (req, res
       })();
     });
   });
+});
+
+router.get('/:id', (req, res) => {
+  OutfitController.getOutfitDetails(req, res);
 });
 
 module.exports = router;

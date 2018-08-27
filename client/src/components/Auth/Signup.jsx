@@ -71,8 +71,8 @@ class Signup extends Component {
       return <Redirect to="/" />;
     } else {
       return (
-        <div className="container">
-          <div className="row mt-0 mt-sm-5">
+        <div className="auth-page container">
+          <div className="row">
             <div className="d-none d-md-block col">
               <div className="row">
                 <div className="col"></div>

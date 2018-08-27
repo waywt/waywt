@@ -48,8 +48,8 @@ class Login extends Component {
         return <Redirect to="/" />;
       } else {
         return (
-          <div className="container">
-            <div className="row mt-0 mt-sm-5">
+          <div className="auth-page container">
+            <div className="row">
               <div className="col">
                 <div className="login-page mx-auto">
                   <form onSubmit={this.handleSubmit}>

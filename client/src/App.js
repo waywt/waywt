@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { authVerify, userFeed } from "./utils/API";
-import { Signup, Login, Temp } from "./components/Auth";
-import Home from "./components/Pages/Home/";
-import Profile from "./components/Pages/Profile";
-import PostForm from "./components/Pages/PostForm/";
-// import OutfitPage from "./components/OutfitPage";
-import Error from "./components/Error";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { authVerify, userFeed } from './utils/API';
+import { Signup, Login, Temp } from './components/Auth';
+import Home from './components/Pages/Home/';
+import Profile from './components/Pages/Profile';
+import OutfitPage from "./components/Pages/OutfitPage";
+import PostForm from './components/Pages/PostForm/';
+import Header from './components/Header';
+import Error from './components/Error';
 
 class App extends Component {
   state = {
@@ -89,11 +90,11 @@ class App extends Component {
               <Home
                 authenticated={this.state.authenticated}
                 user={this.state.user}
+                resetState={this.resetState}
                 following={this.state.following}
                 outfits={this.state.outfits}
                 suggestions={this.state.suggestions}
                 updateOutfitsState={this.updateOutfitsState}
-                resetState={this.resetState}
               />
             );
           }} />
@@ -115,8 +116,6 @@ class App extends Component {
           }} />
           <Route exact path="/auth/cb" component={Temp} />
           
-          
-          {/* <Route exact path='/outfitpage' component={OutfitPage} /> */}
           {/* <Route exact path='/outfit' component={Outfit} /> */}
 
           <Route
@@ -131,6 +130,16 @@ class App extends Component {
               );
             }}
           />
+          <Route exact path='/outfits/:id' render={({match}) => {
+            return (
+              <OutfitPage
+                authenticated={this.state.authenticated}
+                resetState={this.resetState}
+                currUser={this.state.user}
+                outfitId={match.params.id}
+              />
+            );
+          }} />; 
           <Route exact path='/:username' render={({match}) => {
             return (
               <Profile
@@ -143,8 +152,18 @@ class App extends Component {
               />
             );
           }} />
-
-          <Route component={Error} />
+          <Route render={() => {
+            return (
+              <div>
+                <Header 
+                  authenticated={this.state.authenticated}
+                  user={this.state.user}
+                  resetState={this.resetState}
+                />
+                <Error />
+              </div>
+            );
+          }} />
         </Switch>  
       </Router>
     );
