@@ -17,14 +17,14 @@ class OutfitComments extends Component {
 
     return (
       <div className="od-comments-container">
-        {comments && comments.slice(0,numComments-1).map(comment =>{
+        {comments && comments.slice(0,numComments).map(comment =>{
           return (
             <div className="od od-comment" key={comment.id}>
               <a href={`/${comment.User.username}`}><strong>{comment.User.username}</strong></a> {comment.text}
             </div>
           );
         })}
-        {comments && comments.length > this.state.numComments ? (
+        {comments && this.state.numComments < comments.length ? (
           <div className="od od-load-comment">
             <a href="" onClick={this.loadMoreComments}>Load more comments</a>
           </div>

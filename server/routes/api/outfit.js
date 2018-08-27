@@ -5,7 +5,8 @@ const {
 } = require('../../models');
 const passport = require('passport');
 
-const OutfitController = require('../../controllers/OutfitController');
+const OutfitsController = require('../../controllers/OutfitsController');
+const CommentsController = require('../../controllers/CommentsController');
 
 /* GET api/outfits/following?cat={CategoryId}&offset={offset}
 returns outfits of user's Following (limit 10)
@@ -179,7 +180,11 @@ router.post('/', passport.authenticate('auth-user', {session: false}), (req, res
 });
 
 router.get('/:id', (req, res) => {
-  OutfitController.getOutfitDetails(req, res);
+  OutfitsController.getOutfitDetails(req, res);
+});
+
+router.post('/:id/comments', passport.authenticate('auth-user', {session: false}), (req, res) => {
+  CommentsController.createNewComment(req, res);
 });
 
 module.exports = router;

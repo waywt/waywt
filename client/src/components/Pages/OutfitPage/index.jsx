@@ -20,7 +20,10 @@ class OutfitPage extends Component {
     } else {
       getOutfitDetails(this.props.outfitId).then(result => {
         if (result.data) {
-          this.setState({outfitData: result.data});
+          this.setState({
+            outfitData: result.data,
+            comments: result.data.Comments.reverse()
+          });
           //*
           console.log(result.data);
         } else {
@@ -30,13 +33,15 @@ class OutfitPage extends Component {
     }
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-    
-  // }
+  addComment = newComment => {
+    const commentsArray = this.state.comments;
+    commentsArray.unshift(newComment);
+    this.setState({comments: commentsArray});
+  }
 
   render() {
     const { authenticated, currUser, resetState, outfitId} = this.props;
-    const { outfitDNE, outfitData } = this.state;
+    const { outfitDNE, outfitData, comments } = this.state;
 
     return (
       <div>
@@ -72,7 +77,7 @@ class OutfitPage extends Component {
                     hashtags={outfitData ? outfitData.Hashtags : null}
                   />
                   <OutfitComments
-                    comments={outfitData ? outfitData.Comments : null}
+                    comments={outfitData ? comments : null}
                   />
                 </div>
                 <hr className="op-hr"/>
@@ -83,7 +88,13 @@ class OutfitPage extends Component {
                   likeCount={outfitData ? outfitData.Likes.length : null}
                 />
                 <hr className="op-hr"/>
-                { authenticated ? <OutfitCommentForm /> : ''}
+                { authenticated ? (
+                  <OutfitCommentForm 
+                    outfitId={outfitId} 
+                    currUser={currUser}
+                    addComment={this.addComment}
+                  /> 
+                ) : ''}
               </div>
             </div>
           </div>

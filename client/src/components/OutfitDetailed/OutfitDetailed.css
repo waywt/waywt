@@ -163,11 +163,8 @@ a.od-cat:hover {
   margin-top: 16px;
 }
 
-.Outfit-comment-input {
-  outline: 0;
-  box-shadow: none;
-}
 .Outfit-comment-form {
+  position: relative;
   margin: 16px 0;
   padding: 0 12px;
 }
@@ -182,4 +179,17 @@ a.od-cat:hover {
 .Outfit-comment-form .form-control:focus {
   border: none;
   box-shadow: 0 0 0 0.1rem #c1d4ee70;
+}
+.Outfit-comment-submit {
+  position: absolute;
+  z-index: 2;
+  top: 7px;
+  right: 20px;
+  margin: 0;
+  padding: 0;
+  color: #088da5;
+}
+.Outfit-comment-submit:focus {
+  border: none;
+  box-shadow: none;
 }
