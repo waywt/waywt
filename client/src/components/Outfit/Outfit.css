@@ -116,25 +116,11 @@ body {
 }
 
 
-.Outfit-comment {
-  height: 100%;
-  padding: 0 20px;
-}
-.Outfit-likes a,
-.Outfit-comment a {
+.Outfit-likes a {
   color: black;
 }
-.Outfit-comment a:hover {
-  color: #00000090;
-  text-decoration: none;
-}
-.Outfit-load-comment {
-  height: 100%;
-  padding: 4px 20px;
-}
-.Outfit-load-comment a {
-  color: #999;
-}
+
+
 .Outfit-comment-input {
   outline: 0;
   box-shadow: none;

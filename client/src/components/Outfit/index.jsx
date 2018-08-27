@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './Outfit.css';
 import UserSnapshot from '../UserSnapshot';
-import { OutfitDescription, OutfitHashtags } from '../OutfitDetailed';
+import { 
+  OutfitDescription, OutfitHashtags, OutfitComments 
+} from '../OutfitDetailed';
 import like_btn_active from '../../images/like_btn_active.png';
 import like_btn from '../../images/like_btn.png';
 import comment_btn from '../../images/comment_btn.png'
@@ -85,26 +87,18 @@ class Outfit extends Component {
         <div className="Outfit-likes mb-2">
           <a href={`/outfits/${id}`}><strong>{likeCount} likes</strong></a>
         </div>
-        <OutfitDescription 
-          username={username}
-          description={description}
-        />
-        <OutfitHashtags hashtags={hashtags ? hashtags : null} />
-        <div>
-          {comments && comments.slice(0,this.state.numComments-1).map(comment =>{
-            return (
-              <div className="Outfit-comment" key={`comment-${comment.id}`}>
-                <a href={`/${comment.User.username}`}><strong>{comment.User.username}</strong></a> {comment.text}
-              </div>
-            );
-          })}
-          {comments && comments.length > this.state.numComments ? (
-            <div className="Outfit-load-comment mt-2">
-              <a href="" onClick={this.loadMoreComments}>Load more comments</a>
-            </div>
-          ) : ''}
+        <hr className="op-hr"/>
+        <div className="op-info-container">
+          <OutfitDescription 
+            username={username}
+            description={description}
+          />
+          <OutfitHashtags hashtags={hashtags} />
+          <OutfitComments
+            comments={comments}
+          />
         </div>
-        <hr />
+        <hr className="op-hr"/>
         <form className="Outfit-comment-form">
           <div className="form-group">              
             <input

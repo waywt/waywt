@@ -90,14 +90,50 @@
   text-decoration: none;
 }
 
+.od-comments-container {
+  margin-bottom: 16px;
+}
 .od-comment {
   font-size: .9rem;
   padding: 0 20px;
 }
 .od-load-comment {
   font-size: .9rem;
-  padding: 10px 20px;
+  padding: 10px 20px 0;
 }
 .od-load-comment a {
   color: #999;
+}
+
+.od-basics-container {
+  padding: 16px 20px;
+}
+a.od-cat {
+  color: white;
+}
+a.od-cat:hover {
+  text-decoration: none;
+} 
+.od-cat {
+  padding: 5px 8px;
+  color: white;
+  font-weight: 400;
+}
+.od-cat[data-id="1"] {
+  background-color: #f6546a;
+}
+.od-cat[data-id="2"] {
+  background-color: #003366;
+}
+.od-cat[data-id="3"] {
+  background-color: #329932;
+}
+.od-cat[data-id="4"] {
+  background-color: purple;
+}
+.od-cat[data-id="5"] {
+  background-color: brown;
+}
+.od-cat[data-id="6"] {
+  background-color: #e51284;
 }

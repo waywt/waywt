@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './OutfitPage.css';
 import { getOutfitDetails } from '../../../utils/outfitAPI';
 import { 
-  OutfitImage, OutfitDescription, OutfitHashtags, OutfitComments 
+  OutfitImage, OutfitDescription, OutfitHashtags, OutfitComments, OutfitBasics 
 } from '../../OutfitDetailed';
 import UserSnapshot from '../../UserSnapshot';
 import Header from '../../Header';
@@ -50,7 +50,7 @@ class OutfitPage extends Component {
         ) : (
           <div className="container">
             <div className="row no-gutters op-container">
-              <div className="col-12 col-md-7 d-flex align-items-center op-img-container">
+              <div className="col-12 col-md-7 d-flex align-items-center justify-content-center op-img-container">
                 <OutfitImage 
                   id={outfitData ? outfitData.id : null}
                   imgLink={outfitData ? outfitData.imageUrl : null}
@@ -76,6 +76,9 @@ class OutfitPage extends Component {
                   />
                 </div>
                 <hr className="op-hr"/>
+                <OutfitBasics 
+                  category={outfitData ? outfitData.Category : null}
+                />
               </div>
             </div>
           </div>

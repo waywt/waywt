@@ -6,7 +6,6 @@ class OutfitComments extends Component {
     numComments: 3
   }
 
-
   loadMoreComments = event => {
     event.preventDefault();
     this.setState({numComments: this.state.numComments + 3});
@@ -17,7 +16,7 @@ class OutfitComments extends Component {
     const { numComments } = this.state;
 
     return (
-      <div>
+      <div className="od-comments-container">
         {comments && comments.slice(0,numComments-1).map(comment =>{
           return (
             <div className="od od-comment" key={comment.id}>
