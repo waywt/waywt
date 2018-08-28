@@ -25,6 +25,13 @@ const imageLinks = [];
   const l = await axios(`${baseUrl}waywt/time/all/1`, opts);
   const m = await axios(`${baseUrl}freeforallfashion/time/all/1`, opts);
   const n = await axios(`${baseUrl}FemaleFashionAdvice/time/all/1`, opts);
+  const o = await axios(`${baseUrl}findfashion/time/all/1`, opts);
+  const p = await axios(`${baseUrl}malefashion/time/all/1`, opts);
+  const q = await axios(`${baseUrl}OUTFITS/time/all/1`, opts);
+  const r = await axios(`${baseUrl}femalefashion/time/all/1`, opts);
+  const s = await axios(`${baseUrl}waywt/time/all/1`, opts);
+  const t = await axios(`${baseUrl}freeforallfashion/time/all/1`, opts);
+  const u = await axios(`${baseUrl}FemaleFashionAdvice/time/all/1`, opts);
   
   const dataArray = [
     a.data.data,
@@ -41,6 +48,13 @@ const imageLinks = [];
     l.data.data,
     m.data.data,
     n.data.data,
+    o.data.data,
+    p.data.data,
+    q.data.data,
+    r.data.data,
+    s.data.data,
+    t.data.data,
+    u.data.data,
   ];
 
   dataArray.forEach(dataSet => {
