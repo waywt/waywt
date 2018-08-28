@@ -10,7 +10,9 @@
   "scripts": {
     "setup-db": "sequelize db:migrate",
     "watch-server": "nodemon --ignore 'client/*'",
-    "watch-client": "cd client && yarn start"
+    "watch-client": "cd client && yarn start",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "axios": "^0.18.0",
