@@ -5,11 +5,11 @@ import { createOutfitComment } from '../../utils/outfitAPI';
 
 class OutfitCommentForm extends Component {
   state = {
-    text: null
+    text: ''
   }
 
   handleInputChange = (e) => {
-    this.setState({ text: e.target.value.trim() });
+    this.setState({ text: e.target.value });
   }
 
   handleSubmit = event => {
@@ -22,7 +22,7 @@ class OutfitCommentForm extends Component {
         User: { id: result.data.UserId, username: this.props.currUser.username }
       }
 
-      this.setState({ text: null });
+      this.setState({ text: '' });
       this.props.addComment(newComment);
     });
   }
@@ -31,11 +31,12 @@ class OutfitCommentForm extends Component {
     const { text, textErr } = this.state;
 
     return (
-      <form className="Outfit-comment-form" onSubmit={this.handleSubmit}>          
+      <form className="Outfit-comment-form" onSubmit={this.handleSubmit}>        
         <input
           type="text"
           className="form-control Outfit-comment-input"
           placeholder="Add a comment..."
+          value={text}
           onChange={this.handleInputChange}
         />
         { text && !textErr ? (

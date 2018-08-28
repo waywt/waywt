@@ -183,6 +183,10 @@ router.get('/:id', (req, res) => {
   OutfitsController.getOutfitDetails(req, res);
 });
 
+router.get('/category/:category_name', (req, res) => {
+  OutfitsController.getOutfitsByCatName(req, res);
+});
+
 router.post('/:id/comments', passport.authenticate('auth-user', {session: false}), (req, res) => {
   CommentsController.createNewComment(req, res);
 });

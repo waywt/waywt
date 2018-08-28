@@ -4,54 +4,68 @@ const axios = require("axios");
 const fs = require("fs");
 const _ = require("lodash");
 
-const baseUrl = "https://api.imgur.com/3/gallery/search/time/all/";
+const baseUrl = "https://api.imgur.com/3/gallery/r/";
 const opts = {
   headers: { Authorization: `Client-ID ${process.env.IMGUR_CLIENT_ID}` }
 };
 const imageLinks = [];
 
 (async () => {
-  const waywt0 = await axios(`${baseUrl}0?q=waywt`, opts);
-  const waywt1 = await axios(`${baseUrl}1?q=waywt`, opts);
-  const waywt2 = await axios(`${baseUrl}2?q=waywt`, opts);
-  const waywt3 = await axios(`${baseUrl}3?q=waywt`, opts);
-  const waywt4 = await axios(`${baseUrl}4?q=waywt`, opts);
-  const waywt5 = await axios(`${baseUrl}5?q=waywt`, opts);
-  const waywt6 = await axios(`${baseUrl}6?q=waywt`, opts);
-  const waywt7 = await axios(`${baseUrl}7?q=waywt`, opts);
-  const waywt8 = await axios(`${baseUrl}8?q=waywt`, opts);
-  const waywt9 = await axios(`${baseUrl}9?q=waywt`, opts);
-  const waywt10 = await axios(`${baseUrl}10?q=waywt`, opts);
-
+  const a = await axios(`${baseUrl}findfashion/time/all/0`, opts);
+  const b = await axios(`${baseUrl}malefashion/time/all/0`, opts);
+  const c = await axios(`${baseUrl}OUTFITS/time/all/0`, opts);
+  const d = await axios(`${baseUrl}femalefashion/time/all/0`, opts);
+  const e = await axios(`${baseUrl}waywt/time/all/0`, opts);
+  const f = await axios(`${baseUrl}freeforallfashion/time/all/0`, opts);
+  const g = await axios(`${baseUrl}FemaleFashionAdvice/time/all/0`, opts);
+  const h = await axios(`${baseUrl}findfashion/time/all/1`, opts);
+  const i = await axios(`${baseUrl}malefashion/time/all/1`, opts);
+  const j = await axios(`${baseUrl}OUTFITS/time/all/1`, opts);
+  const k = await axios(`${baseUrl}femalefashion/time/all/1`, opts);
+  const l = await axios(`${baseUrl}waywt/time/all/1`, opts);
+  const m = await axios(`${baseUrl}freeforallfashion/time/all/1`, opts);
+  const n = await axios(`${baseUrl}FemaleFashionAdvice/time/all/1`, opts);
+  const o = await axios(`${baseUrl}findfashion/time/all/1`, opts);
+  const p = await axios(`${baseUrl}malefashion/time/all/1`, opts);
+  const q = await axios(`${baseUrl}OUTFITS/time/all/1`, opts);
+  const r = await axios(`${baseUrl}femalefashion/time/all/1`, opts);
+  const s = await axios(`${baseUrl}waywt/time/all/1`, opts);
+  const t = await axios(`${baseUrl}freeforallfashion/time/all/1`, opts);
+  const u = await axios(`${baseUrl}FemaleFashionAdvice/time/all/1`, opts);
+  
   const dataArray = [
-    waywt0.data.data,
-    waywt1.data.data,
-    waywt2.data.data,
-    waywt3.data.data,
-    waywt4.data.data,
-    waywt5.data.data,
-    waywt6.data.data,
-    waywt7.data.data,
-    waywt8.data.data,
-    waywt9.data.data,
-    waywt10.data.data
+    a.data.data,
+    b.data.data,
+    c.data.data,
+    d.data.data,
+    e.data.data,
+    f.data.data,
+    g.data.data,
+    h.data.data,
+    i.data.data,
+    j.data.data,
+    k.data.data,
+    l.data.data,
+    m.data.data,
+    n.data.data,
+    o.data.data,
+    p.data.data,
+    q.data.data,
+    r.data.data,
+    s.data.data,
+    t.data.data,
+    u.data.data,
   ];
 
-  dataArray.forEach(galleries => {
-    galleries.forEach((gallery, i) => {
-      if (gallery.images) {
-        gallery.images.forEach(image => {
-          if (
-            image.height > 360 &&
-            image.height < 1000 &&
-            image.link.slice(-4) !== ".mp4"
-          ) {
-            imageLinks.push(image.link);
-          }
-        });
+  dataArray.forEach(dataSet => {
+    dataSet.forEach(item => {
+      if (item.link && !item.nsfw && item.height > 400 && item.height < 1600) {
+        imageLinks.push(item.link);
       }
     });
   });
+
+  console.log(imageLinks.length);
 
   fs.writeFileSync(
     "./server/utils/imageLinks.json",

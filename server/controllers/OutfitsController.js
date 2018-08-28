@@ -1,3 +1,4 @@
+const sequelize = require('sequelize');
 const {
   Outfit, Category, User, Profile, Comment, Like, Tag, Hashtag
 } = require('../models');
@@ -45,6 +46,49 @@ const getOutfitDetails = (req, res) => {
   })();
 }
 
+const getOutfitsByCatName = (req, res) => {
+  (async() => {
+    const catIds = {
+      Casual: 1,
+      Formal: 2,
+      Business: 3,
+      Sleepwear: 4,
+      Athletic: 5,
+      Outerwear: 6,
+    };
+
+    const outfitCount = await Outfit.findAll({
+      where: {
+        CategoryId: catIds[req.params.category_name] || 0,
+      },
+      attributes: [[sequelize.fn('COUNT', sequelize.col('id')), 'outfit_count']]
+    })
+
+    const outfits = await Outfit.findAll({
+      where: {
+        CategoryId: catIds[req.params.category_name] || 0,
+      },
+      attributes: { exclude: ['description', 'updatedAt'] },
+      include: [
+        {
+          model: Like,
+          attributes: ['id'],
+        },
+        { 
+          model: Comment,
+          attributes: ['id'],
+        }
+      ],
+      order: [['createdAt', 'DESC']],
+      limit: 24,
+      offset: parseInt(req.query.offset) || 0,
+    });
+
+    res.json({outfitCount: outfitCount, outfits: outfits});
+  })()
+}
+
 module.exports = {
   getOutfitDetails,
+  getOutfitsByCatName
 };

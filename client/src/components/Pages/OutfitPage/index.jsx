@@ -24,8 +24,6 @@ class OutfitPage extends Component {
             outfitData: result.data,
             comments: result.data.Comments.reverse()
           });
-          //*
-          console.log(result.data);
         } else {
           this.setState({outfitDNE: true});
         }
@@ -40,7 +38,9 @@ class OutfitPage extends Component {
   }
 
   render() {
-    const { authenticated, currUser, resetState, outfitId} = this.props;
+    const { 
+      authenticated, currUser, resetState, outfitId, following, updateFollowingState
+    } = this.props;
     const { outfitDNE, outfitData, comments } = this.state;
 
     return (
@@ -66,6 +66,10 @@ class OutfitPage extends Component {
                 <UserSnapshot
                   profile={outfitData ? outfitData.User.Profile : null} 
                   username={outfitData ? outfitData.User.username : null}
+                  id={outfitData ? outfitData.User.id : null}
+                  currUserId={currUser ? currUser.id : null}
+                  following={following}
+                  updateFollowingState={updateFollowingState}
                 />
                 <hr className="op-hr"/>
                 <div className="op-info-container">

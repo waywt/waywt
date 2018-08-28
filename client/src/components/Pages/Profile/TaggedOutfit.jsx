@@ -25,7 +25,9 @@ class TaggedOutfit extends Component {
             {this.state.showTagDetails ? (
               <div className="po-tag-details w-100">
                 <p className="po-tag-text">{tagged.text}</p>
-                <p className="po-tag-creator">{tagged.User.username}</p>
+                <p className="po-tag-creator">
+                  <em>Tagged by</em> {tagged.User.username}
+                </p>
               </div>
             ) : ''}
             <a

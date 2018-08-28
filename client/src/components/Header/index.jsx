@@ -48,7 +48,14 @@ class Header extends Component {
               <i className="fas fa-sign-out-alt"></i>
             </button>
           </div>
-        ) : ''}
+        ) : (
+          <a
+            href="/login"
+            className="btn nb-login-btn"
+          >
+            <i className="fas fa-sign-in-alt"></i>
+          </a>  
+        )}
       </nav>
     );
   }

@@ -5,6 +5,8 @@ import { Signup, Login, Temp } from './components/Auth';
 import Home from './components/Pages/Home/';
 import Profile from './components/Pages/Profile';
 import OutfitPage from "./components/Pages/OutfitPage";
+import CategoryPage from "./components/Pages/CategoryPage";
+import HashtagPage from "./components/Pages/HashtagPage";
 import PostForm from './components/Pages/PostForm/';
 import Header from './components/Header';
 import Error from './components/Error';
@@ -83,88 +85,107 @@ class App extends Component {
 
   render() {
     return (
-      <Router> 
-        <Switch>
-          <Route exact path="/" render={() => {
-            return (
-              <Home
-                authenticated={this.state.authenticated}
-                user={this.state.user}
-                resetState={this.resetState}
-                following={this.state.following}
-                outfits={this.state.outfits}
-                suggestions={this.state.suggestions}
-                updateOutfitsState={this.updateOutfitsState}
-              />
-            );
-          }} />
-          <Route exact path="/signup" render={() => {
-            return (
-              <Signup 
-                authenticated={this.state.authenticated}
-                updateAuthState={this.updateAuthState}
-              />
-            );
-          }} />
-          <Route exact path="/login" render={() => {
-            return (
-              <Login 
-                authenticated={this.state.authenticated}
-                updateAuthState={this.updateAuthState}
-              />
-            );
-          }} />
-          <Route exact path="/auth/cb" component={Temp} />
-          
-          {/* <Route exact path='/outfit' component={Outfit} /> */}
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path="/" render={() => {
+              return (
+                <Home
+                  authenticated={this.state.authenticated}
+                  user={this.state.user}
+                  resetState={this.resetState}
+                  following={this.state.following}
+                  outfits={this.state.outfits}
+                  suggestions={this.state.suggestions}
+                  updateOutfitsState={this.updateOutfitsState}
+                  updateFollowingState={this.updateFollowingState}
+                />
+              );
+            }} />
+            <Route exact path="/signup" render={() => {
+              return (
+                <Signup 
+                  authenticated={this.state.authenticated}
+                  updateAuthState={this.updateAuthState}
+                />
+              );
+            }} />
+            <Route exact path="/login" render={() => {
+              return (
+                <Login 
+                  authenticated={this.state.authenticated}
+                  updateAuthState={this.updateAuthState}
+                />
+              );
+            }} />
+            <Route exact path="/auth/cb" component={Temp} />
+            <Route exact path="/explore/category/:categoryName" render={({match}) => {
+              return (
+                <CategoryPage 
+                  authenticated={this.state.authenticated}
+                  resetState={this.resetState}
+                  currUser={this.state.user}
+                  catName={match.params.categoryName}
+                />
+              );
+            }} />
+            <Route exact path="/explore/tags/:hashtag" render={({match}) => {
+              return (
+                <HashtagPage 
+                  authenticated={this.state.authenticated}
+                  resetState={this.resetState}
+                  currUser={this.state.user}
+                  hashtag={match.params.hashtag}
+                />
+              );
+            }} />
 
-          <Route
-            exact
-            path="/outfits/new"
-            render={() => {
+            <Route exact path="/outfits/new" render={() => {
               return (
                 <PostForm
                   authenticated={this.state.authenticated}
                   updateAuthState={this.updateAuthState}
                 />
               );
-            }}
-          />
-          <Route exact path='/outfits/:id' render={({match}) => {
-            return (
-              <OutfitPage
-                authenticated={this.state.authenticated}
-                resetState={this.resetState}
-                currUser={this.state.user}
-                outfitId={match.params.id}
-              />
-            );
-          }} />; 
-          <Route exact path='/:username' render={({match}) => {
-            return (
-              <Profile
-                authenticated={this.state.authenticated}
-                resetState={this.resetState}
-                currUser={this.state.user}
-                following={this.state.following}
-                updateFollowingState={this.updateFollowingState}
-                username={match.params.username}                
-              />
-            );
-          }} />
-          <Route render={() => {
-            return (
-              <div>
-                <Header 
+            }} />
+            <Route exact path='/outfits/:id' render={({match}) => {
+              return (
+                <OutfitPage
                   authenticated={this.state.authenticated}
-                  user={this.state.user}
                   resetState={this.resetState}
+                  currUser={this.state.user}
+                  outfitId={match.params.id}
+                  following={this.state.following}
+                  updateFollowingState={this.updateFollowingState}
                 />
-                <Error />
-              </div>
-            );
-          }} />
-        </Switch>  
+              );
+            }} />; 
+            <Route exact path='/:username' render={({match}) => {
+              return (
+                <Profile
+                  authenticated={this.state.authenticated}
+                  resetState={this.resetState}
+                  currUser={this.state.user}
+                  following={this.state.following}
+                  updateFollowingState={this.updateFollowingState}
+                  username={match.params.username}                
+                />
+              );
+            }} />
+            <Route render={() => {
+              return (
+                <div>
+                  <Header 
+                    authenticated={this.state.authenticated}
+                    user={this.state.user}
+                    resetState={this.resetState}
+                  />
+                  <Error />
+                </div>
+              );
+            }} />
+          </Switch>
+        </div>  
       </Router>
     );
   }

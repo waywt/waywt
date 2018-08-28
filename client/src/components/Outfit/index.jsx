@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import './Outfit.css';
 import UserSnapshot from '../UserSnapshot';
 import { 
-  OutfitDescription, OutfitHashtags, OutfitComments, OutfitBasics 
+  OutfitDescription, OutfitHashtags, OutfitComments, OutfitBasics, OutfitImage 
 } from '../OutfitDetailed';
 import like_btn_active from '../../images/like_btn_active.png';
 import like_btn from '../../images/like_btn.png';
-import comment_btn from '../../images/comment_btn.png'
-
 
 class Outfit extends Component {
   state = {
@@ -40,12 +38,11 @@ class Outfit extends Component {
     return (
       <article className="Outfit">
         <UserSnapshot profile={profile} username={username} />
-        <div className="Outfit-image">
-          {/* <button id="button1" /> */}
-          <div className="Outfit-image-bg">
-            <img alt={description} src={image} />
-          </div>
-        </div>
+        <OutfitImage 
+          id={id}
+          imgLink={image}
+          tags={tags}
+        />
         <OutfitBasics
           authenticated={authenticated} 
           category={category}
@@ -64,16 +61,6 @@ class Outfit extends Component {
             comments={comments}
           />
         </div>
-        <hr className="op-hr"/>
-        <form className="Outfit-comment-form">
-          <div className="form-group">              
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Add a comment..."
-            />
-          </div>
-        </form>
       </article>
     );
   }
