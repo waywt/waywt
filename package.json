@@ -11,8 +11,8 @@
     "setup-db": "sequelize db:migrate",
     "watch-server": "nodemon --ignore 'client/*'",
     "watch-client": "cd client && yarn start",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "build": "cd client && yarn build",
+    "heroku-postbuild": "yarn build"
   },
   "dependencies": {
     "axios": "^0.18.0",
