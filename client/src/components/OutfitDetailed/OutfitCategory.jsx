@@ -27,7 +27,7 @@ class OutfitCategory extends Component {
       <div>
         { category ? (
           <a 
-            href={`/outfits/${category.name}`}
+            href={`/explore/category/${category.name}`}
             data-id={category.id}
             className="od-cat"
           >

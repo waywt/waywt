@@ -9,3 +9,11 @@ export const createOutfitComment = (id, newComment) => {
     'headers': { 'Authorization': `Bearer ${localStorage.getItem('accessToken')}` }
   });
 }
+
+export const getOutfitsByCatName = catName => {
+  return axios.get(`/api/outfits/category/${catName}`);
+}
+
+export const getOutfitsByHashtag = hashtag => {
+  return axios.get(`/api/hashtags/${hashtag}`);
+}

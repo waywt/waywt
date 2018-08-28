@@ -115,8 +115,16 @@ class App extends Component {
             );
           }} />
           <Route exact path="/auth/cb" component={Temp} />
-          
-          {/* <Route exact path='/outfit' component={Outfit} /> */}
+          <Route exact path="/explore/category/:categoryName" render={({match}) => {
+            return (
+              <h1>{match.params.categoryName}</h1>
+            );
+          }} />
+          <Route exact path="/explore/tags/:hashtag" render={({match}) => {
+            return (
+              <h1>{match.params.hashtag}</h1>
+            );
+          }} />
 
           <Route
             exact

@@ -28,7 +28,7 @@ const getHashtagOutfits = (req, res) => {
         },
       ]
     });
--A
+
     res.json(hashtagWithOutfits);
   })();
 }
