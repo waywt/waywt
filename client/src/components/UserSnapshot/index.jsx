@@ -38,32 +38,20 @@ class UserSnapshot extends Component {
             <i className="fas fa-tshirt fa-lg"></i>
           </a>
         ) : ''}
-        {following && !following.includes(id) && id !== currUserId ? (
+        {currUserId && following && !following.includes(id) && id !== currUserId ? (
           <FollowButton 
             customClasses={'ml-auto'}
             id={id}
             handleFollowUser={this.handleFollowUser}
           />
         ) : ''}
-        {following && following.includes(id) ? (
+        {currUserId && following && following.includes(id) ? (
           <UnfollowButton 
             customClasses={'ml-auto'}
             id={id}
             handleUnfollowUser={this.handleUnfollowUser}
           />
         ) : ''}
-        {/* { id && !currUser ? (
-          <button 
-            className="btn btn-primary btn-sm ml-auto"
-            data-id={id}
-            onClick={this.handleFollowUser}
-          >
-            Follow
-          </button>
-        ) : ''}
-        { id && currUser ? (
-          
-        ) : ''} */}
       </div>
     );
   }

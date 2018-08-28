@@ -6,7 +6,7 @@ import UserSnapshot from '../../UserSnapshot';
 class ProfileContent extends Component {
   showContent = () => {
     const { 
-      activeTab, outfitsData, taggedData, followersData, followingData 
+      activeTab, outfitsData, taggedData, followersData, followingData
     } = this.props;
 
     if (activeTab === 0) {
