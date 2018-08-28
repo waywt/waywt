@@ -6,6 +6,7 @@ import Home from './components/Pages/Home/';
 import Profile from './components/Pages/Profile';
 import OutfitPage from "./components/Pages/OutfitPage";
 import CategoryPage from "./components/Pages/CategoryPage";
+import HashtagPage from "./components/Pages/HashtagPage";
 import PostForm from './components/Pages/PostForm/';
 import Header from './components/Header';
 import Error from './components/Error';
@@ -128,7 +129,12 @@ class App extends Component {
           }} />
           <Route exact path="/explore/tags/:hashtag" render={({match}) => {
             return (
-              <h1>{match.params.hashtag}</h1>
+              <HashtagPage 
+                authenticated={this.state.authenticated}
+                resetState={this.resetState}
+                currUser={this.state.user}
+                hashtag={match.params.hashtag}
+              />
             );
           }} />
 

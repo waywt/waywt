@@ -22,7 +22,6 @@ class CategoryPage extends Component {
             outfitsCount: result.data.outfitCount[0].outfit_count,
             outfitsData: result.data.outfits,
           });
-          console.log(result.data);
         }
       });
     }

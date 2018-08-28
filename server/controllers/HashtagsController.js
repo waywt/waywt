@@ -1,4 +1,5 @@
-const { Hashtag, Outfit, Category, Like, Comment } = require('../models');
+const sequelize = require('sequelize');
+const { Hashtag, Outfit, Like, Comment } = require('../models');
 
 const getHashtagOutfits = (req, res) => {
   (async() => {
@@ -12,10 +13,6 @@ const getHashtagOutfits = (req, res) => {
           model: Outfit,
           attributes: { exclude: ['description', 'updatedAt'] },
           include: [
-            {
-              model: Category,
-              attributes: ['id', 'name'],
-            },
             {
               model: Like,
               attributes: ['id'],
