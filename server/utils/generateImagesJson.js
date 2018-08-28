@@ -11,13 +11,20 @@ const opts = {
 const imageLinks = [];
 
 (async () => {
-  const a = await axios(`${baseUrl}/findfashion`, opts);
-  const b = await axios(`${baseUrl}/malefashion`, opts);
-  const c = await axios(`${baseUrl}/OUTFITS`, opts);
-  const d = await axios(`${baseUrl}/femalefashion`, opts);
-  const e = await axios(`${baseUrl}/waywt`, opts);
-  const f = await axios(`${baseUrl}/freeforallfashion`, opts);
-  const g = await axios(`${baseUrl}/FemaleFashionAdvice`, opts);
+  const a = await axios(`${baseUrl}findfashion/time/all/0`, opts);
+  const b = await axios(`${baseUrl}malefashion/time/all/0`, opts);
+  const c = await axios(`${baseUrl}OUTFITS/time/all/0`, opts);
+  const d = await axios(`${baseUrl}femalefashion/time/all/0`, opts);
+  const e = await axios(`${baseUrl}waywt/time/all/0`, opts);
+  const f = await axios(`${baseUrl}freeforallfashion/time/all/0`, opts);
+  const g = await axios(`${baseUrl}FemaleFashionAdvice/time/all/0`, opts);
+  const h = await axios(`${baseUrl}findfashion/time/all/1`, opts);
+  const i = await axios(`${baseUrl}malefashion/time/all/1`, opts);
+  const j = await axios(`${baseUrl}OUTFITS/time/all/1`, opts);
+  const k = await axios(`${baseUrl}femalefashion/time/all/1`, opts);
+  const l = await axios(`${baseUrl}waywt/time/all/1`, opts);
+  const m = await axios(`${baseUrl}freeforallfashion/time/all/1`, opts);
+  const n = await axios(`${baseUrl}FemaleFashionAdvice/time/all/1`, opts);
   
   const dataArray = [
     a.data.data,
@@ -27,11 +34,18 @@ const imageLinks = [];
     e.data.data,
     f.data.data,
     g.data.data,
+    h.data.data,
+    i.data.data,
+    j.data.data,
+    k.data.data,
+    l.data.data,
+    m.data.data,
+    n.data.data,
   ];
 
   dataArray.forEach(dataSet => {
     dataSet.forEach(item => {
-      if (item.link && !item.nsfw && item.height > 400) {
+      if (item.link && !item.nsfw && item.height > 400 && item.height < 1600) {
         imageLinks.push(item.link);
       }
     });
