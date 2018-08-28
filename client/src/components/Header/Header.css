@@ -61,3 +61,9 @@ a.nb-profile-btn:hover,
 .nb-logout-btn:hover {
   color: #00000080;
 }
+a.nb-login-btn {
+  color:black
+}
+a.nb-login-btn:hover {
+  color: #00000080;
+}
