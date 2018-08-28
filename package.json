@@ -11,6 +11,7 @@
     "setup-db": "sequelize db:migrate",
     "watch-server": "nodemon --ignore 'client/*'",
     "watch-client": "cd client && yarn start",
+    "install": "cd client && yarn install",
     "build": "cd client && yarn build",
     "heroku-postbuild": "yarn build"
   },
