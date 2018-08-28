@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "start": "node server/server.js",
     "setup-db": "sequelize db:migrate",
     "watch-server": "nodemon --ignore 'client/*'",
     "watch-client": "cd client && yarn start",
