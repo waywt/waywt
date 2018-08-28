@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
 import './UserSnapshot.css';
 import defaultAvatar from '../../images/default_avatar.png';
+import { FollowButton, UnfollowButton } from '../Buttons';
 
 class UserSnapshot extends Component {
   handleFollowUser = () => {
-    
+    const id = this.props.id;
+    this.props.updateFollowingState(id, 'follow');
   }
 
+  handleUnfollowUser = () => {
+    const id = this.props.id;
+    this.props.updateFollowingState(id);
+  }
+  
   render() {
-    const {profile, username, id, currUser, customStyle} = this.props;
+    const {
+      profile, username, id, currUserId, customStyle, following
+    } = this.props;
 
     return (
       <div className="User-snapshot" style={customStyle}>
@@ -24,7 +33,26 @@ class UserSnapshot extends Component {
             <p>{profile.header}</p>
           ) : ''}
         </div>
-        { id && !currUser ? (
+        {currUserId && id === currUserId ? (
+          <a href="/outfits/new" className="new-Outfit-link ml-auto">
+            <i className="fas fa-tshirt fa-lg"></i>
+          </a>
+        ) : ''}
+        {following && !following.includes(id) && id !== currUserId ? (
+          <FollowButton 
+            customClasses={'ml-auto'}
+            id={id}
+            handleFollowUser={this.handleFollowUser}
+          />
+        ) : ''}
+        {following && following.includes(id) ? (
+          <UnfollowButton 
+            customClasses={'ml-auto'}
+            id={id}
+            handleUnfollowUser={this.handleUnfollowUser}
+          />
+        ) : ''}
+        {/* { id && !currUser ? (
           <button 
             className="btn btn-primary btn-sm ml-auto"
             data-id={id}
@@ -34,10 +62,8 @@ class UserSnapshot extends Component {
           </button>
         ) : ''}
         { id && currUser ? (
-          <a href="/outfits/new" className="new-Outfit-link ml-auto">
-            <i className="fas fa-tshirt fa-lg"></i>
-          </a>
-        ) : ''}
+          
+        ) : ''} */}
       </div>
     );
   }
