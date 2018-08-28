@@ -87,7 +87,6 @@ class App extends Component {
     return (
       <Router>
         <div>
-          {JSON.stringify(this.state.following)} {JSON.stringify(this.state.user)}
           <Switch>
             <Route exact path="/" render={() => {
               return (
@@ -99,6 +98,7 @@ class App extends Component {
                   outfits={this.state.outfits}
                   suggestions={this.state.suggestions}
                   updateOutfitsState={this.updateOutfitsState}
+                  updateFollowingState={this.updateFollowingState}
                 />
               );
             }} />

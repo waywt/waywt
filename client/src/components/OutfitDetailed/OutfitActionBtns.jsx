@@ -16,7 +16,7 @@ class OutfitActionBtns extends Component {
    };
 
   render () {
-    const { authenticated, OutfitId, likeCount, showLink } = this.props;
+    const { authenticated, outfitId, likeCount, showLink } = this.props;
 
     return (
       <div className="row">
@@ -32,7 +32,7 @@ class OutfitActionBtns extends Component {
         </div>
         <div className="col-12 od od-like-ct">
           { showLink ? (
-            <a href={`/outfits/${OutfitId}`}><strong>{likeCount} likes</strong></a>
+            <a href={`/outfits/${outfitId}`}><strong>{likeCount} likes</strong></a>
           ) : (
             <strong>{likeCount} likes</strong>
           )}

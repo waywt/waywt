@@ -9,7 +9,7 @@ import UserSnapshot from '../../UserSnapshot';
 class Home extends Component {
   render() {
     const { 
-      authenticated, resetState, updateOutfitsState, user, outfits, suggestions 
+      authenticated, resetState, updateOutfitsState, user, outfits, suggestions, following, updateFollowingState 
     } = this.props;
 
     if (!authenticated) {
@@ -31,6 +31,7 @@ class Home extends Component {
                       <div className="col-12" key={`outfit-${outfit.id}`}>
                         <Outfit
                           authenticated={authenticated}
+                          currUser={user}
                           username={outfit.User.username}
                           profile={outfit.User.Profile}
                           id={outfit.id}
@@ -52,6 +53,9 @@ class Home extends Component {
                           profile={suggestion.Profile}
                           username={suggestion.username}
                           id={suggestion.id}
+                          currUserId={user.id}
+                          following={following}
+                          updateFollowingState={updateFollowingState}
                           customStyle={{backgroundColor: 'white', border: '1px solid #efefef'}} 
                         />
                       </div>
