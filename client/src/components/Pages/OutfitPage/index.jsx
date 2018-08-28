@@ -24,8 +24,6 @@ class OutfitPage extends Component {
             outfitData: result.data,
             comments: result.data.Comments.reverse()
           });
-          //*
-          console.log(result.data);
         } else {
           this.setState({outfitDNE: true});
         }

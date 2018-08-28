@@ -5,6 +5,7 @@ import { Signup, Login, Temp } from './components/Auth';
 import Home from './components/Pages/Home/';
 import Profile from './components/Pages/Profile';
 import OutfitPage from "./components/Pages/OutfitPage";
+import CategoryPage from "./components/Pages/CategoryPage";
 import PostForm from './components/Pages/PostForm/';
 import Header from './components/Header';
 import Error from './components/Error';
@@ -117,7 +118,12 @@ class App extends Component {
           <Route exact path="/auth/cb" component={Temp} />
           <Route exact path="/explore/category/:categoryName" render={({match}) => {
             return (
-              <h1>{match.params.categoryName}</h1>
+              <CategoryPage 
+                authenticated={this.state.authenticated}
+                resetState={this.resetState}
+                currUser={this.state.user}
+                catName={match.params.categoryName}
+              />
             );
           }} />
           <Route exact path="/explore/tags/:hashtag" render={({match}) => {
