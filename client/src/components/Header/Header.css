@@ -57,6 +57,9 @@ body {
 a.nb-profile-btn {
   color: black;
 }
+.nb-logout-btn {
+  background-color: transparent;
+}
 a.nb-profile-btn:hover,
 .nb-logout-btn:hover {
   color: #00000080;
