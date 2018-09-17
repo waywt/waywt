@@ -1,5 +1,14 @@
 # Instagarment
-Share your outfits with followers, find out what others are wearing, and shop their style online.
+
+*Share your outfits with followers and find out what others are wearing*
+
+### Table of Contents
+
+[Inspiration](#inspiration)<br>
+[What is it?](#what-is-it)<br>
+[Technologies](#technologies)<br>
+[Pages](#pages)<br>
+[Features](#features)
 
 # Inspiration
 * People often envy others’ outfits on Instagram
@@ -12,7 +21,7 @@ Share your outfits with followers, find out what others are wearing, and shop th
 * Users have accounts with stored data and authentication
 * Can connect with friends and checkout anyones latest look 
 
-# Technologies Used
+# Technologies
 * Data was created and seeded using Sequelize CLI, Imgur, Axios, Faker, and Lodash
 * Passport is used to authenticate users
 * The app was created using React, with reusable components throughout the site
