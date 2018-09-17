@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { authSignup } from '../../utils/API';
+import { authLogin, authSignup } from '../../utils/API';
 import { validUsername, validEmail, validPassword } from '../../utils/Validate';
 import './auth.css';
+import { userOne, userTwo } from './demo.json';
 import InstagarmentLarge from '../../images/InstagarmentLarge.png'
 import iPhoneX from '../../images/iPhoneX.png'
 
@@ -14,18 +15,29 @@ class Signup extends Component {
     usernameErr: false,
     emailErr: false,
     passwordErr: false,
-    errMsg: '',
-    fbUrl: '/auth/facebook',
-    googUrl: '/auth/google'
+    errMsg: ''
   };
 
-  componentDidMount() {
-    if (/localhost/.test(window.location.href)) {
-      this.setState({
-        fbUrl: 'http://localhost:3100/auth/facebook',
-        googUrl: 'http://localhost:3100/auth/google'
-      });
-    };
+  handleDemoLogin = (event, userN) => {
+    event.preventDefault();
+
+    let credentials;
+
+    if (userN === 1) {
+      credentials = {
+        usernameOrEmail: userOne.username,
+        password: userOne.password
+      }
+    } else {
+      credentials = {
+        usernameOrEmail: userTwo.username,
+        password: userTwo.password
+      }
+    }
+    authLogin(credentials).then(result => {
+      localStorage.setItem('accessToken', result.data.accessToken);
+      this.props.updateAuthState(true);
+    });
   }
 
   handleInputChange = event => {
@@ -92,13 +104,21 @@ class Signup extends Component {
                       <div id="signup-descrip">
                         Sign up to share what you're wearing with friends and followers.
                       </div>
-                      <a href={this.state.fbUrl} className="w-75 btn facebook-signup">
-                        <i className="fab fa-facebook-square fa-lg mr-2"></i>
-                        Log in with Facebook
+                      <a 
+                        href={`/${userOne.username}`} 
+                        onClick={(e) => this.handleDemoLogin(e, 1)}
+                        className="w-75 btn facebook-signup"
+                      >
+                        <i className="fas fa-user fa-lg mr-2"></i>
+                        Log in as {userOne.username}
                       </a>
-                      <a href={this.state.googUrl} className="w-75 btn google-signup">
-                        <i className="fab fa-google fa-lg mr-2"></i>
-                        Log in with Google
+                      <a 
+                        href={`/${userTwo.username}`} 
+                        onClick={(e) => this.handleDemoLogin(e, 2)}
+                        className="w-75 btn google-signup"
+                      >
+                        <i className="fas fa-user-tie fa-lg mr-2"></i>
+                        Log in as {userTwo.username}
                       </a> 
                       <div className="d-flex justify-content-center">
                         <div className="linebreak"></div>
